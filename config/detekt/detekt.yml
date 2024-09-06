@@ -1,0 +1,8 @@
+#json.schemastore.org/detekt-1.22.0.json
+comments:
+  UndocumentedPublicClass:
+    active: true
+  UndocumentedPublicFunction:
+    active: true
+  UndocumentedPublicProperty:
+    active: true

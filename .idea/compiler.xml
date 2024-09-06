@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="17">
+      <module name="school-industrial-development.buildSrc" target="21" />
+      <module name="school-industrial-development.buildSrc.main" target="21" />
+      <module name="school-industrial-development.buildSrc.test" target="21" />
+      <module name="school57kotlin.buildSrc" target="21" />
+      <module name="school57kotlin.buildSrc.main" target="21" />
+      <module name="school57kotlin.buildSrc.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
