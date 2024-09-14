@@ -4,7 +4,7 @@ package ru.tbank.education.school.lesson1
  * Метод для вычисления простых арифметических операций.
  */
 fun calculate(a: Double, b: Double, operation: OperationType): Double? {
-    TODO()
+    TODO() 
 }
 
 /**
