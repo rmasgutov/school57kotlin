@@ -42,13 +42,8 @@ fun String.calculate(): BigDecimal? {
         return null
     }
 
-    val a = parts[0].toBigDecimalOrNull() ?: run {
-        return null
-    }
-
-    val b = parts[2].toBigDecimalOrNull() ?: run {
-        return null
-    }
+    val a = parts[0].toBigDecimalOrNull()
+    val b = parts[2].toBigDecimalOrNull()
 
     val operation = when (parts[1]) {
         "+" -> OperationType.ADD
@@ -56,9 +51,11 @@ fun String.calculate(): BigDecimal? {
         "*" -> OperationType.MULTIPLY
         "/" -> OperationType.DIVIDE
         "^" -> OperationType.POW
-        else -> {
-            return null
-        }
+        else -> null
+    }
+
+    if (a == null || b == null || operation == null) {
+        return null
     }
 
     return calculate(a, b, operation)
