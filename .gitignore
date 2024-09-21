@@ -5,6 +5,12 @@
 # Compiled class file
 *.class
 
+### Idea
+.idea
+
+###Mac
+.DS_Store
+
 # Log file
 *.log
 
@@ -55,4 +61,3 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,kotlin
-/.idea/
