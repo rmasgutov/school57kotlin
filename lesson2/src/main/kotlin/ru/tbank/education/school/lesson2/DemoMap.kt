@@ -14,6 +14,7 @@ object DemoMap {
             getRandomString(5, 10) to Random.nextInt(1, 101),
             getRandomString(5, 10) to Random.nextInt(1, 101)
         )
+
     }
     fun maxValue(): Int {
         return createMap().values.max()
