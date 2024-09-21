@@ -8,7 +8,7 @@ object DemoList {
         return randomList
     }
 
-    fun sumList(a : List<Int>): Int {
+    fun sumList(a: List<Int>): Int {
         var sum = 0
         for (i in a) {
             sum += i
@@ -16,7 +16,7 @@ object DemoList {
         return sum
     }
 
-    fun sumEvenList(a : List<Int>): Int {
+    fun sumEvenList(a: List<Int>): Int {
         var sum = 0
         val n = a.size
         for (i in 1..n) {
@@ -25,12 +25,12 @@ object DemoList {
         return sum
     }
 
-    fun multiplyList(a : List <Int>): List<Int> {
-        a.map{it * 2}
+    fun multiplyList(a: List<Int>): List<Int> {
+        a.map { it * 2 }
         return a
     }
 
-    fun maxElement(a : List <Int>): Int {
+    fun maxElement(a: List<Int>): Int {
         var maxx = 0
         for (i in a) {
             if (i > maxx) maxx = i
@@ -38,7 +38,7 @@ object DemoList {
         return maxx
     }
 
-    fun sortDesc(a : List <Int>): List<Int> {
+    fun sortDesc(a: List<Int>): List<Int> {
         return a.sortedDescending()
     }
 }

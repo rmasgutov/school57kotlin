@@ -22,7 +22,7 @@ object DemoMap {
         return maxx
     }
 
-    fun keyForMaxValue(): String {
+    fun keyForMaxValue(m : Map <String, Int> ): String {
         var maxx = 0
         var s = ""
         for ((key, value) in m) {
@@ -39,6 +39,6 @@ object DemoMap {
     }
 
     fun filterOddValues(m : Map <String, Int> ): Map<String, Int> {
-        m.filterValues { it % 2 == 1 }
+        return m.filterValues { it % 2 == 1 }
     }
 }
