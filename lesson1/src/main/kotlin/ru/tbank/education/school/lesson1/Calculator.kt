@@ -37,7 +37,7 @@ fun calculate(a: Double, b: Double, operation: OperationType = OperationType.ADD
  */
 @Suppress("ReturnCount")
 fun String.calculate(): BigDecimal? {
-    val parts = this.split(" ")
+    val parts = split(" ")
     if (parts.size != 3) {
         return null
     }
