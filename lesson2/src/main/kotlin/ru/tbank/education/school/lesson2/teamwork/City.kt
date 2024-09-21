@@ -61,10 +61,30 @@ fun main() {
                 for ((street, houses) in streets) {
                     val allHouses = (houses.min()..houses.max()).toList() - houses
                     for (house in allHouses) {
-                        println("$city, $region, $district, $street, $house")
+                        if (streets.size > districts.size && houses.size < allHouses.size) {
+                            println("$city, $region, $district, $street, $house")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (i in 1..10) {
+        println("Улицы с домом $i:")
+        for ((city, regions) in data) {
+            for ((region, districts) in regions) {
+                for ((district, streets) in districts) {
+                    for ((street, houses) in streets) {
+                        for (house in houses) {
+                            if (houses.contains(i)) println(street)
+                            break
+                        }
                     }
                 }
             }
         }
     }
 }
+//только в районах где улиц больше чем  районов в округе
+//и количество пропщуеных домов больше чем существующих
+// вывести для всех номеров до 10 улицы на которых есть дом с таким номером
