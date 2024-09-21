@@ -4,6 +4,7 @@ import kotlin.random.Random
 
 object DemoMap {
     private var map = mutableMapOf<String, Int>()
+
     fun createMap(): Map<String, Int> {
         for (i in 1..5) {
             map[Random.nextInt(10000, 99999).toString()] = Random.nextInt(1, 100)
@@ -18,11 +19,11 @@ object DemoMap {
     }
 
     fun maxValue(): Int {
-        return map.maxBy { it.value }.value;
+        return map.maxBy { it.value }.value
     }
 
     fun keyForMaxValue(): String {
-        return map.maxBy { it.value }.key;
+        return map.maxBy { it.value }.key
     }
 
     fun sortByValueDesc(): Map<String, Int> {

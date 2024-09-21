@@ -3,7 +3,8 @@ package ru.tbank.education.school.lesson2
 import kotlin.random.Random
 
 object DemoList {
-    private var list = mutableListOf<Int>();
+    private var list = mutableListOf<Int>()
+
     fun createList(): List<Int> {
         for (i in 0..5) {
             this.list.add(Random.nextInt(1, 100))
@@ -12,7 +13,7 @@ object DemoList {
     }
 
     fun sumList(): Int {
-        return list.sum();
+        return list.sum()
     }
 
     fun sumEvenList(): Int {
