@@ -15,5 +15,4 @@ fun main() {
         left = right
         ++right
     }
-    //git new branch
 }
