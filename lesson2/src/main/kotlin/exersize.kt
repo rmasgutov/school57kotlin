@@ -1,6 +1,6 @@
 fun main() {
     var arr = listOf(1, 2, 2, 2, 2, 3, 4)
-    var n = arr.size
+    val n = arr.size
     arr = arr.sorted()
     var x = -1
     var k = 0
