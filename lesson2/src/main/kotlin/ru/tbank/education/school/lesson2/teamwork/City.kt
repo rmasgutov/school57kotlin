@@ -54,9 +54,17 @@ val data: Map<String, Map<String, Map<String, Map<String, Set<Int>>>>> = mapOf(
 )
 
 fun main() {
-
     // все пропущенные дома, в формате 'город, округ, район, улица, номера дома'
-
-
-
+    for ((city, regions) in data) {
+        for ((region, districts) in regions) {
+            for ((district, streets) in districts) {
+                for ((street, houses) in streets) {
+                    val allHouses = (houses.min()..houses.max()).toList() - houses
+                    for (house in allHouses) {
+                        println("$city, $region, $district, $street, $house")
+                    }
+                }
+            }
+        }
+    }
 }
