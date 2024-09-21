@@ -5,6 +5,12 @@
 # Compiled class file
 *.class
 
+### Idea
+.idea
+
+###Mac
+.DS_Store
+
 # Log file
 *.log
 
