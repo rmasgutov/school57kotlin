@@ -24,8 +24,8 @@ object DemoList {
         return list
     }
 
-    fun maxElement(): Int? {
-        return list.maxOrNull()
+    fun maxElement(): Int {
+        return list.maxOrNull() ?: 0
     }
 
     fun sortDesc(): List<Int> {
