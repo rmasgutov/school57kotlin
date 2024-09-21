@@ -7,6 +7,7 @@ fun main() {
         if (count > a.size / 2) {
             print(i)
             break
+            //sdsfsfdd
         }
     }
 }
