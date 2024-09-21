@@ -12,6 +12,7 @@ class first {
                 if (j == n) {
                     c += 1
                 }
+
             }
             if (c == leng) {
                 println(n)
