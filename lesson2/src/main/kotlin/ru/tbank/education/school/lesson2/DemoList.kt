@@ -5,7 +5,7 @@ import kotlin.random.Random
 object DemoList {
     private var list = mutableListOf<Int>();
     fun createList(): List<Int> {
-        for (i in 0..100) {
+        for (i in 0..5) {
             this.list.add(Random.nextInt(1, 100))
         }
         return list
