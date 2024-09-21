@@ -61,10 +61,16 @@ fun main() {
         for ((circle, areas) in circles) {
             for ((area, streets) in areas) {
                 for ((street, nums) in streets) {
+                    var arr : MutableList<Int> = mutableListOf()
                     for (i in 1..nums.max()) {
-                        if (!nums.contains(i) && streets.keys.size > areas.keys.size) {
-                            println("$city $circle $area $street $i")
+                        if (!nums.contains(i)){
+                            arr.add(i)
                         }
+
+                    }
+                    if(arr.size > nums.size){
+                        for(i in arr){
+                        println("$city $circle $area $street $i")}
                     }
                 }
             }
