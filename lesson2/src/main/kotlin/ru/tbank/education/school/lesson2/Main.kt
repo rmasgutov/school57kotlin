@@ -5,6 +5,8 @@ fun main() {
     var n = v.size / 2
     for (i in v) {
         var cnt = 0
+
+
         for (j in v) {
             if (i == j) ++cnt
         }
