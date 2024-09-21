@@ -1,6 +1,9 @@
 package ru.tbank.education.school.lesson2
 
+import kotlin.random.Random
+
 object DemoMap {
+    private var map = mutableMapOf<String, Int>()
     fun createMap(): Map<String, Int> {
         TODO()
     }
