@@ -4,7 +4,6 @@ object DemoMap {
     fun createMap(): Map<String, Int> {
         TODO()
     }
-
     fun maxValue(): Int {
         TODO()
     }
