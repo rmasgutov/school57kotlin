@@ -1,12 +1,5 @@
 package ru.tbank.education.school.lesson1
 
-enum class OperationType {
-    ADD,
-    SUBTRACT,
-    MULTIPLY,
-    DIVIDE,
-}
-
 /**
  * Метод для вычисления простых арифметических операций.
  */
@@ -39,8 +32,8 @@ fun calculate(
 @Suppress("ReturnCount")
 fun String.calculate(): Double? {
     val expression = split(" ")
-    var a = expression[0].toDouble()
-    var b = expression[2].toDouble()
+    val a = expression[0].toDouble()
+    val b = expression[2].toDouble()
     return when (expression[1]) {
         "+" -> calculate(a, b, OperationType.ADD)
         "-" -> calculate(a, b, OperationType.SUBTRACT)
@@ -50,7 +43,7 @@ fun String.calculate(): Double? {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     println("1 % 10".calculate())
     //test
 }
