@@ -8,6 +8,8 @@ fun main() {
         for (j in v) {
             if (i == j) ++cnt
         }
+
+
         if (cnt >= n) {
             println(i)
             break
