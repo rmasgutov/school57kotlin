@@ -1,23 +1,28 @@
 package ru.tbank.education.school.lesson2
 
+import kotlin.random.Random
+
 object DemoMap {
     fun createMap(): Map<String, Int> {
-
+        val ans = mutableMapOf<String, Int> ()
+        for (num in 1..5) {
+            ans[Random.nextInt(10000, 100000000).toString()] = Random.nextInt(1, 100)
+        }
+        return ans
     }
-
     fun maxValue(): Int {
-        TODO()
+        return createMap().values.max()
     }
 
     fun keyForMaxValue(): String {
-        TODO()
+        return createMap().maxBy { it.value }.key
     }
 
     fun sortByValueDesc(): Map<String, Int> {
-        TODO()
+        return createMap().toList().sortedByDescending { (_, value) -> value }.toMap()
     }
 
     fun filterOddValues(): Map<String, Int> {
-        TODO()
+        return createMap().filter { it.value % 2 == 0 }
     }
 }

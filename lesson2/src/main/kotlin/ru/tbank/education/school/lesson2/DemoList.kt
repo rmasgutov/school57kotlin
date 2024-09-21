@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 object DemoList {
     fun createList(): List<Int> {
-        return List(5) { Random.nextInt(1 100) }
+        return List(5) { Random.nextInt(1, 100) }
     }
 
     fun sumList(): Int {
