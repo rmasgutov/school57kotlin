@@ -8,6 +8,9 @@
 ### Idea
 .idea
 
+###Mac
+.DS_Store
+
 # Log file
 *.log
 
