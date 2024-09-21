@@ -39,8 +39,6 @@ object DemoList {
     }
 
     fun sortDesc(a : List <Int>): List<Int> {
-        a.sorted()
-        a.reversed()
-        return a
+        return a.sortedDescending()
     }
 }
