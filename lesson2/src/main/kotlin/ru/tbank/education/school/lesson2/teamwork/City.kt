@@ -57,6 +57,18 @@ fun main() {
 
     // все пропущенные дома, в формате 'город, округ, район, улица, номера дома'
 
-
+    for ((city, circles) in data) {
+        for ((circle, areas) in circles) {
+            for ((area, streets) in areas) {
+                for ((street, nums) in streets) {
+                    for (i in 1..nums.max()) {
+                        if (!nums.contains(i)) {
+                            println("$city $circle $area $street $i")
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }
