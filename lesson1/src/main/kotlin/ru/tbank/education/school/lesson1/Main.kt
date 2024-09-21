@@ -1,7 +1,7 @@
 package ru.tbank.education.school.lesson1
 
 fun main() {
-    val a = arrayOf(2, 3, 4, 3, 6, 2, 3, 3, 3, 3, 3, 3)
+    val a = arrayOf(1,11,11,1,1,1)
     var candidate = a[0]
     var count = 0
 
