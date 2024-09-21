@@ -62,7 +62,7 @@ fun main() {
             for ((area, streets) in areas) {
                 for ((street, nums) in streets) {
                     for (i in 1..nums.max()) {
-                        if (!nums.contains(i)) {
+                        if (!nums.contains(i) && streets.keys.size > areas.keys.size) {
                             println("$city $circle $area $street $i")
                         }
                     }
@@ -70,4 +70,7 @@ fun main() {
             }
         }
     }
+    //только в тех районах где улиц больше чем районов в округе
+//кольчество пропущеных домов больше чем существующих
+
 }
