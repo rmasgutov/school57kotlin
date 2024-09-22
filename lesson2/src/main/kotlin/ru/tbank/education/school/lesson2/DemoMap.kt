@@ -1,19 +1,19 @@
 package ru.tbank.education.school.lesson2
 
 import kotlin.random.Random
-fun generateRandomString(minLength: Int, maxLength: Int): String {
-    val allowedChars = ('a'..'z') + ('A'..'Z')
-    return (1..Random.nextInt(minLength, maxLength + 1)).map { allowedChars.random() }.joinToString("")
+fun genRndString(minLen: Int, maxLen: Int): String {
+    val allowedSigns = ('a'..'z') + ('A'..'Z')
+    return (1..Random.nextInt(minLen, maxLen + 1)).map { allowedSigns.random() }.joinToString("")
 }
 object DemoMap {
     fun createMap(): Map<String, Int> {
         TODO()
         return mapOf(
-            generateRandomString(5, 10) to Random.nextInt(1, 101),
-            generateRandomString(5, 10) to Random.nextInt(1, 101),
-            generateRandomString(5, 10) to Random.nextInt(1, 101),
-            generateRandomString(5, 10) to Random.nextInt(1, 101),
-            generateRandomString(5, 10) to Random.nextInt(1, 101)
+            genRndString(5, 10) to Random.nextInt(1, 101),
+            genRndString(5, 10) to Random.nextInt(1, 101),
+            genRndString(5, 10) to Random.nextInt(1, 101),
+            genRndString(5, 10) to Random.nextInt(1, 101),
+            genRndString(5, 10) to Random.nextInt(1, 101)
         )
     }
 
