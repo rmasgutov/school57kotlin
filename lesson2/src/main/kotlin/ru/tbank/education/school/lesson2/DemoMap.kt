@@ -17,6 +17,7 @@ object DemoMap {
         )
     }
 
+
     fun maxValue(): Int {
         TODO()
         return createMap().values.max()
