@@ -42,7 +42,7 @@ object DemoMap {
     }
 
     fun sortByValueDesc(): Map<String, Int> {
-        val a = createMap().toList()
+        var a = createMap().toList()
         return a.sortedBy { it.second }.toMap()
     }
 
