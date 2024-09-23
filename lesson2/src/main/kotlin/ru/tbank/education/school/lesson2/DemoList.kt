@@ -36,7 +36,7 @@ object DemoList {
     }
 
     fun sortDesc(arr: List<Int>): List<Int> {
-        val ans = arr.sorted()
+        val ans = arr.sortedDescending()
         return ans
     }
 }

@@ -21,7 +21,7 @@ object DemoMap {
     }
 
     fun sortByValueDesc(m: Map<String, Int>): Map<String, Int> {
-        val ans = m.toList().sortedBy { (k, v) -> v}.toMap()
+        val ans = m.toList().sortedByDescending { (k, v) -> v}.toMap()
         return ans
     }
 
