@@ -26,7 +26,7 @@ object DemoMap {
     }
 
     fun filterOddValues(m: Map<String, Int>): Map<String, Int> {
-        val arr = m.toList().filter { (k, v) -> v%2 != 0 }.toMap()
+        val arr = m.toList().filter { (k, v) -> v%2 == 0 }.toMap()
         return arr
     }
 }
