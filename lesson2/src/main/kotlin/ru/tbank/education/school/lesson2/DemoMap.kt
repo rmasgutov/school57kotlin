@@ -1,5 +1,4 @@
 package ru.tbank.education.school.lesson2
-
 import kotlin.random.Random
 fun genRndString(minLen: Int, maxLen: Int): String {
     val allowedSigns = ('a'..'z') + ('A'..'Z')
