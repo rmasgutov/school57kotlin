@@ -32,8 +32,8 @@ object DemoList {
 
     fun maxElement(a: List<Int>): Int {
         var maxx = 0
-        for (i in a) {
-            if (i > maxx) maxx = i
+        for (item in a) {
+            if (item > maxx) maxx = item
         }
         return maxx
     }

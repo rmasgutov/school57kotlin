@@ -39,6 +39,6 @@ object DemoMap {
     }
 
     fun filterOddValues(m : Map <String, Int> ): Map<String, Int> {
-        return m.filterValues { it % 2 == 1 }
+        return m.filterValues { it % 2 == 0 }
     }
 }
