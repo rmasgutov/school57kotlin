@@ -2,7 +2,7 @@ package ru.tbank.education.school.lesson2
 
 object DemoMap {
     fun createMap(): Map<String, Int> {
-        var data = mapOf("sdjfahgmj" to 3, "dfjhs" to 6, "fgh" to 90, "h" to 35, "hjk" to 56)
+        val data = mapOf("sdjfahgmj" to 3, "dfjhs" to 6, "fgh" to 90, "h" to 35, "hjk" to 56)
         return data
     }
 
@@ -11,19 +11,22 @@ object DemoMap {
     }
 
     fun keyForMaxValue(data: Map<String, Int>): String {
-        var res = data.values.max()
-        for (i in data.keys) {
-            if (data[i] == res) {
-                return i
+        val res = data.values.max()
+        var ans = ""
+        for (key in data.keys) {
+            if (data[key] == res) {
+                ans = key
+                break
             }
         }
+        return ans
     }
 
     fun sortByValueDesc(data: Map<String, Int>): Map<String, Int> {
-        return data.toSortedMap()
+        return data.toList().sortedByDescending { it.second }.toMap()
     }
 
     fun filterOddValues(data: Map<String, Int>): Map<String, Int> {
-
+        return data.filterValues { it % 2 != 0 }
     }
 }

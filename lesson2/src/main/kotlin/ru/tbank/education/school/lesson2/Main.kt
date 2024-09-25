@@ -3,9 +3,19 @@ package ru.tbank.education.school.lesson2
 fun main() {
     val list = DemoList.createList()
     println("Original list: $list")
-    TODO()
+    println(DemoList.sumList(list))
+    println(DemoList.sumEvenList(list))
+    println(DemoList.multiplyList(list))
+    println(DemoList.maxElement(list))
+    println(DemoList.sortDesc(list))
 
     val map = DemoMap.createMap()
     println("Original map: $map")
-    TODO()
+    for ((key, value) in map) {
+        println("$key: $value")
+    }
+    println(DemoMap.maxValue(map))
+    println(DemoMap.keyForMaxValue(map))
+    println(DemoMap.sortByValueDesc(map))
+    println(DemoMap.filterOddValues(map))
 }

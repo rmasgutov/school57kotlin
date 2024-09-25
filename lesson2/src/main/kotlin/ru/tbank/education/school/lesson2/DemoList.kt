@@ -2,7 +2,7 @@ package ru.tbank.education.school.lesson2
 
 object DemoList {
     fun createList(): List<Int> {
-        var data = listOf(1, 5, 8, 30, 27)
+        val data = listOf(1, 5, 8, 30, 27)
         return data
     }
 
@@ -12,8 +12,10 @@ object DemoList {
 
     fun sumEvenList(data: List<Int>): Int {
         var res = 0
-        for (i in 0..data.size) {
-            res = res + data[i]
+        for (i in 0..data.size - 1) {
+            if (data[i] % 2 == 0) {
+                res += data[i]
+            }
         }
         return res
     }
