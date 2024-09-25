@@ -20,7 +20,6 @@ object DemoMap {
 
     fun printMap(): List<String> {
         val data = createMap()
-        println(data)
         return data.map { "${it.key}: ${it.value}" }
     }
 
