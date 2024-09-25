@@ -1,8 +1,8 @@
 package ru.tbank.education.school.lesson2
 import kotlin.random.Random
 object DemoList {
+    private val list: List = createList()
     fun createList(): List<Int> {
-        private val list: List = createList()
         return List(5) { Random.nextInt(1, 101) }
     }
     fun sumList(): Int {
