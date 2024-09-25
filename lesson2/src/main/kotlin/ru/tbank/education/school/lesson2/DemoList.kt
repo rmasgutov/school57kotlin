@@ -2,7 +2,7 @@ package ru.tbank.education.school.lesson2
 import kotlin.random.Random
 object DemoList {
     fun createList(): List<Int> {
-        var arr = List(5){Random.nextInt(1, 101)}
+        val arr = List(5){Random.nextInt(1, 101)}
         return arr
     }
 

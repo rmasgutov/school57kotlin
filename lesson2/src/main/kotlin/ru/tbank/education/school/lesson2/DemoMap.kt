@@ -4,7 +4,7 @@ import kotlin.random.Random
 object DemoMap {
 
     fun createMap(): Map<String, Int> {
-        var mapa =  List(5) {
+        val mapa =  List(5) {
             generateRandomString(Random.nextInt(5, 11)) to Random.nextInt(1, 101)
         }.toMap()
         return mapa
