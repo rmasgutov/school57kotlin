@@ -20,5 +20,4 @@ object DemoList {
     fun sortDesc(): List<Int> {
         return list().sortedDescending()
     }
-
 }
