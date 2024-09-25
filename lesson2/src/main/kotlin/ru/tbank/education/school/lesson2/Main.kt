@@ -10,6 +10,7 @@ fun main(){
     println(DemoList.multiplyList(a))
     println(DemoList.maxElement(a))
     println(DemoList.sortDesc(a))
+
     println("DemoMap")
     val b = DemoMap.createMap()
     for ((key, value )in b){
