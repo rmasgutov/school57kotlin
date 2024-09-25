@@ -6,7 +6,7 @@ object DemoMap {
     fun createMap(): Map<String, Int> {
         val ans = mutableMapOf<String, Int> ()
         for (num in 1..5) {
-            ans[Random.nextInt(10000, 100000000).toString()] = Random.nextInt(1, 101)
+            ans[Random.nextInt(10000, 1000000001).toString()] = Random.nextInt(1, 101)
         }
         return ans
     }
@@ -24,5 +24,9 @@ object DemoMap {
 
     fun filterOddValues(): Map<String, Int> {
         return createMap().filter { it.value % 2 == 0 }
+    }
+    fun printMap(): List<String> {
+        val data = createMap()
+        return data.map { "${it.key}: ${it.value}" }
     }
 }
