@@ -6,7 +6,7 @@ object DemoMap {
     fun createMap(): Map<String, Int> {
         val ans = mutableMapOf<String, Int> ()
         for (num in 1..5) {
-            ans[Random.nextInt(10000, 100000000).toString()] = Random.nextInt(1, 100)
+            ans[Random.nextInt(10000, 100000000).toString()] = Random.nextInt(1, 101)
         }
         return ans
     }
