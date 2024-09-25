@@ -18,6 +18,7 @@ object DemoList {
         for (num in a) {
             if (num % 2 == 0) {
                 even_counter += num
+
             }
         }
         return even_counter
