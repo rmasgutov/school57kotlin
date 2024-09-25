@@ -18,6 +18,12 @@ object DemoMap {
         )
     }
 
+    fun printMap(): List<String> {
+        val data = createMap()
+        println(data)
+        return data.map { "${it.key}: ${it.value}" }
+    }
+
     fun maxValue(): Int {
         return createMap().values.max()
     }
@@ -33,6 +39,7 @@ object DemoMap {
     }
 
     fun filterOddValues(): Map<String, Int> {
-        return createMap().filterValues { it % 2 == 1 }
+        val data = createMap()
+        return data.filterValues { it % 2 == 0 }
     }
 }
