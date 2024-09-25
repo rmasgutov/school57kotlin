@@ -11,7 +11,6 @@ object DemoMap {
         for ((key, value) in b) {
             if (value > maxx) {
                 maxx = value
-
             }
         }
         return maxx
@@ -24,7 +23,6 @@ object DemoMap {
             if (value > maxx) {
                 maxx = value
                 s = key
-
             }
         }
         return s

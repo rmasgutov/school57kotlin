@@ -18,7 +18,6 @@ object DemoList {
         for (num in a) {
             if (num % 2 == 0) {
                 even_counter += num
-
             }
         }
         return even_counter
@@ -28,6 +27,7 @@ object DemoList {
         val result = a.map{it *2}
         return result
     }
+
     fun maxElement(a: List<Int>): Int {
         var maxx = 0
         for (num in a) {
