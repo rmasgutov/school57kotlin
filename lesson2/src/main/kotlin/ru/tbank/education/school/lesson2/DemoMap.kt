@@ -14,7 +14,6 @@ object DemoMap {
             getRandomString(5, 10) to Random.nextInt(1, 101),
             getRandomString(5, 10) to Random.nextInt(1, 101)
         )
-
     }
     fun maxValue(): Int {
         return map().values.maxOrNull()
@@ -28,5 +27,4 @@ object DemoMap {
     fun filterOddValues(): Map<String, Int> {
         return map().filterValues { it % 2 == 1 }
     }
-
 }
