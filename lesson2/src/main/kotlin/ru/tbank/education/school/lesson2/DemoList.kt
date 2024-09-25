@@ -15,6 +15,7 @@ object DemoList {
 
     fun sumEvenList(a: List<Int>): Int {
         var even_counter = 0
+
         for (num in a) {
             if (num % 2 == 0) {
                 even_counter += num
