@@ -17,16 +17,16 @@ object DemoMap {
 
     }
     fun maxValue(): Int {
-        return createMap().values.max()
+        return map().values.maxOrNull()
     }
     fun keyForMaxValue(): String {
-        return createMap().maxByOrNull { it.value }!!.key
+        return map().maxByOrNull { it.value }!!.key
     }
     fun sortByValueDesc(): Map<String, Int> {
         return map.toList().sortedByDescending { it.second }.toMap()
     }
     fun filterOddValues(): Map<String, Int> {
-        return createMap().filterValues { it % 2 == 1 }
+        return map().filterValues { it % 2 == 1 }
     }
 
 }
