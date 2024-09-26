@@ -6,24 +6,19 @@ object DemoMap {
     fun createMap(): Map<String, Int> {
         val a = listOf("sduyf", "weiuhwefo", "wfkfhi", "efwfluhi", "dfkjhifdk")
         val m = mutableMapOf<String, Int> ()
-        for (i in 1..5) {
-            val x = Random.nextInt(1, 100)
-            val y = Random.nextInt(0, 4)
-            m[a[y]] = x
+        for (key in a) {
+            val value = Random.nextInt(1, 100)
+            m[key] = value
         }
         return m
     }
 
     fun maxValue(m : Map<String, Int>): Int {
-        var maxx = 0
-        for ((key, value) in m) {
-            if (value > maxx) maxx = value
-        }
-        return maxx
+        return m.values.max()
     }
 
     fun keyForMaxValue(m : Map <String, Int> ): String {
-        var maxx = 0
+        var maxx = Int.MIN_VALUE
         var s = ""
         for ((key, value) in m) {
             if (value > maxx) {

@@ -9,11 +9,7 @@ object DemoList {
     }
 
     fun sumList(a: List<Int>): Int {
-        var sum = 0
-        for (i in a) {
-            sum += i
-        }
-        return sum
+        return a.sum()
     }
 
     fun sumEvenList(a: List<Int>): Int {
@@ -26,16 +22,11 @@ object DemoList {
     }
 
     fun multiplyList(a: List<Int>): List<Int> {
-        a.map { it * 2 }
-        return a
+        return a.map { it * 2 }
     }
 
     fun maxElement(a: List<Int>): Int {
-        var maxx = 0
-        for (item in a) {
-            if (item > maxx) maxx = item
-        }
-        return maxx
+        return a.max();
     }
 
     fun sortDesc(a: List<Int>): List<Int> {
