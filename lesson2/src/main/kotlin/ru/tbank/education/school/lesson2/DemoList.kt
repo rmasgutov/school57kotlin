@@ -21,7 +21,7 @@ object DemoList {
             }
             return u
         }
-//2
+//2вв
         fun multiplyList(): List<Int> {
             val result = createList().map { it * 2 }
             return result
