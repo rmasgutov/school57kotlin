@@ -19,15 +19,15 @@ object DemoMap {
     }
 
     fun maxValue(): Int {
-        return map.maxBy { it.value }.value
+        return map.maxByOrNull { it.value }!!.value
     }
 
     fun keyForMaxValue(): String {
-        return map.maxBy { it.value }.key
+        return map.maxByOrNull { it.value }!!.key
     }
 
     fun sortByValueDesc(): Map<String, Int> {
-        map = map.toList().sortedBy { it.second }.toMap().toMutableMap()
+        map = map.toList().sortedByDescending { it.second }.toMap().toMutableMap()
         return map
     }
 

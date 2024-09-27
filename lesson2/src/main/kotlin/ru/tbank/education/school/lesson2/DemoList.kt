@@ -30,7 +30,7 @@ object DemoList {
     }
 
     fun sortDesc(): List<Int> {
-        list = list.sorted().toMutableList()
+        list = list.sortedDescending().toMutableList()
         return list
     }
 }
