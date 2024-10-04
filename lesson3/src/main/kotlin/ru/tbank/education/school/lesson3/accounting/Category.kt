@@ -1,7 +1,7 @@
 package ru.tbank.education.school.lesson3.accounting
 
 abstract class Category (val name: String, var products: MutableList<Product>) {
-    constructor(products: MutableList<Product>) : this("", products)
+    constructor(products: List<Product>) : this("", products.toMutableList())
 
     open fun findProducts(request: String) : MutableList<Product> {
         if (name.contains((request))) {
