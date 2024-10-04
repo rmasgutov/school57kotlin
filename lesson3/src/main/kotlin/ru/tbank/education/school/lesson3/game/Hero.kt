@@ -12,11 +12,10 @@ class Hero (x : Int, y : Int, name : String, isBot : Boolean, val hasBoots : Boo
     override fun move(dx: Int, dy: Int) {
         x += dx
         y += dy
-        println("I'm moving to $x/$y")
         if (hasBoots) {
             x += dx
             y += dy
-            println("I'm moving to $x/$y")
         }
+        println("I'm moving to $x/$y")
     }
 }

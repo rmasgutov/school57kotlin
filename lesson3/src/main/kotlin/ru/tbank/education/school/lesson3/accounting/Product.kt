@@ -1,9 +1,9 @@
 package ru.tbank.education.school.lesson3.accounting
 
 data class Product (
-    val name: String,
-    val price: Int,
-    val count: Int
+    var name: String,
+    var price: Int,
+    var count: Int
 ) {
     override fun equals(other: Any?): Boolean {
         if (other !is Product) return false
@@ -12,5 +12,9 @@ data class Product (
 
     operator fun plus(other: Product) : Product {
         return Product(name, price, count + other.count)
+    }
+
+    operator fun minus(other: Product) : Product {
+        return Product(name, price, count - other.count)
     }
 }
