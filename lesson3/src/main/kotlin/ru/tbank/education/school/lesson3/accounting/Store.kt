@@ -6,6 +6,10 @@ object Store {
     val sales = mutableListOf<Product>()
     val warehouse = mutableListOf<Category>()
 
+    fun init(warehouse: List<Category>) {
+        this.warehouse.addAll(warehouse)
+    }
+
     fun topUp(categories: List<Category>) {
         warehouse.addAll(categories)
     }
@@ -16,11 +20,11 @@ object Store {
 
             category.inventoryManagement()
             val sellAmount =
-                    when (category) {
-                        is FoodCategory -> 2
-                        is ElectronicsCategory -> 1
-                        else -> 1
-                    }
+                when (category) {
+                    is FoodCategory -> 2
+                    is ElectronicsCategory -> 1
+                    else -> 1
+                }
             foundProduct.apply {
                 assert(count >= sellAmount) { "Not enough \"${product.name}\" to sell!" }
                 count -= sellAmount
@@ -37,11 +41,11 @@ object Store {
 
     fun addProduct(product: Product) {
         warehouse
-                        .first { it.findProducts(product.name).isNotEmpty() }
-                        .apply { inventoryManagement() }
-                        .findProducts(product.name)
-                        .firstOrNull()!!
-                .apply { count += product.count }
+            .first { it.findProducts(product.name).isNotEmpty() }
+            .apply { inventoryManagement() }
+            .findProducts(product.name)
+            .firstOrNull()!!
+            .apply { count += product.count }
     }
 
     fun removeProduct(product: Product) {

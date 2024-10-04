@@ -46,14 +46,16 @@ open class Car(
         set(value) {
             velocity = (value / 1.6).toInt()
         }
-
 }
 
 /**
  * Легковой автомобиль.
  */
 class PassengerCar(
-    model: String, velocity: Int, color: Color, engine: Engine,
+    model: String,
+    velocity: Int,
+    color: Color,
+    engine: Engine,
     var availableSeats: Int
 ) : Car(model, velocity, color, engine) {
 
@@ -77,7 +79,10 @@ class PassengerCar(
  * Грузовой автомобиль.
  */
 class Truck(
-    model: String, velocity: Int, color: Color, engine: Engine,
+    model: String,
+    velocity: Int,
+    color: Color,
+    engine: Engine,
     var availableSlots: Int
 ) : Car(model, velocity, color, engine) {
 
@@ -101,11 +106,10 @@ fun main() {
     println("Velocity MPH: ${car.velocityMph}")
     println("Color: ${car.color}")
 
-    println("car.toString(): ${car.toString()}")
-
+    println("car.toString(): $car")
 
     val carData = CarData("Lada", 0, Color.RED, Engine(2, "V6"))
-    println("carData.toString(): ${carData.toString()}")
+    println("carData.toString(): $carData")
 }
 
 /**
@@ -139,5 +143,3 @@ data class CarData(
     var color: Color,
     var engine: Engine
 )
-
-

@@ -7,9 +7,9 @@ abstract class Category(val name: String, var products: MutableList<Product>) {
 
     fun inventoryManagement() {
         this.products =
-                this.products
-                        .groupBy { it.name }
-                        .map { (_, products) -> products.reduce { p, pn -> p + pn } }
-                        .toMutableList()
+            this.products
+                .groupBy { it.name }
+                .map { (_, products) -> products.reduce { p, pn -> p + pn } }
+                .toMutableList()
     }
 }

@@ -1,6 +1,6 @@
 package ru.tbank.education.school.lesson3.accounting
 
-data class Product(val name: String, var price: Double, var count: Int) {
+data class Product(val name: String, var price: Double = 0.0, var count: Int) {
     override fun equals(other: Any?): Boolean {
         return other is Product && other.name == this.name
     }

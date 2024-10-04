@@ -22,6 +22,7 @@ class StoreTest {
         assertEquals(sale, Store.sales[0])
         assertEquals(2, Store.warehouse[0].products[0].count)
     }
+
     @Test
     fun sellElectronicsSuccessTest() {
         // given
