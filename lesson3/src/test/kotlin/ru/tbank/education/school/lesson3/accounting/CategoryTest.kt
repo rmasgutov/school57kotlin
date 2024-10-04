@@ -7,12 +7,10 @@ class CategoryTest {
     @Test
     fun findProductsTest() {
         // given
-        val category = ElectronicsCategory(
-            products = listOf(
-                Product(name = "Телевизор", price = 10000.0, count = 10),
-                Product(name = "Смартфон", price = 10000.0, count = 10)
-            )
-        )
+        val category = ElectronicsCategory(products = listOf(
+            Product(name = "Телевизор", price = 10000.0, count = 10),
+            Product(name = "Смартфон", price = 10000.0, count = 10)
+        ))
         // when
         val actual1 = category.findProducts(request = "теле")
 
@@ -30,12 +28,10 @@ class CategoryTest {
     @Test
     fun findProductsAllInCategoryTest() {
         // given
-        val category = ElectronicsCategory(
-            products = listOf(
-                Product(name = "Телевизор", price = 10000.0, count = 10),
-                Product(name = "Смартфон", price = 10000.0, count = 10)
-            )
-        )
+        val category = ElectronicsCategory(products = listOf(
+            Product(name = "Телевизор", price = 10000.0, count = 10),
+            Product(name = "Смартфон", price = 10000.0, count = 10)
+        ))
         // when
         val actual1 = category.findProducts(request = "эле")
 
