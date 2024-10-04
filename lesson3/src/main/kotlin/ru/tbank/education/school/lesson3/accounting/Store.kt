@@ -71,8 +71,8 @@ object Store {
         }
     }
 
-    fun fullPrice(category: Category): Int {
-        var result = 0
+    fun fullPrice(category: Category): Double {
+        var result = 0.0
         for (product in category.products) {
             result += product.price * product.count
         }
