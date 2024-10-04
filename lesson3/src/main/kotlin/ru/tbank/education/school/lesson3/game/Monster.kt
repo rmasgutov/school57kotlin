@@ -1,7 +1,8 @@
 package ru.tbank.education.school.lesson3.game
+
 import kotlin.random.Random
 
-class Monster : Character, Movable {
+class Monster : Character, Moveable {
     override val isBot = true
 
     constructor(name: String) {

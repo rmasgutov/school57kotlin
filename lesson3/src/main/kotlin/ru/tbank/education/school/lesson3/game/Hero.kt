@@ -2,7 +2,7 @@ package ru.tbank.education.school.lesson3.game
 
 import kotlin.random.Random
 
-class Hero : Character, Movable {
+class Hero : Character, Moveable {
     override val isBot = false
 
     private var hasBoots: Boolean
