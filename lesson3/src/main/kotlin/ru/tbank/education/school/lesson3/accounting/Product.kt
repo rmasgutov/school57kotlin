@@ -17,4 +17,3 @@ data class Product (
         return Product(name, price, count - other.count)
     }
 }
-//

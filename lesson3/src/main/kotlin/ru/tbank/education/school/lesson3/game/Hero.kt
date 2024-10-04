@@ -27,4 +27,3 @@ class Hero(
         println("I'm moving to x=$x, y=$y")
     }
 }
-//
