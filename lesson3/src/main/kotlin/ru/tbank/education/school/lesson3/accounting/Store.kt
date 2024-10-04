@@ -70,3 +70,4 @@ object Store {
         return category.products.sumOf { it.price * it.count }
     }
 }
+//
