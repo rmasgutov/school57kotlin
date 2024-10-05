@@ -1,5 +1,6 @@
 package ru.tbank.education.school.lesson3.game
-
+import ru.tbank.education.school.lesson3.game.Character
+import ru.tbank.education.school.lesson3.game.Moveable
 import kotlin.random.Random
 
 class Hero(xcoordinat: Int, ycoordinat: Int, name: String, isBot: Boolean): Character(xcoordinat,ycoordinat,name,false),Moveable {
