@@ -12,3 +12,4 @@ abstract class Character(
 
     abstract fun move(dx: Int, dy: Int)
 }
+
