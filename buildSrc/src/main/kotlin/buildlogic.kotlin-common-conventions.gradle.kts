@@ -46,7 +46,7 @@ java {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
-    jvmArgs = listOf("-Dfile.encoding=UTF-8", "-Xjvm-default=all")
+    jvmArgs = listOf("-Dfile.encoding=UTF-8")
 }
 
 tasks.withType<Detekt>().configureEach {
