@@ -11,7 +11,14 @@ object Average {
      * @param target путь до файла с результатами.
      */
     fun processFileIO(source: String, target: String) {
-        TODO()
+        val inputFile = FileIO(source)
+        val data = inputFile.readFile()
+        val outputFile = FileIO(target)
+        outputFile.clear()
+
+        for (test in data) {
+            outputFile.appendFile((test.map { it.toInt() }.average()).toString())
+        }
     }
 
     /**
