@@ -4,8 +4,7 @@ import kotlin.random.Random
 class Hero(x : Int, y : Int, name : String, isBot : Boolean, val hasBoots : Boolean) : Character(x, y, name, isBot), Moveable {
     constructor(
             name : String,
-            hasBoots : Boolean,
-            isBot : Boolean
+            hasBoots : Boolean
     ) : this(Random.nextInt(), Random.nextInt(), name, false, hasBoots)
 
     override fun say() {
@@ -13,12 +12,12 @@ class Hero(x : Int, y : Int, name : String, isBot : Boolean, val hasBoots : Bool
     }
 
     override fun move(dx: Int, dy: Int) {
-        var k = 1
+        x += dx
+        y += dy
         if (hasBoots) {
-            k = 2
+            x += dx
+            y += dy
         }
-        x += k * dx
-        y += k * dy
         println("I'm moving to $x/$y")
     }
 }
