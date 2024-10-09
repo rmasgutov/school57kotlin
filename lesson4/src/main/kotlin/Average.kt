@@ -28,6 +28,13 @@ object Average {
      * @param target путь до файла с результатами.
      */
     fun processFileNIO(source: String, target: String) {
-        TODO()
+        val inputFile = FileNIO(source)
+        val data = inputFile.readFile()
+        val outputFile = FileNIO(target)
+        outputFile.clear()
+
+        for (test in data) {
+            outputFile.appendFile((test.map { it.toInt() }.average()).toString())
+        }
     }
 }

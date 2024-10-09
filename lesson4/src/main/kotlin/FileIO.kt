@@ -5,14 +5,14 @@ import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 
-class FileIO(var name: String, needCreate : Boolean = false, val needClear: Boolean = false) {
+class FileIO(name: String, needCreate : Boolean = false, needClear: Boolean = false) : FileInteraction(name, needCreate, needClear) {
     init {
         if (needCreate) {
             createFile()
         }
     }
 
-    fun readFile() : MutableList<List<String>> {
+    override fun readFile() : MutableList<List<String>> {
         val file : File
         val data = mutableListOf<List<String>>()
 
@@ -32,7 +32,7 @@ class FileIO(var name: String, needCreate : Boolean = false, val needClear: Bool
         return data
     }
 
-    fun writeFile(content: String) {
+    override fun writeFile(content: String) {
         try {
             if (!File(name).exists()) {
                 throw FileNotFoundException("Файл $name не найден")
@@ -46,7 +46,7 @@ class FileIO(var name: String, needCreate : Boolean = false, val needClear: Bool
         }
     }
 
-    fun appendFile(content: String) {
+    override fun appendFile(content: String) {
         try {
             if (!File(name).exists()) {
                 throw FileNotFoundException("Файл $name не найден")
@@ -60,11 +60,8 @@ class FileIO(var name: String, needCreate : Boolean = false, val needClear: Bool
         }
     }
 
-    fun clear() {
-        writeFile("")
-    }
 
-    fun createFile() {
+    override fun createFile() {
         try {
             File(name).createNewFile()
             if (needClear) {

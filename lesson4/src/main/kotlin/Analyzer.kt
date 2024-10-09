@@ -16,7 +16,7 @@ object Analyzer {
         outputFile.clear()
 
         val data = inputFile.readFile()
-        outputFile.appendFile("Общее количество строк:  ${data.size}")
+        outputFile.appendFile("Общее количество строк: ${data.size}")
 
         val words = mutableListOf<String>()
         val uniqueWords = mutableSetOf<String>()
@@ -40,6 +40,25 @@ object Analyzer {
      * @param target путь до файла с результатами.
      */
     fun processFileNIO(source: String, target: String) {
-        TODO()
+        val inputFile = FileNIO(source)
+        val outputFile = FileNIO(target)
+        outputFile.clear()
+
+        val data = inputFile.readFile()
+        outputFile.appendFile("Общее количество строк: ${data.size}")
+
+        val words = mutableListOf<String>()
+        val uniqueWords = mutableSetOf<String>()
+
+        for (line in data) {
+            for (word in line) {
+                words.add(word)
+                uniqueWords.add(word)
+            }
+        }
+
+        outputFile.appendFile("Общее количество слов: ${words.size}")
+        outputFile.appendFile("Уникальные слова: ${uniqueWords.size}")
+        outputFile.appendFile("Средняя длина слов: ${words.map { it.length }.average()}")
     }
 }
