@@ -1,8 +1,8 @@
 package ru.tbank.education.school.lesson3.accounting
 
 data class Product (
-    var name: String = "",
-    var price: Double = 0.0,
+    val name: String = "",
+    val price: Double = 0.0,
     var count: Int = 0
 ) {
     override fun equals(other: Any?): Boolean {
