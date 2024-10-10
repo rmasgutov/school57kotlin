@@ -36,7 +36,7 @@ object Store {
     }
 
     fun search(query: String): List<Product> {
-        return warehouse.map { it.findProducts(query) }.flatten()
+        return warehouse.flatMap { it.findProducts(query) }
     }
 
     fun addProduct(product: Product) {
