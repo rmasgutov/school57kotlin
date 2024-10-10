@@ -2,13 +2,11 @@ package ru.tbank.education.school.lesson3.accounting
 
 
 object Store {
-    var sales = mutableListOf<Product>()
-    var warehouse = mutableListOf<Category>()
+    val sales = mutableListOf<Product>()
+    val warehouse = mutableListOf<Category>()
 
     fun topUp(newCategories: List<Category>) {
-        for (category in newCategories) {
-            warehouse.add(category)
-        }
+        warehouse.addAll(newCategories)
     }
 
     fun sell(sellProduct: Product) {
@@ -41,7 +39,7 @@ object Store {
     fun add(newProduct: Product) {
         for (category in warehouse) {
             category.inventoryManagement()
-            for (i in 0..category.products.size) {
+            for (i in 0..(category.products.size - 1)) {
                 if (category.products[i] == newProduct) {
                     category.products[i] += newProduct
                 }
@@ -52,7 +50,7 @@ object Store {
     fun del(newProduct: Product) {
         for (category in warehouse) {
             category.inventoryManagement()
-            for (i in 0..category.products.size) {
+            for (i in 0..(category.products.size - 1)) {
                 if (category.products[i] == newProduct) {
                     category.products[i] -= newProduct
                 }
@@ -63,7 +61,7 @@ object Store {
     fun change(newProduct: Product) {
         for (category in warehouse) {
             category.inventoryManagement()
-            for (i in 0..category.products.size) {
+            for (i in 0..(category.products.size - 1)) {
                 if (category.products[i] == newProduct) {
                     category.products[i] = newProduct
                 }
