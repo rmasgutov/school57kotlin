@@ -4,7 +4,7 @@ abstract class Category(val name: String, var products: MutableList<Product>) {
     fun findProducts(request: String): MutableList<Product> {
         val result = products
         if (!name.contains(request)) {
-            result.filter { it.name.contains(request) || name.contains(request) }.toMutableList()
+            result.filter { it.name.contains(request) }.toMutableList()
         }
         return result
     }
