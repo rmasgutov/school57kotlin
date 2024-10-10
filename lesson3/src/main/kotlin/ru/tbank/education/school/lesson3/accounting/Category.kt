@@ -17,11 +17,3 @@ abstract class Category(val name: String, var products: MutableList<Product>) {
                 .toMutableList()
     }
 }
-
-fun main() {
-    val category = ElectronicsCategory(products = listOf(
-        Product(name = "Телевизор", price = 10000.0, count = 10),
-        Product(name = "Смартфон", price = 10000.0, count = 10)
-    ))
-    println(category.findProducts("Теле"))
-}
