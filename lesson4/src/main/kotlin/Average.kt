@@ -1,26 +1,21 @@
 package ru.tbank.education.school
 
-/**
- * Класс для вычисления среднего арифметического.
- */
+
 object Average {
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java IO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
     fun processFileIO(source: String, target: String) {
-        TODO()
+        Work_with_file(target).write(Work_with_file(source).read().map {
+            it.split(" ").map {
+                it.toInt()
+            }.average().toString()
+        }.toString().filter { it != '[' && it != ']' })
     }
 
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java NIO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
+
     fun processFileNIO(source: String, target: String) {
-        TODO()
+        Work_with_file(target, 2).write(Work_with_file(source, 2).read().map {
+            it.split(" ").map {
+                it.toInt()
+            }.average().toString()
+        }.toString().filter { it != '[' && it != ']' })
     }
 }
