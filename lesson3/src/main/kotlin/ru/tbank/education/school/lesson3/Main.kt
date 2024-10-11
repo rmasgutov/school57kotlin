@@ -43,6 +43,16 @@ abstract class Category(
         }
         products = map.values.toMutableList()
     }
+    fun sell(c: Int, ind: Int):Boolean {
+        if(this.products[ind].count>1){
+            this.products[ind].count -= 1
+        }
+        else{
+            this.products[ind].count = 0
+            return true
+        }
+        return false
+    }
 }
 
 
@@ -61,10 +71,10 @@ class Store(
         warehouse.add(c)
     }
     fun sell(p:Product, c:Int){
-        val ind:Pair<Int, Int> = this.search(p.name)
+        val ind:Pair<Int, Int> = search(p.name)
         if (ind != Pair(-1, -1)){
-            if (this.warehouse[ind.first].sell(c, ind.second)){
-                this.sales.add(p)
+            if (warehouse[ind.first].sell(c, ind.second)){
+                sales.add(p)
             }
         }
     }
