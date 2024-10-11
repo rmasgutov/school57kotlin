@@ -1,26 +1,51 @@
 package ru.tbank.education.school
 
-/**
- * Класс для вычисления среднего арифметического.
- */
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Paths
+
 object Average {
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java IO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
+
     fun processFileIO(source: String, target: String) {
-        TODO()
+        try {
+            val fin = File(source)
+            val fout = File(target)
+            val lines = fin.readLines()
+            val meanLines = lines.map { line ->
+                val nums = line.split(" ").map { it.toInt() }
+                if (nums.isNotEmpty()) nums.sum() / nums.size
+                else 0
+            }
+            fout.writeText(meanLines.joinToString("\n"))
+        }
+        catch (e: FileNotFoundException) {
+            println("Такого файла не существует: ${e.message}")
+        }
+        catch (e: IOException) {
+            println("Ошибка при работе с файлом(и): ${e.message}")
+        }
     }
 
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java NIO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
     fun processFileNIO(source: String, target: String) {
-        TODO()
+        try {
+            val fin = Paths.get(source)
+            val fout = Paths.get(target)
+            val lines = Files.readAllLines(fin)
+            val meanLines = lines.map { line ->
+                val nums = line.split(" ").map { it.toInt() }
+                if (nums.isNotEmpty()) nums.sum() / nums.size
+                else 0
+            }
+            Files.write(fout, meanLines.joinToString("\n").toByteArray())
+        }
+        catch (e: FileNotFoundException) {
+            println("Такого файла не существует: ${e.message}")
+        }
+        catch (e: IOException) {
+            println("Ошибка при работе с файлом(и): ${e.message}")
+        }
     }
+
 }
