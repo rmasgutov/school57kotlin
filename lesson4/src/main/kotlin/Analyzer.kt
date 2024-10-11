@@ -5,7 +5,6 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.nio.file.StandardOpenOption
 
 object Analyzer {
     fun processFileIO(source: String, target: String) {

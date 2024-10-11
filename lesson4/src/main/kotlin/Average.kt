@@ -21,10 +21,10 @@ object Average {
             fout.writeText(meanLines.joinToString("\n"))
         }
         catch (e: FileNotFoundException) {
-            println("Такого файла не существует: ${e.message}")
+            println("Такого файла не существует:\n${e.message}")
         }
         catch (e: IOException) {
-            println("Ошибка при работе с файлом(и): ${e.message}")
+            println("Ошибка при работе с файлом(и):\n${e.message}")
         }
     }
 
