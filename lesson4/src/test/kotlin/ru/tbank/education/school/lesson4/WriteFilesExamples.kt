@@ -17,6 +17,7 @@ class WriteFilesExamples {
                 writer.write("Hello World!")
             }
     }
+
     @Test
     fun `append write file using BufferedWriter`() {
         BufferedWriter(FileWriter("src/test/resources/fileCreatedUsingBufferedWriter.txt", true))
@@ -24,7 +25,6 @@ class WriteFilesExamples {
                 writer.append("Hello World!")
             }
     }
-
 
     @Test
     fun `write file using PrintWriter`() {
