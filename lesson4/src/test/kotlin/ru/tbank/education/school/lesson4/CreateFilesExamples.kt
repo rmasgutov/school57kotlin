@@ -22,8 +22,7 @@ class CreateFilesExamples {
 
     @Test
     fun `create file using IO OutputStream`() {
-      FileOutputStream("src/test/resources/fileCreatedUsingOutputStream.txt")
-          .use {  }
+        FileOutputStream("src/test/resources/fileCreatedUsingOutputStream.txt")
+            .use { }
     }
-
 }
