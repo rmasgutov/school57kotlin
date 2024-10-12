@@ -15,7 +15,9 @@ class JsonDeserializationTest {
     fun `Имена свойств совпадают`() {
         // given
         val data =
-            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
+            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", 
+                "passportSerial": "1234", "birthDate": "1990-01-01"}
+            """.trimMargin()
         val objectMapper = jsonMapper {
             addModule(kotlinModule())
             addModule(Jdk8Module())
@@ -38,7 +40,9 @@ class JsonDeserializationTest {
     fun `В JSON есть лишние свойства Настроить ObjectMapper`() {
         // given
         val data =
-            """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
+            """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", 
+                "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}
+            """.trimMargin()
         val objectMapper = jsonMapper {
             addModule(kotlinModule())
             addModule(Jdk8Module())
@@ -61,7 +65,9 @@ class JsonDeserializationTest {
     fun `В JSON есть лишние свойства Настроить через аннотацию`() {
         // given
         val data =
-            """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
+            """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", 
+                "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}
+            """.trimMargin()
         val objectMapper = jsonMapper {
             addModule(kotlinModule())
             addModule(Jdk8Module())
@@ -84,7 +90,9 @@ class JsonDeserializationTest {
     fun `Имена свойств различаются`() {
         // given
         val data =
-            """{"name": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
+            """{"name": "Иван", "lastName": "Иванов", "middleName": "Иванович", 
+                "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}
+            """.trimMargin()
         val objectMapper = jsonMapper {
             addModule(kotlinModule())
             addModule(Jdk8Module())
@@ -107,7 +115,9 @@ class JsonDeserializationTest {
     fun `Кастомный формат даты`() {
         // given
         val data =
-            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "01-01-1990"}"""
+            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", 
+                "passportNumber": "123456", "passportSerial": "1234", "birthDate": "01-01-1990"}
+            """.trimMargin()
         val objectMapper = jsonMapper {
             addModule(kotlinModule())
             addModule(Jdk8Module())
@@ -130,7 +140,9 @@ class JsonDeserializationTest {
     fun `Поддержка optional типа`() {
         // given
         val data1 =
-            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
+            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", 
+                "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}
+            """.trimMargin()
         val objectMapper = jsonMapper {
             addModule(kotlinModule())
             addModule(Jdk8Module())
@@ -145,7 +157,9 @@ class JsonDeserializationTest {
 
         // given
         val data2 =
-            """{"firstName": "Иван", "lastName": "Иванов", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
+            """{"firstName": "Иван", "lastName": "Иванов", "passportNumber": "123456", 
+                "passportSerial": "1234", "birthDate": "1990-01-01"}
+            """.trimMargin()
 
         // when
         val client2 = objectMapper.readValue<Person4>(data2)
