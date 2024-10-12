@@ -1,5 +1,7 @@
 package ru.tbank.education.school.lesson3
 
-fun main() {
-    println("Hello World!")
-}
+import java.io.File
+import java.io.FileOutputStream
+import java.nio.file.Files
+import java.nio.file.Paths
+import kotlin.io.path.Path
