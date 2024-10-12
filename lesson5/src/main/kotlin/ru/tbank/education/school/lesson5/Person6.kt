@@ -1,4 +1,4 @@
-package ru.tbank.education.school.ru.tbank.education.school.lesson5
+package ru.tbank.education.school.lesson5
 
 import java.time.LocalDate
 
