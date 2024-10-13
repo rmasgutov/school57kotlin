@@ -40,16 +40,24 @@ object Store {
     }
 
     fun addProduct(product: Product) {
-        warehouse
-            .first { it.findProducts(product.name).isNotEmpty() }
-            .apply { inventoryManagement() }
+        val foundProduct = warehouse
+            .firstOrNull { it.findProducts(product.name).isNotEmpty() }
+
+        if (foundProduct == null) return
+
+        foundProduct.apply { inventoryManagement() }
             .findProducts(product.name)
             .firstOrNull()!!
             .apply { count += product.count }
     }
 
     fun removeProduct(product: Product) {
-        warehouse.first { it.findProducts(product.name).isNotEmpty() }.products.removeAll {
+        val foundProduct = warehouse
+            .firstOrNull { it.findProducts(product.name).isNotEmpty() }
+
+        if (foundProduct == null) return
+
+        foundProduct.products.removeAll {
             it == product
         }
     }

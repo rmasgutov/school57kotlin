@@ -2,17 +2,12 @@ package ru.tbank.education.school.lesson3.game
 
 import kotlin.random.Random
 
-class Hero : Character, Moveable {
-    override val isBot = false
-
-    private var hasBoots: Boolean
-
-    constructor(name: String, hasBoots: Boolean) {
-        this.name = name
-        this.hasBoots = hasBoots
-        x = Random.nextDouble(-30_000_000.0, 30_000_000.0)
-        y - Random.nextDouble(-30_000_000.0, 30_000_000.0)
-    }
+class Hero(name: String, private var hasBoots: Boolean) : Character(
+    Random.nextDouble(-30_000_000.0, 30_000_000.0),
+    Random.nextDouble(-30_000_000.0, 30_000_000.0),
+    name,
+    false
+), Moveable {
     override fun say() {
         println("I'm a hero! $name")
     }
