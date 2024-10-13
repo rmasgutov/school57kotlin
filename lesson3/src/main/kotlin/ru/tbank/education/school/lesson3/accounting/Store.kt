@@ -16,19 +16,18 @@ object Store {
     fun sell(obj: Product) {
         food.inventoryManagement()
         elec.inventoryManagement()
-        for (i in 0..food.products.size) {
-            food.products[i] = food.products[i] - obj * 2
+        food.products.map {
+            it - obj * 2
         }
-        for (i in 0..elec.products.size) {
-            if (obj.name == elec.products[i].name) {
-                elec.products[i].count -= 1
-            }
+        elec.products.map {
+            if (obj == it) it.count -= 1
         }
-        for (i in 0..warehouse.size) {
-            warehouse[i].inventoryManagement()
-            if (warehouse[i].name == "food" || warehouse[i].name == "electronics") continue
-            for (j in 0..warehouse[i].products.size) {
-                warehouse[i].products[j] = warehouse[i].products[j] - obj
+        warehouse.forEach {
+            it.inventoryManagement()
+            if (it.name != "food" && it.name != "electronics") {
+                it.products.map {
+                    it - obj
+                }
             }
         }
         sales.add(obj)
