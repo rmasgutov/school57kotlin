@@ -24,7 +24,7 @@ object Average {
                 var line1 = line.split(" ").map { it.toInt() }
                 var t = line1
                 listav.add(t.average())
-            }
+            }//
             outputfileio.writeText(listav.joinToString(" "))
         } catch (e: FileNotFoundException) {
             println("Высосо, файл не найден ${e.message}")
