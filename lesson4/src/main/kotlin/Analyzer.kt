@@ -4,6 +4,11 @@ package ru.tbank.education.school
  * Класс для анализа содержимого файла.
  */
 object Analyzer {
+    /**
+     * Метод анализирует список строк.
+     * @param lines Анализируемые стоки.
+     * @return Результат анализа.
+     */
     private fun analyzeLines(lines: List<String>): String {
         val words = lines.flatMap { it.split(" ").map(String::lowercase) }
         val uniqueWords = words.toSet()

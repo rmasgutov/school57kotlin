@@ -8,6 +8,10 @@ import java.nio.file.Paths
 
 class Utils {
     companion object {
+        /**
+         * Метод позволяет безопасно работать с файлами.
+         * @param executable Исполняемый код.
+         */
         private fun operateFile(executable: () -> Unit) {
             try {
                 executable()
@@ -20,6 +24,12 @@ class Utils {
             }
         }
 
+        /**
+         * Метод позволяет писать в файл с помощью функции, опираясь на содержимое другого файла, используя java.io.
+         * @param source путь до исходного файла.
+         * @param target путь до файла с результатами.
+         * @param transform функция, преобразующая содержимое входного файла в содержимое выходного.
+         */
         fun operateFileIO(source: String, target: String, transform: (List<String>) -> String) {
             operateFile {
                 File(target).writeText(
@@ -28,6 +38,12 @@ class Utils {
             }
         }
 
+        /**
+         * Метод позволяет писать в файл с помощью функции, опираясь на содержимое другого файла, используя java.nio.
+         * @param source путь до исходного файла.
+         * @param target путь до файла с результатами.
+         * @param transform функция, преобразующая содержимое входного файла в содержимое выходного.
+         */
         fun operateFileNIO(source: String, target: String, transform: (List<String>) -> String) {
             operateFile {
                 Files.write(
