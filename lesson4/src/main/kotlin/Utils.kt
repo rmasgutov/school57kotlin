@@ -8,11 +8,9 @@ import java.nio.file.Paths
 
 class Utils {
     companion object {
-        fun operateFileIO(source: String, target: String, transform: (List<String>) -> String) {
+        private fun operateFile(executable: () -> Unit) {
             try {
-                File(target).writeText(
-                    transform(File(source).readLines())
-                )
+                executable()
             } catch (e: FileNotFoundException) {
                 println("File not found: ${e.message}")
             } catch (e: IOException) {
@@ -22,20 +20,22 @@ class Utils {
             }
         }
 
+        fun operateFileIO(source: String, target: String, transform: (List<String>) -> String) {
+            operateFile {
+                File(target).writeText(
+                    transform(File(source).readLines())
+                )
+            }
+        }
+
         fun operateFileNIO(source: String, target: String, transform: (List<String>) -> String) {
-            try {
+            operateFile {
                 Files.write(
                     Paths.get(target),
                     transform(
                         Files.readAllLines(Paths.get(source))
                     ).toByteArray()
                 )
-            } catch (e: FileNotFoundException) {
-                println("File not found: ${e.message}")
-            } catch (e: IOException) {
-                println("Error while using file: ${e.message}")
-            } catch (e: Exception) {
-                println("Error: ${e.message}")
             }
         }
     }
