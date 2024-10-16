@@ -33,7 +33,6 @@ object Average {
             println("Неизвестная ошибка: ${e.message}")
         }
     }
-
     fun processFileNIO(source: String, target: String) {
         try {
             val inputFileNIO = Paths.get(source)
