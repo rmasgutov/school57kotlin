@@ -57,6 +57,26 @@ fun main() {
 
     // все пропущенные дома, в формате 'город, округ, район, улица, номера дома'
 
+    for ((city, circles) in data) {
+        for ((circle, areas) in circles) {
+            for ((area, streets) in areas) {
+                for ((street, nums) in streets) {
+                    var arr : MutableList<Int> = mutableListOf()
+                    for (i in 1..nums.max()) {
+                        if (!nums.contains(i)){
+                            arr.add(i)
+                        }
 
+                    }
+                    if(arr.size > nums.size){
+                        for(i in arr){
+                        println("$city $circle $area $street $i")}
+                    }
+                }
+            }
+        }
+    }
+    //только в тех районах где улиц больше чем районов в округе
+//кольчество пропущеных домов больше чем существующих
 
 }
