@@ -1,5 +1,6 @@
 package ru.tbank.education.school.lesson5
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -12,7 +13,7 @@ class JsonSerializationTest {
     fun `Не должны сериализовываться свойства с null значениям Настройка через аннотацию`() {
         // given
         val client = Person5()
-        val objectMapper = ObjectMapper()
+        val objectMapper = ObjectMapper().findAndRegisterModules()
 
         // when
         val data = objectMapper.writeValueAsString(client)
@@ -25,7 +26,9 @@ class JsonSerializationTest {
     fun `Не должны сериализовываться свойства с null значениям Настройка через ObjectMapper`() {
         // given
         val client = Person6()
-        val objectMapper = ObjectMapper()
+        val objectMapper = ObjectMapper().findAndRegisterModules().setSerializationInclusion(
+            JsonInclude.Include.NON_EMPTY
+        )
 
         // when
         val data = objectMapper.writeValueAsString(client)
