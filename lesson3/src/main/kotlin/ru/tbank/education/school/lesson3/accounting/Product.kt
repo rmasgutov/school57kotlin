@@ -9,12 +9,10 @@ data class Product(
         if (other is Product) return other.name == name
         return false
     }
-
-    operator fun plus(other: Product): Product? {
+    operator fun plus(other: Product): Product {
         if (name == other.name) {
             return Product(name, price, count + other.count)
         }
-        println("Can't sum product not with product.")
-        return null
+        throw IllegalArgumentException("Can't sum product not with product")
     }
 }

@@ -35,26 +35,19 @@ object Store {
             else category.products.add(product)
         }
     }
-    fun change(product: Product) {
-        for (category in warehouse) {
-            category.inventoryManagement()
-            for (item in 0..category.products.size) {
-                if (category.products[item] == product) {
-                    category.products[item] = product
-                    return
-                }
-            }
+    fun removeProduct(categoryName: String, product: Product) {
+        val category = warehouse.find { it.name == categoryName }
+        if (category != null) {
+            category.del(product)
         }
+        else println("This category is empty!")
     }
-    fun del(product: Product) {
-        for (category in warehouse) {
-            category.inventoryManagement()
-            for (item in 0..category.products.size) {
-                if (category.products[item] == product) {
-                    category.products.remove(product)
-                    return
-                }
-            }
+
+    fun updateProduct(categoryName: String, product: Product, newCount: Int) {
+        val category = warehouse.find { it.name == categoryName }
+        if (category != null) {
+            category.change(product, newCount)
         }
+        else println("This category is empty!")
     }
 }
