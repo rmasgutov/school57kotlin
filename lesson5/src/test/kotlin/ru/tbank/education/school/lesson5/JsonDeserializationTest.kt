@@ -1,6 +1,10 @@
 package ru.tbank.education.school.lesson5
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -17,6 +21,9 @@ class JsonDeserializationTest {
         val data =
             """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
         val objectMapper = ObjectMapper()
+            .registerModules(KotlinModule.Builder().build(), JavaTimeModule(), Jdk8Module())
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 
         // when
         val client = objectMapper.readValue<Person1>(data)
@@ -36,6 +43,9 @@ class JsonDeserializationTest {
         val data =
             """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
         val objectMapper = ObjectMapper()
+            .registerModules(KotlinModule.Builder().build(), JavaTimeModule(), Jdk8Module())
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 
         // when
         val client = objectMapper.readValue<Person1>(data)
@@ -55,6 +65,9 @@ class JsonDeserializationTest {
         val data =
             """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
         val objectMapper = ObjectMapper()
+            .registerModules(KotlinModule.Builder().build(), JavaTimeModule(), Jdk8Module())
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 
         // when
         val client = objectMapper.readValue<Person1>(data)
@@ -74,6 +87,9 @@ class JsonDeserializationTest {
         val data =
             """{"name": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
         val objectMapper = ObjectMapper()
+            .registerModules(KotlinModule.Builder().build(), JavaTimeModule(), Jdk8Module())
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 
         // when
         val client = objectMapper.readValue<Person2>(data)
@@ -93,6 +109,9 @@ class JsonDeserializationTest {
         val data =
             """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "01-01-1990"}"""
         val objectMapper = ObjectMapper()
+            .registerModules(KotlinModule.Builder().build(), JavaTimeModule(), Jdk8Module())
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 
         // when
         val client = objectMapper.readValue<Person3>(data)
@@ -112,6 +131,9 @@ class JsonDeserializationTest {
         val data1 =
             """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
         val objectMapper = ObjectMapper()
+            .registerModules(KotlinModule.Builder().build(), JavaTimeModule(), Jdk8Module())
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 
         // when
         val client1 = objectMapper.readValue<Person4>(data1)
