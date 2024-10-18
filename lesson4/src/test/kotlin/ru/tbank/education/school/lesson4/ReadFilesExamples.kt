@@ -1,13 +1,17 @@
 package ru.tbank.education.school.lesson4
 
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.io.*
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
 
-
 class ReadFilesExamples {
+
 
     @Test
     fun `read file using input stream`() {
@@ -69,7 +73,6 @@ class ReadFilesExamples {
             }
     }
 
-
     @Throws(IOException::class)
     private fun readFromInputStream(inputStream: InputStream): String {
         val resultStringBuilder = StringBuilder()
@@ -82,5 +85,31 @@ class ReadFilesExamples {
                 }
             }
         return resultStringBuilder.toString()
+    }
+
+    @BeforeEach
+    fun setUpMethod() {
+        println("setUpMethod")
+    }
+
+    @AfterEach
+    fun tearDownMethod() {
+        println("tearDownMethod")
+    }
+
+    companion object {
+        @JvmStatic
+        @BeforeAll
+        fun setUp(): Unit {
+            println("setUp")
+        }
+
+        @JvmStatic
+        @AfterAll
+        fun tearDown(): Unit {
+            println("tearDown")
+        }
+
+
     }
 }
