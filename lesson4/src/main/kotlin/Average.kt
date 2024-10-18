@@ -1,26 +1,42 @@
 package ru.tbank.education.school
 
-/**
- * Класс для вычисления среднего арифметического.
- */
+import java.io.File
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Paths
 object Average {
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java IO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
     fun processFileIO(source: String, target: String) {
-        TODO()
+        try{
+            val a = File(source)
+            val b = File(target)
+            if (!a.exists()){throw IOException("файл для ввода не найден")}
+            if (!b.exists()){throw IOException("файл для вывода не найден")}
+            val list = a.readLines()
+            for(i in list){
+                val nums = i.split(" ").map{it.toInt()}
+                if(nums.size!=0){val ans = nums.sum()/nums.size
+                b.writeText(ans.toString())
+                b.writeText("\n")}
+            }
+        }catch(e: IOException){
+            println("Произошла ошибка: ${e.message}")
+        }
     }
-
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java NIO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
     fun processFileNIO(source: String, target: String) {
-        TODO()
+        try{
+            val a = Paths.get(source)
+            val b = Paths.get(target)
+            if (!Files.exists(a)){throw IOException("файл для ввода не найден")}
+            if (!Files.exists(b)){throw IOException("файл для вывода не найден")}
+            val list = Files.readAllLines(a)
+            for(i in list){
+                val nums = i.split(" ").map{it.toInt()}
+                if(nums.size!=0){val ans = nums.sum()/nums.size
+                    Files.writeString(b, ans.toString())
+                    Files.writeString(b, "\n")}
+            }
+        }catch(e: IOException){
+            println("Произошла ошибка:${e.message}")
+        }
     }
 }
