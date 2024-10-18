@@ -5,6 +5,7 @@ import java.time.LocalDate
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Person1(
+    //second edition
     val firstName: String,
     val lastName: String,
     val middleName: String?,

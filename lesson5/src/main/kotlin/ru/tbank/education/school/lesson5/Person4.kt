@@ -4,6 +4,7 @@ import java.time.LocalDate
 import java.util.*
 
 data class Person4(
+    //second edition
     val firstName: String,
     val lastName: String,
     val middleName: Optional<String>,

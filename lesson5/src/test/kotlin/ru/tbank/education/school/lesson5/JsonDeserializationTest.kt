@@ -14,6 +14,7 @@ import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person4
 import java.time.LocalDate
 
 class JsonDeserializationTest {
+    //second edition
     @Test
     fun `Имена свойств совпадают`() {
         // given
