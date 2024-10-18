@@ -5,7 +5,6 @@ import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Paths
 
-
 object Average {
     fun processFileIO(source: String, target: String) {
         try{
