@@ -8,17 +8,25 @@ data class Product(
     var count:Int,
     ){
 
-    fun equals(x: Product) : Boolean {
+    override fun equals(x: Any?) : Boolean {
+        if (x !is Product) return false
         return (x.name == name)
     }
 
     operator fun plus(a:Product):Product {
-        return Product(name, price,a.count + count)
+        if (equals(a.name)) {
+            return Product(name, price, a.count + count)
+        } else {
+            return Product(name, price, a.count)
+        }
     }
 
     operator fun minus(a:Product) : Product {
-        return Product(name, price, count - a.count)
-    }
+        if (equals(a.name)) {
+            return Product(name, price, a.count - count)
+        } else {
+            return Product(name, price, a.count)
+        }
 }
 
 
@@ -26,14 +34,11 @@ abstract class Category(
     val name:String,
     var products:MutableList<Product>
 ) {
-    fun findProducts(st: String) : List<String> {
-        var arr_of_names = listOf("")
-        if (st in name) {
-            for (prod in products) {
-                arr_of_names.plus(prod.name)
-            }
+    fun findProducts (request : String) : List<Product>{
+        if (name.contains((request))) {
+            return products
         }
-        return arr_of_names
+        return products.filter { it.name.contains(request) }
     }
 
     fun inventoryManagement() {
