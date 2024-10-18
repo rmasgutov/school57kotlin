@@ -7,6 +7,7 @@ abstract class Category (val name : String, var listOfProducts : MutableList<Pro
         }
         return listOfProducts.filter { it.name.contains(request) }
     }
+
     open fun inventoryManagement() {
         var result = mutableListOf<Product>()
         var used = mutableSetOf<String>()

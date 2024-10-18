@@ -7,9 +7,7 @@ class Monster(x : Int, y : Int, name : String, isBot : Boolean) : Character(x, y
     constructor(
         x : Int,
         y : Int,
-        name : String,
-        isBot : Boolean,
-        hasBoots : Boolean
+        name : String
     ) : this(x, y, name, isBot = false) {
 
         this.x = Random.nextInt()
@@ -20,5 +18,6 @@ class Monster(x : Int, y : Int, name : String, isBot : Boolean) : Character(x, y
     override fun move(dx: Int, dy: Int) {
         x += dx
         y += dy
+        println("I'm moving to $x/$y")
     }
 }

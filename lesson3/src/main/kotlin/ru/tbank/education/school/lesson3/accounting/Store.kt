@@ -37,7 +37,7 @@ object Store {
     fun add(product : Product) {
         for (category in warehouse) {
             category.inventoryManagement()
-            for (num in 0..category.listOfProducts.size) {
+            for (num in 0..category.listOfProducts.size - 1) {
                 if (category.listOfProducts[num] == product) {
                     category.listOfProducts[num] += product
                 }
@@ -48,7 +48,7 @@ object Store {
     fun del(product : Product) {
         for (category in warehouse) {
             category.inventoryManagement()
-            for (num in 0..category.listOfProducts.size) {
+            for (num in 0..category.listOfProducts.size - 1) {
                 if (category.listOfProducts[num] == product) {
                     category.listOfProducts[num] -= product
                 }
@@ -57,17 +57,14 @@ object Store {
     }
 
     fun countFullCost(category: Category) : Int{
-        var fullCost = 0
-        for (product in category.listOfProducts) {
-            fullCost += product.count
-        }
+        var fullCost = category.listOfProducts.sumOf { it.count }
         return fullCost
     }
 
     fun change(changeProduct: Product) {
         for (category in warehouse) {
             category.inventoryManagement()
-            for (i in 0..category.listOfProducts.size) {
+            for (i in 0..category.listOfProducts.size - 1) {
                 if (category.listOfProducts[i].name == changeProduct.name) {
                     category.listOfProducts[i] = changeProduct
                 }
