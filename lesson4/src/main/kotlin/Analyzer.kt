@@ -1,5 +1,7 @@
 package ru.tbank.education.school
 
+import java.io.*
+
 /**
  * Класс для анализа содержимого файла.
  */
@@ -11,7 +13,13 @@ object Analyzer {
      * @param target путь до файла с результатами.
      */
     fun processFileIO(source: String, target: String) {
-        TODO()
+        javaClass.classLoader.getResourceAsStream("numbers.txt")
+            .use { inputStream ->
+                BufferedReader(InputStreamReader(inputStream!!))
+                    .use { bufferedReader ->
+                        println("buffered reader: " + bufferedReader.readText())
+                    }
+            }
     }
 
     /**
