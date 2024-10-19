@@ -12,13 +12,19 @@ data class Product(
     }
 
 
-    operator fun plus(other: Product) : Product {
-        return Product(name, price, count + other.count)
+    operator fun plus(other: Product): Product {
+        if (this == other) {
+            return Product(name, price, count - other.count)
+        }
+        return this
     }
 
 
     operator fun minus(other: Product) : Product {
-        return Product(name, price, count - other.count)
+        if (this == other) {
+            return Product(name, price, count - other.count)
+        }
+        return this
     }
 
 
@@ -35,11 +41,11 @@ abstract class Category(
     fun inventoryManagement() {
         var ans: MutableList<Product> = mutableListOf()
         var def: MutableSet<String> = mutableSetOf("")
-        for (i in 0..products.size) {
+        for (i in 0..products.size - 1) {
             var loc: Product = products[i]
             if (def.containsAll(listOf(loc.name))) continue
             def.add(loc.name)
-            for (j in 0..products.size) {
+            for (j in 0..products.size - 1) {
                 if (i == j) continue
                 val loc2 = products[i]
                 loc = loc + loc2
@@ -88,15 +94,15 @@ object Store {
     fun sell(obj: Product) {
         food.inventoryManagement()
         elec.inventoryManagement()
-        for (i in 0..food.products.size) {
+        for (i in 0..food.products.size - 1) {
             food.products[i] = food.products[i] - obj * 2
         }
-        for (i in 0..elec.products.size) {
+        for (i in 0..elec.products.size - 1) {
             if (obj.name == elec.products[i].name) {
                 elec.products[i].count -= 1
             }
         }
-        for (i in 0..warehouse.size) {
+        for (i in 0..warehouse.size - 1) {
             warehouse[i].inventoryManagement()
             if (warehouse[i].name == "food" || warehouse[i].name == "electronics") continue
             for (j in 0..warehouse[i].products.size) {
@@ -108,9 +114,9 @@ object Store {
 
 
     fun search(obj: String): Product {
-        for (i in 0..warehouse.size) {
+        for (i in 0..warehouse.size - 1) {
             warehouse[i].inventoryManagement()
-            for (j in 0..warehouse[i].products.size) {
+            for (j in 0..warehouse[i].products.size - 1) {
                 if (warehouse[i].products[j].name == obj) {
                     return warehouse[i].products[j]
                 }
@@ -150,7 +156,7 @@ object Store {
     fun change(newProduct: Product) {
         for (category in warehouse) {
             category.inventoryManagement()
-            for (i in category.products.indices) {
+            for (i in category.products.indices - 1) {
                 if (category.products[i] == newProduct) {
                     category.products[i] = newProduct
                     break
@@ -158,11 +164,9 @@ object Store {
             }
         }
     }
-
-
     fun full_price(category: Category): Int {
         var ans = 0
-        for (i in 0..category.products.size) {
+        for (i in 0..category.products.size - 1){
             ans += category.products[i].price * category.products[i].count
         }
         return ans
