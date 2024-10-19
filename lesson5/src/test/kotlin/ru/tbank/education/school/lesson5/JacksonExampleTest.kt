@@ -19,7 +19,6 @@ class JacksonExampleTest {
         val deserializedObject = objectMapper.readValue<JacksonExample>(serializedData)
         println("Исходный и десериализованный объекты равны: ${initialObject == deserializedObject}")
     }
-
 }
 
 data class JacksonExample(
