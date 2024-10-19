@@ -19,4 +19,11 @@ data class Product(
     }
 
     operator fun plus(other: Product): Product {
-        return if (name == other.name) {
+        return if (this == other) {
+            Product(name, price, count + other.count)
+        } else {
+            throw IllegalArgumentException()
+        }
+    }
+
+}

@@ -6,7 +6,8 @@ abstract class Category(
 ) {
 
     fun findProducts(query: String): List<Product> {
-        return products.filter { it.name.contains(query) || name.contains(query) }
+        if (name.contains(query)) return products
+        return products.filter { it.name.contains(query) }
     }
 
     fun inventoryManagement() {
