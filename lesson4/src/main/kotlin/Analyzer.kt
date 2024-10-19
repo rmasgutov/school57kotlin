@@ -67,4 +67,3 @@ fun processFileIO(source: String, target: String) {
             println("Неизвестная ошибка: ${e.message}")
         }
     }
-}
