@@ -2,10 +2,12 @@ package ru.tbank.education.school.lesson3.accounting
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import java.io.File
 
 class CategoryTest {
     @Test
     fun findProductsTest() {
+        File
         // given
         val category = ElectronicsCategory(products = listOf(
             Product(name = "Телевизор", price = 10000.0, count = 10),
