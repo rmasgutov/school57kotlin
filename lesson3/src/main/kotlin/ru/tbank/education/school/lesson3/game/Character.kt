@@ -9,6 +9,4 @@ abstract class Character(
     open fun say() {
         println("Hi!")
     }
-
-    abstract fun move(dx: Int, dy: Int)
 }
