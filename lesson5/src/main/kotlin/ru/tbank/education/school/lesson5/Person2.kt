@@ -10,4 +10,5 @@ data class Person2(
     val passportNumber: String,
     val passportSerial: String,
     val birthDate: LocalDate,
+
 )

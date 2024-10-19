@@ -9,4 +9,5 @@ data class Person6(
     val passportNumber: String? = null,
     val passportSerial: String? = null,
     val birthDate: LocalDate? = null
+
 )

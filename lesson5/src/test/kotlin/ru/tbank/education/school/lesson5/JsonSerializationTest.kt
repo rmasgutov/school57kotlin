@@ -20,7 +20,6 @@ class JsonSerializationTest {
         // then
         assertEquals("{}", data)
     }
-
     @Test
     fun `Не должны сериализовываться свойства с null значениям Настройка через ObjectMapper`() {
         // given

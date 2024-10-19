@@ -10,4 +10,5 @@ data class Person3(
     val passportSerial: String,
     @JsonFormat(pattern = "dd-MM-yyyy")
     val birthDate: LocalDate
+
 )

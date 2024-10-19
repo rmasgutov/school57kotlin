@@ -13,7 +13,6 @@ import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person4
 import java.time.LocalDate
 
 class JsonDeserializationTest {
-    //second edition
     @Test
     fun `Имена свойств совпадают`() {
         // given
@@ -22,9 +21,7 @@ class JsonDeserializationTest {
         val objectMapper = ObjectMapper().registerModule(
             KotlinModule.Builder().build()
         ).registerModule(JavaTimeModule())
-        // when
         val client = objectMapper.readValue<Person1>(data)
-        // then
         assertEquals("Иван", client.firstName)
         assertEquals("Иванов", client.lastName)
         assertEquals("Иванович", client.middleName)
