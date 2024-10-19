@@ -1,0 +1,20 @@
+package ru.tbank.education.school.lesson3.accounting
+
+abstract class Category(
+        val name: String,
+        var products: MutableList<Product>
+) {
+
+    fun findProducts(query: String): List<Product> {
+        if (name.contains(query)) return products
+        return products.filter { it.name.contains(query) }
+    }
+
+    fun inventoryManagement() {
+        products = products.groupBy { it.name }
+                .map { (_, products) ->
+                    products.reduce { p1, p2 -> p1 + p2 }
+                }.toMutableList()
+    }
+
+}
