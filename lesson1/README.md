@@ -6,7 +6,24 @@
 3. Основные конструкции. `if, when, return`
 4. Особенности функции. Named arguments, default arguments, extension functions
 
+eadfkifsa ki ksad dfasnfsd nci ncbdj nk nik nduj ndsio c 
+ 
+d 
+ 
 
+sdvfvaefdsa вдлацулаывдмьылдавпьлвы 
+ 
+ 
+ алтмвлдь сджб 
+  
+ 
+   злт лаьпмукцщмь 
+ с
+   тшлаимзщуким
+ъм м  
+ с 
+   т  шлмик
+пкупцук
 ## Gradle
 1. Какие задачи решаются с помощью gradle? 
 2. Какие фазы сборки бывают? 
