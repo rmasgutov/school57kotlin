@@ -54,9 +54,15 @@ val data: Map<String, Map<String, Map<String, Map<String, Set<Int>>>>> = mapOf(
 )
 
 fun main() {
-
-    // все пропущенные дома, в формате 'город, округ, район, улица, номера дома'
-
-
-
+    data.forEach { city, dis ->
+        dis.forEach{ dis, nei ->
+            nei.forEach { nei, street ->
+                street.forEach { street, arr ->
+                    for (el in 1..arr.max()) {
+                        if (!(el in arr)) println("$city, $dis, $nei, $street, $el")
+                    }
+                }
+            }
+        }
+    }
 }
