@@ -19,8 +19,8 @@
           buildInputs = [ jre kotlin ];
           shellHook = ''
             alias kt="${kotlin} \$1 --unclude-runtime -d result.jar && java -jar result.jar && rm result.jar"
-            export JAVA_HOME="${jre}"
           '';
+          JAVA_HOME = "${jre}";
         };
       }
     );
