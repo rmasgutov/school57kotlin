@@ -1,4 +1,4 @@
-package ru.tbank.education.school.lesson3.accounting
+package ru.tbank.education.school.lesson3.accounting//package ru.tbank.education.school.lesson3.accounting
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

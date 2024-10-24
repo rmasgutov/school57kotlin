@@ -1,5 +1,6 @@
 package ru.tbank.education.school.ru.tbank.education.school.lesson5
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 
 data class Person3(
@@ -8,5 +9,6 @@ data class Person3(
     val middleName: String?,
     val passportNumber: String,
     val passportSerial: String,
+    @JsonFormat(pattern = "dd-MM-yyyy")
     val birthDate: LocalDate
 )
