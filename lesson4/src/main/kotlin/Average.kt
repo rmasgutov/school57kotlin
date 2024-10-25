@@ -9,7 +9,7 @@ object Average {
      */
     private fun calcAverages(lines: List<String>): String {
         return lines.map {
-            line -> line.split(" ").mapNotNull(String::toIntOrNull).average()
+            it.split(" ").mapNotNull(String::toIntOrNull).average()
         }.joinToString("\n")
     }
 
