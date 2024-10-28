@@ -113,8 +113,7 @@ class JsonDeserializationTest {
         // given
         val data1 =
             """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
-        val objectMapper = ObjectMapper().registerModule(KotlinModule.Builder().build()).registerModule(JavaTimeModule())
-
+        val objectMapper = ObjectMapper().findAndRegisterModules()
         // when
         val client1 = objectMapper.readValue<Person4>(data1)
 
