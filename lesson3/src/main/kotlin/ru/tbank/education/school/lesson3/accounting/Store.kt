@@ -1,5 +1,6 @@
 package ru.tbank.education.school.lesson3.accounting
 
+
 class Store(
     var sales:MutableList<Product>,
     var warehouse:MutableList<Category>){

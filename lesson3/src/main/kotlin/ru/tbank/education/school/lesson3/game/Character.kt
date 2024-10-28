@@ -1,5 +1,6 @@
 package ru.tbank.education.school.lesson3.game
 
+
 open class Character(
     var x:Int,
     var y:Int,

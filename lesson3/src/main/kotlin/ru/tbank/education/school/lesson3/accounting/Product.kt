@@ -1,5 +1,6 @@
 package ru.tbank.education.school.lesson3.accounting
 import java.io.IOException
+
 data class Product(
     val name:String,
     val price:Int,
