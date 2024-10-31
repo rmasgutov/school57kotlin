@@ -1,5 +1,6 @@
 package ru.tbank.education.school.lesson3.accounting
-data class Product (
+
+data class Product(
     var name: String,
     var price: Double,
     var count: Int
@@ -9,11 +10,17 @@ data class Product (
         return name == other.name
     }
 
-    operator fun plus(other: Product) : Product {
+    operator fun plus(other: Product): Product {
+        if (name != other.name) {
+            throw IllegalArgumentException("Cannot add products with different names")
+        }
         return Product(name, price, count + other.count)
     }
 
-    operator fun minus(other: Product) : Product {
+    operator fun minus(other: Product): Product {
+        if (name != other.name) {
+            throw IllegalArgumentException("Cannot subtract products with different names")
+        }
         return Product(name, price, count - other.count)
     }
 }
