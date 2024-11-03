@@ -1,5 +1,4 @@
 package ru.tbank.education.school.lesson6.client.feign.user
-
 import feign.Headers
 import feign.Param
 import feign.RequestLine

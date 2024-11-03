@@ -93,7 +93,6 @@ fun main() {
             userStatus = 1
         )
     val UserClient = UserClient("https://pets.swagger.io")
-
     UserClient.addUser(newUser)
 
     println(UserClient.updateUser(newUser.copy(username = "oops")))

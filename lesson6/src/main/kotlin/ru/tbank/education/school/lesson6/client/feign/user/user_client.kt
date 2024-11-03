@@ -1,5 +1,4 @@
 package ru.tbank.education.school.lesson6.client.java.user
-
 import ru.tbank.education.school.lesson6.client.dto.ApiResponse
 import ru.tbank.education.school.lesson6.client.dto.User
 import ru.tbank.education.school.lesson6.client.lessonObjectMapper
