@@ -78,6 +78,7 @@ class user_client(private val url: String) {
         }
     }
 }
+
 fun main() {
     val id = Random.nextLong() * 1000
     val newUser =
