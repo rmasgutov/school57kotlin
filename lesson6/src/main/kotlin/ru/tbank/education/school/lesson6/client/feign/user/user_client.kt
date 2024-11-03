@@ -7,7 +7,6 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import kotlin.random.Random
-
 class UserClient(private val url: String) {
     private val javaHttpClient = HttpClient.newBuilder().build()
 
