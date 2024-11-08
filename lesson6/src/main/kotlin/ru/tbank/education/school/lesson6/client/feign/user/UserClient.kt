@@ -45,3 +45,4 @@ fun main() {
     userClient.deleteUser(newUser.username)
     println("Пользователь был удален")
 }
+//запушила не в ту ветку, поэтому комментарий
