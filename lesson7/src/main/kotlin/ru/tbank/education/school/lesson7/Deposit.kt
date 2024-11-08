@@ -2,6 +2,7 @@ package ru.tbank.education.school.lesson7
 
 import java.time.LocalDate
 
+
 /**
  * Моделька данных вклада. У одного пользователя может быть много вклад.
  * Доступны только рублевые вклад.
