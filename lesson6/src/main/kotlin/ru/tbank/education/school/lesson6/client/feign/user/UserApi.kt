@@ -8,7 +8,7 @@ import ru.tbank.education.school.lesson6.client.dto.User
 interface UserApi {
     @RequestLine("PUT /v2/user/{username}")
     @Headers("Content-Type: application/json")
-    fun updateUser(user: String, user1: User): ApiResponse
+    fun updateUser(@Param("username") user: String, user1: User): ApiResponse
 
     @RequestLine("POST /v2/user")
     @Headers("Content-Type: application/json")
