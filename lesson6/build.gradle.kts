@@ -1,5 +1,5 @@
 plugins {
-    id("buildlogic.kotlin-library-conventions")
+    buildlogic.`kotlin-common-conventions-no-detekt`
 }
 
 val jacksonVersion = "2.18.0"
