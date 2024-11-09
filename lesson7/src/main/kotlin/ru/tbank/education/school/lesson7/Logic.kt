@@ -5,7 +5,7 @@ import java.time.LocalDate
 import kotlin.math.pow
 
 /**
- * Текущий баланс по вкладу, отображающийся в личном кабинете с учетом всех начислений
+ * Текущий баланс по вкладу, отображающийся в личном кабинете с учетом всех начислений.
  */
 fun currentBalance(deposit: Deposit) = deposit.initialDeposit + (
     1 + (
