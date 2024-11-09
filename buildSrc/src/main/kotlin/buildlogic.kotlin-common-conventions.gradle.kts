@@ -7,7 +7,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm")
-    id("io.gitlab.arturbosch.detekt")
+    id("io.gitlab.arturbosch.detekt") apply false
 }
 
 group = "ru.tbank.education.school"
