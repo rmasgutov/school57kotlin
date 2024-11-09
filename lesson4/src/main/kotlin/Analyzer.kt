@@ -1,26 +1,59 @@
 package ru.tbank.education.school
 
-/**
- * Класс для анализа содержимого файла.
- */
+import java.io.File
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Paths
+
+
 object Analyzer {
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java IO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
     fun processFileIO(source: String, target: String) {
-        TODO()
+        try{
+            val a = File(source)
+            val b = File(target)
+            if (!a.exists()){throw IOException("файл для ввода не найден")
+            }
+            if (!b.exists()){throw IOException("файл для вывода не найден")
+            }
+            val list = a.readLines()
+            var sum:Int = 0
+            var sum2:Int = 0
+            var s:MutableSet<String> = mutableSetOf()
+            for(i in list){
+                val words = i.split(" ")
+                sum += words.size
+                for(j in words){sum2+=j.length
+                s.add(j)}
+            }
+            b.writeText("Общее количество строк: ${list.size.toString()}\nОбщее количество слов: ${sum.toString()}\nУникальные слова: ${s.size.toString()}\nСредняя длина слов: ${(sum2/sum).toString()}\n")
+
+        }catch(e: IOException){
+            println("Произошла ошибка: ${e.message}")
+        }
     }
 
-    /**
-     * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
-     * Обработка выполняется через Java NIO.
-     * @param source путь до исходного файла.
-     * @param target путь до файла с результатами.
-     */
     fun processFileNIO(source: String, target: String) {
-        TODO()
+        try{
+            val a = Paths.get(source)
+            val b = Paths.get(target)
+            if (!Files.exists(a)){throw IOException("файл для ввода не найден")
+            }
+            if (!Files.exists(b)){throw IOException("файл для вывода не найден")
+            }
+            val list = Files.readAllLines(a)
+            var sum:Int = 0
+            var sum2:Int = 0
+            var s:MutableSet<String> = mutableSetOf()
+            for(i in list){
+                val words = i.split(" ")
+                sum += words.size
+                for(j in words){sum2+=j.length
+                    s.add(j)}
+            }
+            Files.writeString(b,"Общее количество строк: ${list.size.toString()}\nОбщее количество слов: ${sum.toString()}\nУникальные слова: ${s.size.toString()}\nСредняя длина слов: ${(sum2/sum).toString()}\n")
+
+        }catch(e: IOException){
+            println("Произошла ошибка: ${e.message}")
+        }
     }
 }
