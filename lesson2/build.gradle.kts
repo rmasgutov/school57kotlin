@@ -1,3 +1,3 @@
 plugins {
-    id("buildlogic.kotlin-library-conventions")
+    buildlogic.`kotlin-common-conventions-no-detekt`
 }
