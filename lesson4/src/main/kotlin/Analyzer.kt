@@ -5,13 +5,31 @@ package ru.tbank.education.school
  */
 object Analyzer {
     /**
+     * Метод анализирует список строк.
+     * @param lines Анализируемые стоки.
+     * @return Результат анализа.
+     */
+    private fun analyzeLines(lines: List<String>): String {
+        val words = lines.flatMap { it.split(" ").map(String::lowercase) }
+        val uniqueWords = words.toSet()
+        val averageWordLength = words.map(String::length).average()
+
+        return """
+           Общее количество строк: ${lines.size}
+           Общее количество слов: ${words.size}
+           Уникальные слова: ${uniqueWords.size}
+           Средняя длина слов: $averageWordLength
+        """.trimIndent()
+    }
+
+    /**
      * Метод обрабатывает исходный файл и записывает результат в файл с результатами.
      * Обработка выполняется через Java IO.
      * @param source путь до исходного файла.
      * @param target путь до файла с результатами.
      */
     fun processFileIO(source: String, target: String) {
-        TODO()
+        Utils.operateFileIO(source, target, this::analyzeLines)
     }
 
     /**
@@ -21,6 +39,6 @@ object Analyzer {
      * @param target путь до файла с результатами.
      */
     fun processFileNIO(source: String, target: String) {
-        TODO()
+        Utils.operateFileNIO(source, target, this::analyzeLines)
     }
 }
