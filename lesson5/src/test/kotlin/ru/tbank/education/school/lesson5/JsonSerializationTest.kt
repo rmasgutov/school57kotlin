@@ -5,30 +5,18 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person5
 import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person6
-
 class JsonSerializationTest {
-    //second edition
-
+    private val objectMapper = ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL)
     @Test
-    fun `Не должны сериализовываться свойства с null значениям Настройка через аннотацию`() {
-        // given
+    fun `Не должны сериализовываться свойства с null значениями Настройка через аннотацию`() {
         val client = Person5()
-        val objectMapper = ObjectMapper().findAndRegisterModules()
-        // when
         val data = objectMapper.writeValueAsString(client)
-        // then
         assertEquals("{}", data)
     }
     @Test
-    fun `Не должны сериализовываться свойства с null значениям Настройка через ObjectMapper`() {
-        // given
+    fun `Не должны сериализовываться свойства с null значениями Настройка через ObjectMapper`() {
         val client = Person6()
-        val objectMapper = ObjectMapper().findAndRegisterModules().setSerializationInclusion(
-            JsonInclude.Include.NON_EMPTY
-        )
-        // when
         val data = objectMapper.writeValueAsString(client)
-        // then
         assertEquals("{}", data)
     }
 }
