@@ -1,5 +1,7 @@
 package ru.tbank.education.school.lesson7
 
+import currentBalance
+import ru.tbank.education.deposits.Deposit
 import java.time.LocalDate
 
 fun main() {
