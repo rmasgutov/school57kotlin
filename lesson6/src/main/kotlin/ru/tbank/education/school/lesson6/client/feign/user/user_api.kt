@@ -12,7 +12,7 @@ interface UserApi {
     @Headers("Content-Type: application/json")
     fun updateUser(@Param("username") username: String, user: User): ApiResponse
 
-    @RequestLine("POST /pet")
+    @RequestLine("POST /user") // Исправленный адрес для создания пользователя
     @Headers("Content-Type: application/json")
     fun createUser(user: User): ApiResponse
 
@@ -23,5 +23,4 @@ interface UserApi {
     @RequestLine("DELETE /user/{username}")
     @Headers("Content-Type: application/json")
     fun deleteUser(@Param("username") username: String): ApiResponse
-
 }
