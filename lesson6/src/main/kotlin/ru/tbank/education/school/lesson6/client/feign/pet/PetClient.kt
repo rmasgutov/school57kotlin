@@ -1,40 +1,37 @@
-package ru.tbank.education.school.lesson6.client.feign.pet
+package ru.tbank.education.school.lesson6.client.feign.user
 
 import feign.Feign
 import feign.jackson.JacksonDecoder
 import feign.jackson.JacksonEncoder
-import ru.tbank.education.school.lesson6.client.dto.Pet
+import ru.tbank.education.school.lesson6.client.dto.User
 import ru.tbank.education.school.lesson6.client.lessonObjectMapper
 import kotlin.random.Random
 
-class PetClient(url: String) {
+class UserClient(url: String) {
     private val feignClient =
         Feign
             .builder()
             .encoder(JacksonEncoder(lessonObjectMapper))
             .decoder(JacksonDecoder(lessonObjectMapper))
-            .target(PetApi::class.java, url)
+            .target(UserApi::class.java, url)
 
-    fun addPet(pet: Pet) = feignClient.addPet(pet)
+    fun addUser(user: User) = feignClient.addUser(user)
 
-    fun deletePet(petId: Long) = feignClient.deletePet(petId)
+    fun deleteUser(username: String) = feignClient.deleteUser(username)
 
-    fun updatePet(pet: Pet): Pet =
-        feignClient.updatePet(pet)
+    fun updateUser(username: String, user: User)= feignClient.updateUser(username, user)
 
-    fun getPet(petId: Long): Pet =
-        feignClient.getPet(petId)
+    fun getUser(username: String): User =
+        feignClient.getUser(username)
 }
-
-fun main() {
+fun main(){
     val id = Random.nextLong() * 1000
-    val newPet = Pet(id = id, name = "Дружок", status = "available")
-    val petClient = PetClient("https://petstore.swagger.io")
+    val user = User(id = id, username="username", firstname="firstname", lastname="lastname",
+        email="42@gmail.com", password="12345678", phone="79854784867", userStatus=1)
+    val userClient = UserClient("https://petstore.swagger.io")
 
-    petClient.addPet(newPet)
-
-    println(petClient.getPet(id))
-//
-    println(petClient.updatePet(newPet.copy(name = "Дружок 2")))
-    println(petClient.deletePet(id))
+    userClient.addUser(user)
+    println(userClient.updateUser(user.username, user.copy(username = "???")))
+    println(userClient.getUser(user.username))
+    println(userClient.deleteUser(user.username))
 }

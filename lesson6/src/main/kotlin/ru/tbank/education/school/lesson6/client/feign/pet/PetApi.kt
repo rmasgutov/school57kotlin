@@ -1,25 +1,22 @@
-package ru.tbank.education.school.lesson6.client.feign.pet
-
+package ru.tbank.education.school.lesson6.client.feign.user
 import feign.Headers
 import feign.Param
 import feign.RequestLine
 import ru.tbank.education.school.lesson6.client.dto.ApiResponse
-import ru.tbank.education.school.lesson6.client.dto.Pet
-
-interface PetApi {
-    @RequestLine("PUT /v2/pet")
+import ru.tbank.education.school.lesson6.client.dto.User
+interface UserApi {
+    @RequestLine("PUT /v2/user/{username}")
     @Headers("Content-Type: application/json")
-    fun updatePet(pet: Pet): Pet
+    fun updateUser(user: String, user1: User): ApiResponse
+    fun updateUser(@Param("username") username: String, user: User): ApiResponse
 
-    @RequestLine("POST /v2/pet")
+    @RequestLine("POST /v2/user")
     @Headers("Content-Type: application/json")
-    fun addPet(pet: Pet): Pet
-
-    @RequestLine("GET /v2/pet/{pathId}")
+    fun addUser(user: User): ApiResponse
+    @RequestLine("GET /v2/user/{username}")
     @Headers("Content-Type: application/json")
-    fun getPet(@Param("pathId") petId: Long): Pet
-
-    @RequestLine("DELETE /v2/pet/{pathId}")
+    fun getUser(@Param("username") username: String): User
+    @RequestLine("DELETE /v2/user/{username}")
     @Headers("Content-Type: application/json")
-    fun deletePet(@Param("pathId") petId: Long): ApiResponse
+    fun deleteUser(@Param("username") username: String): ApiResponse
 }
