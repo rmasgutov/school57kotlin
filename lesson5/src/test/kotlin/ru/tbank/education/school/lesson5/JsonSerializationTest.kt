@@ -24,3 +24,4 @@ class JsonSerializationTest {
         assertEquals("{}", data)
     }
 }
+
