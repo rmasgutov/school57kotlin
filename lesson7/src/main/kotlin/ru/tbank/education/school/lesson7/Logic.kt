@@ -7,14 +7,7 @@ import kotlin.math.pow
 /**
  * Текущий баланс по вкладу, отображающийся в личном кабинете с учетом всех начислений.
  */
+const val YearDays = 365
 fun currentBalance(deposit: Deposit) = deposit.initialDeposit + (
-    1 + (
-        deposit.complexPercent.let {
-            if (deposit.isVip == 1) {
-                it + 1
-            } else {
-                it
-            }
-        }
-        ) / 365
+    1 + (deposit.complexPercent.let { if (deposit.isVip == 1) { it + 1 } else { it } }) / YearDays
     ).pow(Duration.between(deposit.createAt, LocalDate.now()).toDays().toDouble())
