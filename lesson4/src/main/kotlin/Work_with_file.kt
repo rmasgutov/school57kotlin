@@ -64,40 +64,4 @@ class Work_with_file(val name: String, var type:Int = 1) {
         if (type == 2) return Paths.get(name).readLines()
         throw RuntimeException()
     }
-
-
-    fun add(content:String) {
-        if (find(name)) {
-            val stream = FileOutputStream(name, true)
-            stream.use {
-                stream.write(content.toByteArray())
-            }
-        } else {
-            throw RuntimeException("Такого файла не существует")
-        }
-    }
-
-
-    fun move(to:String) {
-        if (find(name)) {
-            if (find(to)) {
-                throw RuntimeException("Уже есть такой файл")
-            }
-            val source = Paths.get(name)
-            val target = Paths.get(to)
-            Files.move(source, target)
-        } else {
-            throw RuntimeException("Такого файла не существует")
-        }
-    }
-
-
-    fun delete() {
-        if (find(name)) {
-            val file = File(name)
-            file.delete()
-        } else {
-            throw RuntimeException("Такого файла не существует")
-        }
-    }
 }

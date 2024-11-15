@@ -3,7 +3,7 @@ package ru.tbank.education.school.lesson3.accounting
 
 data class Product(
     var name: String,
-    var price: Int,
+    var price: Double,
     var count: Int
 ) {
     override fun equals(other: Any?): Boolean {

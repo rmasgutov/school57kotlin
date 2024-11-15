@@ -3,7 +3,7 @@ package ru.tbank.education.school.lesson3.accounting
 
 abstract class Category(
     var name: String,
-    var products: MutableList<Product>
+    var products: List<Product>
 ) {
     fun inventoryManagement() {
         var ans: MutableList<Product> = mutableListOf()
