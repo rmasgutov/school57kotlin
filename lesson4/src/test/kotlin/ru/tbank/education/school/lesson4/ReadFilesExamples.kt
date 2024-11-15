@@ -12,7 +12,6 @@ import java.util.*
 
 class ReadFilesExamples {
 
-
     @Test
     fun `read file using input stream`() {
         javaClass.classLoader.getResourceAsStream("data.txt")
@@ -100,16 +99,14 @@ class ReadFilesExamples {
     companion object {
         @JvmStatic
         @BeforeAll
-        fun setUp(): Unit {
+        fun setUp() {
             println("setUp")
         }
 
         @JvmStatic
         @AfterAll
-        fun tearDown(): Unit {
+        fun tearDown() {
             println("tearDown")
         }
-
-
     }
 }
