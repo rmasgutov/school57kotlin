@@ -1,7 +1,22 @@
-package ru.tbank.education.school.ru.tbank.education.school.lesson5
+package ru.tbank.education.school.lesson5
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.time.LocalDate
 
+/**
+ * Класс Person1 представляет информацию о человеке.
+ *
+ * @property firstName Имя человека.
+ * @property lastName Фамилия человека.
+ * @property middleName Отчество человека. Может быть null.
+ * @property passportNumber Номер паспорта.
+ * @property passportSerial Серия паспорта.
+ * @property birthDate Дата рождения человека.
+ *
+ * Аннотация @JsonIgnoreProperties используется для игнорирования неизвестных свойств
+ * при сериализации и десериализации JSON.
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Person1(
     val firstName: String,
     val lastName: String,
