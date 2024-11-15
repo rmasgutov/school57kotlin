@@ -6,7 +6,7 @@ import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Paths
 
-object wAverage {
+object Average {
 
     fun processFileIO(source: String, target: String) {
         try {
@@ -15,16 +15,15 @@ object wAverage {
             val lines = fin.readLines()
             val meanLines = lines.map { line ->
                 val nums = line.split(" ").map { it.toInt() }
-                if (nums.isNotEmpty()) {
-                    nums.sum() / nums.size
-                } else {
-                    0
-                }
+                if (nums.isNotEmpty()) nums.sum() / nums.size
+                else 0
             }
             fout.writeText(meanLines.joinToString("\n"))
-        } catch (e: FileNotFoundException) {
+        }
+        catch (e: FileNotFoundException) {
             println("Такого файла не существует: ${e.message}")
-        } catch (e: IOException) {
+        }
+        catch (e: IOException) {
             println("Ошибка при работе с файлом(и): ${e.message}")
         }
     }
@@ -36,17 +35,17 @@ object wAverage {
             val lines = Files.readAllLines(fin)
             val meanLines = lines.map { line ->
                 val nums = line.split(" ").map { it.toInt() }
-                if (nums.isNotEmpty()) {
-                    nums.sum() / nums.size
-                } else {
-                    0
-                }
+                if (nums.isNotEmpty()) nums.sum() / nums.size
+                else 0
             }
             Files.write(fout, meanLines.joinToString("\n").toByteArray())
-        } catch (e: FileNotFoundException) {
+        }
+        catch (e: FileNotFoundException) {
             println("Такого файла не существует: ${e.message}")
-        } catch (e: IOException) {
+        }
+        catch (e: IOException) {
             println("Ошибка при работе с файлом(и): ${e.message}")
         }
     }
+
 }
