@@ -12,10 +12,10 @@ import kotlin.random.Random
 class UserClient(private val url: String) {
     private val javaHttpClient = HttpClient.newBuilder().build()
 
-    fun addUser(user: User): User? {
+    fun addUser(user: User): ApiResponse? {
         val body = lessonObjectMapper.writeValueAsString(user)
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$url/v2/User"))
+            .uri(URI.create("$url/v2/user"))
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(body))
             .build()
@@ -23,15 +23,15 @@ class UserClient(private val url: String) {
         val response = javaHttpClient.send(request, HttpResponse.BodyHandlers.ofString())
 
         return if (response.statusCode() == 200 || response.statusCode() == 201) {
-            lessonObjectMapper.readValue(response.body(), User::class.java)
+            lessonObjectMapper.readValue(response.body(), ApiResponse::class.java)
         } else {
             null
         }
     }
 
-    fun deleteUser(UserId: Long): ApiResponse? {
+    fun deleteUser(username: String): ApiResponse? {
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$url/v2/User/$UserId"))
+            .uri(URI.create("$url/v2/user/$username"))
             .header("Content-Type", "application/json")
             .DELETE()
             .build()
@@ -45,10 +45,10 @@ class UserClient(private val url: String) {
         }
     }
 
-    fun updateUser(User: User): User? {
-        val body = lessonObjectMapper.writeValueAsString(User)
+    fun updateUser(username: String, user: User): ApiResponse? {
+        val body = lessonObjectMapper.writeValueAsString(user)
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$url/v2/User"))
+            .uri(URI.create("$url/v2/user/$username"))
             .header("Content-Type", "application/json")
             .PUT(HttpRequest.BodyPublishers.ofString(body))
             .build()
@@ -56,15 +56,15 @@ class UserClient(private val url: String) {
         val response = javaHttpClient.send(request, HttpResponse.BodyHandlers.ofString())
 
         return if (response.statusCode() == 200 || response.statusCode() == 201) {
-            lessonObjectMapper.readValue(response.body(), User::class.java)
+            lessonObjectMapper.readValue(response.body(), ApiResponse::class.java)
         } else {
             null
         }
     }
 
-    fun getUser(UserId: Long): User? {
+    fun getUser(username : String): User? {
         val request = HttpRequest.newBuilder()
-            .uri(URI.create("$url/v2/User/$UserId"))
+            .uri(URI.create("$url/v2/user/$username"))
             .header("Content-Type", "application/json")
             .GET()
             .build()
@@ -95,7 +95,7 @@ fun main() {
     val UserClient = UserClient("https://Userstore.swagger.io")
 
     UserClient.addUser(newUser)
-
-    println(UserClient.updateUser(newUser.copy(username = "genoke")))
-    println(UserClient.deleteUser(id))
+    println(UserClient.updateUser(newUser.username, newUser.copy(username = "???")))
+    println(UserClient.getUser(newUser.username))
+    println(UserClient.deleteUser(newUser.username))
 }

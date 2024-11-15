@@ -4,21 +4,22 @@ import feign.Headers
 import feign.Param
 import feign.RequestLine
 import ru.tbank.education.school.lesson6.client.dto.ApiResponse
-import ru.tbank.education.school.lesson6.client.dto.Pet
+import ru.tbank.education.school.lesson6.client.dto.User
 
 interface UserApi {
-    @RequestLine("PUT /v2/pet")
+    @RequestLine("POST /v2/user")
     @Headers("Content-Type: application/json")
-    fun updateUser(user: User): User
+    fun addUser(user: User): ApiResponse
 
-    @RequestLine("POST /v2/pet")
+    @RequestLine("GET /v2/user/{username}")
     @Headers("Content-Type: application/json")
-    fun addUser(user: User): User
-    @RequestLine("GET /v2/pet/{pathId}")
-    @Headers("Content-Type: application/json")
-    fun getUser(@Param("pathId") userId: Long): User
+    fun getUser(@Param("username") username: String): User
 
-    @RequestLine("DELETE /v2/pet/{pathId}")
+    @RequestLine("PUT /v2/user")
     @Headers("Content-Type: application/json")
-    fun deleteUser(@Param("pathId") userId: Long): ApiResponse
+    fun updateUser(@Param("username") username: String, user: User): ApiResponse
+
+    @RequestLine("DELETE /v2/user/{username}")
+    @Headers("Content-Type: application/json")
+    fun deleteUser(@Param("username") username: String): ApiResponse
 }
