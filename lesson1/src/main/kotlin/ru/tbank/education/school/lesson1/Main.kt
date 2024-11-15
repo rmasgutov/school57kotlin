@@ -49,8 +49,8 @@ fun main() {
 //2    val sourse = Path.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config.json")
 //    sourse.move(File("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config4.json"))
 //    обход директории
-1    val paths = Files.walk(Paths.get("lesson1/src"))
-    paths.forEach { println(it.fileName) }
+//1    val paths = Files.walk(Paths.get("lesson1/src"))
+//    paths.forEach { println(it.fileName) }
 //2    val paths = Files.walkFileTree(Paths.get("lesson1/src"), )
 //    paths.forEach { println(it.fileName) }
 
