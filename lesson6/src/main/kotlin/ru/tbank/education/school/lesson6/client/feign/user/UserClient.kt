@@ -3,6 +3,7 @@ package ru.tbank.education.school.lesson6.client.feign.user
 import feign.Feign
 import feign.jackson.JacksonDecoder
 import feign.jackson.JacksonEncoder
+import ru.tbank.education.school.lesson6.client.dto.ApiResponse
 import ru.tbank.education.school.lesson6.client.dto.User
 import ru.tbank.education.school.lesson6.client.lessonObjectMapper
 import kotlin.random.Random
@@ -13,17 +14,18 @@ class UserClient(url: String) {
         .decoder(JacksonDecoder(lessonObjectMapper))
         .target(UserApi::class.java, url)
 
-    fun createUser(user: User) = feignClient.createUser(user)
+    fun createUser(user: User): ApiResponse = feignClient.createUser(user)
 
     fun getUser(username: String): User = feignClient.getUser(username)
 
-    fun updateUser(username: String, user: User) = feignClient.updateUser(username, user)
+    fun updateUser(username: String, user: User): ApiResponse = feignClient.updateUser(username, user)
 
-    fun deleteUser(username: String) = feignClient.deleteUser(username)
+    fun deleteUser(username: String): ApiResponse = feignClient.deleteUser(username)
 }
 
 fun main() {
     val userClient = UserClient("https://petstore.swagger.io")
+
     val newUser = User(
         id = Random.nextLong() * 1000,
         username = "corg",
