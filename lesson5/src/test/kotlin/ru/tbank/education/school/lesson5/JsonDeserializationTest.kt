@@ -9,14 +9,24 @@ import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person2
 import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person3
 import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person4
 import java.time.LocalDate
-
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.module.kotlin.jsonMapper
+import com.fasterxml.jackson.module.kotlin.kotlinModule
 class JsonDeserializationTest {
     @Test
     fun `Имена свойств совпадают`() {
         // given
-        val data =
-            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
-        val objectMapper = ObjectMapper()
+        val data = """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", 
+                "passportSerial": "1234", "birthDate": "1990-01-01"}
+            """.trimMargin()
+        val objectMapper = jsonMapper {
+            addModule(kotlinModule())
+            addModule(Jdk8Module())
+            addModule(JavaTimeModule())
+        }
 
         // when
         val client = objectMapper.readValue<Person1>(data)
@@ -33,9 +43,13 @@ class JsonDeserializationTest {
     @Test
     fun `В JSON есть лишние свойства Настроить ObjectMapper`() {
         // given
-        val data =
-            """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
-        val objectMapper = ObjectMapper()
+        val data = """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}""".trimMargin()
+        val objectMapper = jsonMapper {
+            addModule(kotlinModule())
+            addModule(Jdk8Module())
+            addModule(JavaTimeModule())
+        }.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+
 
         // when
         val client = objectMapper.readValue<Person1>(data)
@@ -52,9 +66,12 @@ class JsonDeserializationTest {
     @Test
     fun `В JSON есть лишние свойства Настроить через аннотацию`() {
         // given
-        val data =
-            """{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
-        val objectMapper = ObjectMapper()
+        val data ="""{"city": "Москва", "firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}""".trimMargin()
+        val objectMapper = jsonMapper {
+            addModule(kotlinModule())
+            addModule(Jdk8Module())
+            addModule(JavaTimeModule())
+        }
 
         // when
         val client = objectMapper.readValue<Person1>(data)
@@ -71,9 +88,12 @@ class JsonDeserializationTest {
     @Test
     fun `Имена свойств различаются`() {
         // given
-        val data =
-            """{"name": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
-        val objectMapper = ObjectMapper()
+        val data ="""{"name": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}""".trimMargin()
+        val objectMapper = jsonMapper {
+            addModule(kotlinModule())
+            addModule(Jdk8Module())
+            addModule(JavaTimeModule())
+        }
 
         // when
         val client = objectMapper.readValue<Person2>(data)
@@ -90,10 +110,12 @@ class JsonDeserializationTest {
     @Test
     fun `Кастомный формат даты`() {
         // given
-        val data =
-            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "01-01-1990"}"""
-        val objectMapper = ObjectMapper()
-
+        val data ="""{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "01-01-1990"}""".trimMargin()
+        val objectMapper = jsonMapper {
+            addModule(kotlinModule())
+            addModule(Jdk8Module())
+            addModule(JavaTimeModule())
+        }
         // when
         val client = objectMapper.readValue<Person3>(data)
 
@@ -109,10 +131,12 @@ class JsonDeserializationTest {
     @Test
     fun `Поддержка optional типа`() {
         // given
-        val data1 =
-            """{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
-        val objectMapper = ObjectMapper()
-
+        val data1 ="""{"firstName": "Иван", "lastName": "Иванов", "middleName": "Иванович", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}""".trimMargin()
+        val objectMapper = jsonMapper {
+            addModule(kotlinModule())
+            addModule(Jdk8Module())
+            addModule(JavaTimeModule())
+        }
         // when
         val client1 = objectMapper.readValue<Person4>(data1)
 
@@ -120,8 +144,7 @@ class JsonDeserializationTest {
         assertEquals("Иванович", client1.middleName.get())
 
         // given
-        val data2 =
-            """{"firstName": "Иван", "lastName": "Иванов", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"}"""
+        val data2 = """{"firstName": "Иван", "lastName": "Иванов", "passportNumber": "123456", "passportSerial": "1234", "birthDate": "1990-01-01"} """.trimMargin()
 
         // when
         val client2 = objectMapper.readValue<Person4>(data2)
