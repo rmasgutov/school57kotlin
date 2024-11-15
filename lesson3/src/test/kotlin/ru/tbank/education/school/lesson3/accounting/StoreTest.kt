@@ -3,6 +3,8 @@ package ru.tbank.education.school.lesson3.accounting
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import ru.tbank.education.school.lesson3.accounting.impl.ElectronicsCategory
+import ru.tbank.education.school.lesson3.accounting.impl.FoodCategory
 
 class StoreTest {
 
@@ -36,7 +38,7 @@ class StoreTest {
         // then
         assertEquals(1, Store.sales.size)
         assertEquals(sale, Store.sales[0])
-        assertEquals(9, Store.warehouse[0].products[0].count)
+        assertEquals(6, Store.warehouse[0].products[0].count)
     }
 
     @Test

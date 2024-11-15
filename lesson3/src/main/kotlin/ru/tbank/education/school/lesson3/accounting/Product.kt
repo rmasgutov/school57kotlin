@@ -5,7 +5,7 @@ package ru.tbank.education.school.lesson3.accounting
  */
 data class Product(
     val name: String,
-    val price: Int,
+    val price: Double = 0.0,
     var count: Int
 ) {
 

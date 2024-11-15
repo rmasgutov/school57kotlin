@@ -1,7 +1,8 @@
 package ru.tbank.education.school.lesson3.accounting
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import ru.tbank.education.school.lesson3.accounting.impl.ElectronicsCategory
 
 class CategoryTest {
     @Test

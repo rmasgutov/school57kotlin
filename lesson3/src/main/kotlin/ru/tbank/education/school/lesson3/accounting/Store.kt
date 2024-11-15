@@ -10,8 +10,23 @@ object Store {
     val sales = mutableListOf<Product>()
     val warehouse = mutableListOf<Category>()
 
+    fun init(warehouse: List<Category>) {
+        this.sales.clear()
+        this.warehouse.clear()
+        this.warehouse.addAll(warehouse)
+    }
+
     fun topUp(categories: List<Category>) {
-        warehouse.addAll(categories)
+        categories.forEach { category ->
+            if (warehouse.any { it.name == category.name }) {
+                warehouse.first { it.name == category.name }
+                    .products.addAll(category.products)
+            } else {
+                warehouse.add(category)
+            }
+        }
+
+        warehouse.forEach { it.inventoryManagement() }
     }
 
     fun addProduct(product: Product) {
@@ -28,7 +43,7 @@ object Store {
             .removeIf { it == product }
     }
 
-    fun countTotalPrice(): Int {
+    fun countTotalPrice(): Double {
         return warehouse.map { category ->
             category.products.map { it.count * it.price }
         }.flatten().sum()
@@ -36,13 +51,14 @@ object Store {
 
     fun sell(product: Product) {
         warehouse.forEach { category ->
+            category.inventoryManagement()
+
             val foundProduct = category.products.find { it == product }
             if (foundProduct == null) {
-                return@forEach
+                throw IllegalArgumentException("Product not found")
             }
 
-            val toRemove = if (category is FoodCategory) 2 else 1
-            category.inventoryManagement()
+            val toRemove = if (category is FoodCategory) 2 * product.count else product.count
 
             foundProduct.apply {
                 if (count < toRemove) throw IllegalArgumentException("Not enough products to sell")

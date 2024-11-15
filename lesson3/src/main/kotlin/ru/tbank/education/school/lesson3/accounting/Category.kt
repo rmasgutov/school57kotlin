@@ -8,8 +8,13 @@ abstract class Category(
     var products: MutableList<Product>
 ) {
 
-    fun findProducts(query: String): List<Product> {
-        return products.filter { it.name.contains(query) || name.contains(query) }
+    fun findProducts(request: String): List<Product> {
+        return products.filter {
+            it.name.contains(request, ignoreCase = true) || name.contains(
+                request,
+                ignoreCase = true
+            )
+        }
     }
 
     fun inventoryManagement() {
