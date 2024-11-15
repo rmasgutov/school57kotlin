@@ -1,6 +1,16 @@
 package ru.tbank.education.school
 
 import java.io.*
+import java.nio.ByteBuffer
+import java.nio.channels.FileChannel
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
+import kotlin.RuntimeException
+import kotlin.io.path.exists
+import kotlin.io.path.readLines
+import kotlin.io.path.writeBytes
 
 /**
  * Класс для анализа содержимого файла.
@@ -26,26 +36,29 @@ object Analyzer {
         var count = mutableSetOf<String>()
         var lengthOfText = 0
         try {
-            val lines = File(source).readLines()
-            numberOfLines = lines.size
-            for (line in lines) {
-                val words = line.split(" ").mapNotNull { it.toString() }
-                numberOfWords += words.size
-                for (word in words) {
-                    count.add(word.lowercase())
-                    lengthOfText += word.length
+            BufferedReader(FileReader(source)).use { reader ->
+                val lines = reader.readLines()
+                numberOfLines = lines.size
+                for (line in lines) {
+                    val words = line.split(" ").mapNotNull { it.toString() }
+                    numberOfWords += words.size
+                    for (word in words) {
+                        count.add(word.lowercase())
+                        lengthOfText += word.length
+                    }
                 }
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             println("Ошибка при чтении файла: ${e.message}")
         }
-        val averageLength = lengthOfText / numberOfWords
+        var averageLength = 0
+        if (numberOfWords != 0) averageLength = lengthOfText / numberOfWords
         try {
             File(target).printWriter().use { writer ->
-                println("Общее количество строк: $numberOfLines")
-                println("Общее количество слов: $numberOfWords")
-                println("Уникальные слова: ${count.size}")
-                println("Средняя длина слов: $averageLength")
+                writer.write("Общее количество строк: $numberOfLines \n")
+                writer.write("Общее количество слов: $numberOfWords \n")
+                writer.write("Уникальные слова: ${count.size} \n")
+                writer.write("Средняя длина слов: $averageLength \n")
             }
         } catch (e: IOException) { println("Ошибка при записи в файл: ${e.message}") }
     }
@@ -55,42 +68,47 @@ object Analyzer {
      * @param source путь до исходного файла.
      * @param target путь до файла с результатами.
      */
-    fun processFileNIO(source: String, target: String) {
-        var reader: BufferedReader? = null
-        var writer: BufferedWriter? = null
+    fun processFileNIO(name: String, to: String) {
+        val source = Paths.get(name)
+        val target = Paths.get(to)
+        if (!Files.exists(source)) {
+            throw FileNotFoundException("Входной файл не найден: $source")
+        }
+        if (!Files.exists(target)) {
+            throw FileNotFoundException("Выходной файл не найден: $target")
+        }
         try {
-            reader = BufferedReader(FileReader(source))
-            writer = BufferedWriter(FileWriter(target))
             var numberOfLines = 0
             var numberOfWords = 0
             var count = mutableSetOf<String>()
             var lengthOfText = 0
             var line: String
-            while (reader.readLine().also { line = it } != null) {
-                numberOfLines++
-                val words = line.split(" ").mapNotNull { it.toString() }
-                numberOfWords += words.size
-                for (word in words) {
-                    count.add(word.lowercase())
-                    lengthOfText += word.length
+            BufferedReader(InputStreamReader(Files.newInputStream(source))).use { reader ->
+                val data = mutableListOf<List<String>>()
+                val lines = Files.readAllLines(Paths.get(name))
+                for (line in lines) {
+                    numberOfLines++
+                    val words = line.split(" ").mapNotNull { it.toString() }
+                    numberOfWords += words.size
+                    for (word in words) {
+                        count.add(word.lowercase())
+                        lengthOfText += word.length
+                    }
                 }
             }
-            val averageLength = lengthOfText / numberOfWords
-            writer.write("Общее количество строк: $numberOfLines")
-            writer.newLine()
-            writer.write("Общее количество слов: $numberOfWords")
-            writer.newLine()
-            writer.write("Уникальные слова: ${count.size}")
-            writer.newLine()
-            writer.write("Средняя длина слов: $averageLength")
-        } finally {
-            try {
-                reader?.close()
-                writer?.close()
-            } catch (e: IOException) {
-                println("Ошибка при закрытии файла: ${e.message}")
+            var averageLength = 0
+            if (numberOfWords != 0) averageLength = lengthOfText / numberOfWords
+            BufferedWriter(OutputStreamWriter(Files.newOutputStream(target))).use { writer ->
+                writer.write("Общее количество строк: $numberOfLines")
+                writer.newLine()
+                writer.write("Общее количество слов: $numberOfWords")
+                writer.newLine()
+                writer.write("Уникальные слова: ${count.size}")
+                writer.newLine()
+                writer.write("Средняя длина слов: $averageLength")
             }
+        } catch (e: Exception) {
+            println("Ошибка при чтении файла: ${e.message}")
         }
     }
-
 }
