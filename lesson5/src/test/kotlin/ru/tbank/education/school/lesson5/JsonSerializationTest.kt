@@ -8,7 +8,7 @@ import com.fasterxml.jackson.module.kotlin.kotlinModule
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person5
-import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person6
+import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person6//
 
 
 
