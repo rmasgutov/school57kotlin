@@ -1,36 +1,27 @@
 package ru.tbank.education.school.lesson2
 
-import kotlin.random.Random
-
 object DemoList {
     fun createList(): List<Int> {
-        return listOf(Random.nextInt(1, 100), Random.nextInt(1, 100), Random.nextInt(1, 100), Random.nextInt(1, 100), Random.nextInt(1, 100))
+        TODO()
     }
 
     fun sumList(): Int {
-        return createList().sum()
+        TODO()
     }
 
     fun sumEvenList(): Int {
-        val a = createList()
-        var sum = 0
-        for (item in a) {
-            if (item % 2 == 0) {
-                sum += item
-            }
-        }
-        return sum
+        TODO()
     }
 
     fun multiplyList(): List<Int> {
-        return createList().map { it * 3 }
+        TODO()
     }
 
     fun maxElement(): Int {
-        return createList().max()
+        TODO()
     }
 
     fun sortDesc(): List<Int> {
-        return createList().sortedDescending()
+        TODO()
     }
 }
