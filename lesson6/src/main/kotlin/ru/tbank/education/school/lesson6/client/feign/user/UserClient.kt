@@ -8,6 +8,24 @@ import ru.tbank.education.school.lesson6.client.dto.User
 import ru.tbank.education.school.lesson6.client.lessonObjectMapper
 import kotlin.random.Random
 
+interface UserApi {
+    @RequestLine("POST /v2/user")
+    @Headers("Content-Type: application/json")
+    fun createUser(user: User): ApiResponse
+
+    @RequestLine("GET /v2/user/{username}")
+    @Headers("Content-Type: application/json")
+    fun getUser(@Param("username") username: String): User
+
+    @RequestLine("PUT /v2/user/{username}")
+    @Headers("Content-Type: application/json")
+    fun updateUser(@Param("username") username: String, user: User): ApiResponse
+
+    @RequestLine("DELETE /v2/user/{username}")
+    @Headers("Content-Type: application/json")
+    fun deleteUser(@Param("username") username: String): ApiResponse
+}
+
 class UserClient(url: String) {
     private val feignClient = Feign.builder()
         .encoder(JacksonEncoder(lessonObjectMapper))
