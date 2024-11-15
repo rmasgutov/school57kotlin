@@ -7,18 +7,19 @@ class CategoryTest {
     @Test
     fun findProductsTest() {
         // given
-        val category = ElectronicsCategory(products = listOf(
-            Product(name = "Телевизор", price = 10000.0, count = 10),
-            Product(name = "Смартфон", price = 10000.0, count = 10)
-        ))
+        val category = ElectronicsCategory("Electr", listOf(
+            Product("Телевизор",10000,10),
+            Product("Смартфон",10000,10)
+        ).toMutableList()
+        )
         // when
-        val actual1 = category.findProducts(request = "теле")
+        val actual1 = category.findProducts("Телевизор")
 
         // then
         assertEquals(1, actual1.size)
         assertEquals(category.products[0], actual1[0])
         // when
-        val actual2 = category.findProducts(request = "смарт")
+        val actual2 = category.findProducts("Смартфон")
 
         // then
         assertEquals(1, actual2.size)
@@ -28,16 +29,18 @@ class CategoryTest {
     @Test
     fun findProductsAllInCategoryTest() {
         // given
-        val category = ElectronicsCategory(products = listOf(
-            Product(name = "Телевизор", price = 10000.0, count = 10),
-            Product(name = "Смартфон", price = 10000.0, count = 10)
-        ))
+        val category = ElectronicsCategory("Electr", listOf(
+            Product("Телевизор",10000,10),
+            Product("Смартфон",10000,10)
+        ).toMutableList()
+        )
         // when
-        val actual1 = category.findProducts(request = "эле")
+        val actual1 = category.findProducts("Смартфон")
+        val actual2 = category.findProducts("Телевизор")
 
         // then
-        assertEquals(2, actual1.size)
-        assertEquals(category.products[0], actual1[0])
-        assertEquals(category.products[1], actual1[1])
+        assertEquals(1, actual1.size)
+        assertEquals(category.products[1], actual1[0])
+        assertEquals(category.products[0], actual2[0])
     }
 }

@@ -50,4 +50,8 @@ object Store {
         }
         else println("This category is empty!")
     }
+
+    fun init(warehouse: List<FoodCategory>) {
+
+    }
 }

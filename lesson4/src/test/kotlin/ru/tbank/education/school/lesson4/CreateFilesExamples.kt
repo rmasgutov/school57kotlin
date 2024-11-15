@@ -5,6 +5,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.nio.file.Files
 import java.nio.file.Paths
+import kotlin.io.path.exists
 
 class CreateFilesExamples {
 
@@ -17,7 +18,9 @@ class CreateFilesExamples {
     @Test
     fun `create file using NIO`() {
         val path = Paths.get("src/test/resources/fileCreatedUsingNIO.txt")
-        Files.createFile(path)
+        if (!path.exists()) {
+            Files.createFile(path)
+        }
     }
 
     @Test

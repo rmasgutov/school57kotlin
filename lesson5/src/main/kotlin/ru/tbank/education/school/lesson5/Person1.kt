@@ -8,7 +8,7 @@ import java.time.LocalDate
 data class Person1(
     val firstName: String,
     val lastName: String,
-    val middleName: String?,
+    val middleName: String? = null,
     val passportNumber: String,
     val passportSerial: String,
     val birthDate: LocalDate
