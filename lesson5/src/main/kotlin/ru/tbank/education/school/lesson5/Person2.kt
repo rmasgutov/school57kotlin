@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSetter
 import java.time.LocalDate
 
 data class Person2(
+    //second edition
     @JsonSetter("name")
     val firstName: String,
     val lastName: String,

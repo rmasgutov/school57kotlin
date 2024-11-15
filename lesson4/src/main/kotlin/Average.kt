@@ -2,6 +2,7 @@ package ru.tbank.education.school
 
 
 object Average {
+    //second edition
     fun processFileIO(source: String, target: String) {
         Work_with_file(target).write(Work_with_file(source).read().map {
             it.split(" ").map {

@@ -2,6 +2,7 @@ package ru.tbank.education.school
 
 
 object Analyzer {
+    //second edition
     fun processFileIO(source: String, target: String) {
         val input = Work_with_file(source)
         val output = Work_with_file(target)

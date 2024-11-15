@@ -13,6 +13,7 @@ import kotlin.io.path.writeBytes
 
 
 class Work_with_file(val name: String, var type:Int = 1) {
+    //second edition
     fun pr() {
         if (find(name)) {
             val file = File(name)

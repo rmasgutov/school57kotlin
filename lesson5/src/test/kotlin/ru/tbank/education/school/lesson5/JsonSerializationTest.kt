@@ -8,6 +8,7 @@ import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person5
 import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person6
 
 class JsonSerializationTest {
+    //second edition
 
     @Test
     fun `Не должны сериализовываться свойства с null значениям Настройка через аннотацию`() {
