@@ -23,7 +23,8 @@ class UserClient(private val url: String) {
         val response = javaHttpClient.send(request, HttpResponse.BodyHandlers.ofString())
 
         return if (response.statusCode() == 200 || response.statusCode() == 201) {
-            lessonObjectMapper.readValue(response.body(), User::class.java)
+lessonObjectMapper.readValue(response.body(), ApiResponse::class.java)
+}
         } else {
             null
         }
