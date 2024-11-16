@@ -5,6 +5,7 @@ import java.io.IOException
 import java.io.FileNotFoundException
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.nio.file.FileAlreadyExistsException
 
 /**
  * Класс для анализа содержимого файла.
@@ -63,6 +64,9 @@ object Analyzer {
             Files.write(outputFileNIO, "Уникальные слова: ${uniqueWords.size}\n".toByteArray())
             Files.write(outputFileNIO, "Средняя длина слов: ${averageWordsLen}\n".toByteArray())
         }
+        catch (e: FileAlreadyExistsException) {
+            println("Файл уже существует: ${e.message}")
+        }
         catch (e: java.nio.file.NoSuchFileException) {
             println("Файл не найден: ${e.message}")
         }
@@ -72,6 +76,5 @@ object Analyzer {
         catch (e: Exception) {
             println("Неизвестная ошибка: ${e.message}")
         }
-
     }
 }

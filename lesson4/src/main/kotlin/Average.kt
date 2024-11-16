@@ -5,6 +5,7 @@ import java.nio.file.Paths
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
+import java.nio.file.FileAlreadyExistsException
 
 /**
  * Класс для вычисления среднего арифметического.
@@ -66,6 +67,9 @@ object Average {
             }
             Files.write(outputFileNIO, listAverage.joinToString(" ").toByteArray())
         }
+        catch (e: FileAlreadyExistsException) {
+            println("Файл уже существует: ${e.message}")
+        }
         catch (e: java.nio.file.NoSuchFileException) {
             println("Файл не найден: ${e.message}")
         }
@@ -75,6 +79,5 @@ object Average {
         catch (e: Exception) {
             println("Неизвестная ошибка: ${e.message}")
         }
-
     }
 }
