@@ -35,7 +35,7 @@ data class Deposit(
      * дроби процентов не допускаются.
      */
 
-    val `complexPercent`: Double,
+    val complexPercent: Double,
     /**
      * * Для премиальных клиентов банка нa
      * вклад в конце каждого месяца помимо проценто
