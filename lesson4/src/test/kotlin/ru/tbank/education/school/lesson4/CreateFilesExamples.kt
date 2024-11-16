@@ -5,7 +5,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.nio.file.Files
 import java.nio.file.Paths
-
+import java.nio.file.FileAlreadyExistsException
 class CreateFilesExamples {
 
     @Test
@@ -17,7 +17,9 @@ class CreateFilesExamples {
     @Test
     fun `create file using NIO`() {
         val path = Paths.get("src/test/resources/fileCreatedUsingNIO.txt")
-        Files.createFile(path)
+        try {
+            Files.createFile(path)
+        }catch(ignored: FileAlreadyExistsException){}
     }
 
     @Test
