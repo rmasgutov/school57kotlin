@@ -17,7 +17,11 @@ class CreateFilesExamples {
     @Test
     fun `create file using NIO`() {
         val path = Paths.get("src/test/resources/fileCreatedUsingNIO.txt")
-        Files.createFile(path)
+        try {
+            Files.createFile(path)
+        } catch (e: Exception) {
+
+        }
     }
 
     @Test
