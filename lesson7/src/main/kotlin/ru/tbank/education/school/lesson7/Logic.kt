@@ -14,5 +14,5 @@ const val YEAR_DAYS = 365
  * Текущий баланс по вкладу, отображающийся в личном кабинете с учетом всех начислений.
  */
 fun currentBalance(deposit: Deposit) = deposit.initialDeposit + (
-    1 + (deposit.complexPercent.let { if (deposit.isVip == 1) { it + 1 } else { it } }) /YEAR_DAYS
+    1 + (deposit.complexPercent.let { if (deposit.isVip == 1) { it + 1 } else { it } }) / YEAR_DAYS
     ).pow(Duration.between(deposit.createAt, LocalDate.now()).toDays().toDouble())
