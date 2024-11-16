@@ -16,5 +16,6 @@ fun currentBalance(deposit: Deposit) = deposit.initialDeposit + (
                 it
             }
         }
-        ) / 356
+        ) / 365
     ).pow(Duration.between(deposit.createAt, LocalDate.now()).toDays().toDouble())
+////

@@ -94,7 +94,7 @@ class JsonDeserializationTest {
         assertEquals("Иван", client.firstName)
         assertEquals("Иванов", client.lastName)
         assertEquals("Иванович", client.middleName)
-        assertEquals("123456", client.passportNumber)
+        assertEquals("123456", client.passportNumber)//
         assertEquals("1234", client.passportSerial)
         assertEquals(LocalDate.of(1990, 1, 1), client.birthDate)
     }
