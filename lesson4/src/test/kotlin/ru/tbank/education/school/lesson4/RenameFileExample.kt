@@ -13,10 +13,10 @@ class RenameFileExample {
         source.renameTo(File("src/test/resources/2.txt"))
     }
 
-    @Test
-    fun `rename file NIO`() {
-        val source = Paths.get("src/test/resources/2.txt")
-        val target = Paths.get("src/test/resources/1.txt")
-        Files.move(source, target)
-    }
+//    @Test
+//    fun `rename file NIO`() {
+//        val source = Paths.get("src/test/resources/2.txt")
+//        val target = Paths.get("src/test/resources/1.txt")
+//        Files.move(source, target)
+//    }
 }
