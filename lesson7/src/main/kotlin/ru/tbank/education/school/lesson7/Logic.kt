@@ -9,12 +9,12 @@ import kotlin.math.pow
  */
 fun currentBalance(deposit: Deposit) = deposit.initialDeposit + (
     1 + (
-        deposit.`сложная процентная ставка`.let {
+        deposit.complexPercent.let {
             if (deposit.isVip == 1) {
                 it + 1
             } else {
                 it
             }
         }
-        ) / 356
+        ) / 365
     ).pow(Duration.between(deposit.createAt, LocalDate.now()).toDays().toDouble())

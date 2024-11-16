@@ -72,5 +72,6 @@ object Analyzer {
         catch (e: Exception) {
             println("Неизвестная ошибка: ${e.message}")
         }
+
     }
 }

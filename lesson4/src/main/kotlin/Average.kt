@@ -75,5 +75,6 @@ object Average {
         catch (e: Exception) {
             println("Неизвестная ошибка: ${e.message}")
         }
+
     }
 }
