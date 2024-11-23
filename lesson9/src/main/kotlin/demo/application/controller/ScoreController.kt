@@ -19,7 +19,7 @@ class ScoreController(
 data class User(
     val age: Int,
     val name: String,
-    val sex: Int, // ????
+    val sex: Sex,
     val income: Long,
     val loans: List<Loan>,
 ) {
@@ -29,6 +29,10 @@ data class User(
         val isClosed: Boolean,
         val monthlyPayment: Long,
     )
+
+    enum class Sex {
+        MALE, FEMALE
+    }
 
 }
 

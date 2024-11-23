@@ -11,10 +11,14 @@ class LogicService {
             throw RuntimeException("Клиент слишком мал")
         }
 
-        // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
-        return creditApplication.user.loans.filter {
+        val existingLoans = creditApplication.user.loans.filter {
             !it.isClosed
-        }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income / 3
+        }
+
+        val totalMonthlyPayment = existingLoans.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment
+
+        // Кредит выдаем только если сумма всех ежемесячных платежей не превышает 1/3 дохода клиента
+        return totalMonthlyPayment <= creditApplication.user.income / 3
     }
 
 }
