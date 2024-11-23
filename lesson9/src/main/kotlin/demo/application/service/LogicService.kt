@@ -1,4 +1,4 @@
-package demo.application.controller
+package demo.application.service
 
 import org.springframework.stereotype.Service
 
