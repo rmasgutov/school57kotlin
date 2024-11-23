@@ -8,7 +8,7 @@ plugins {
 
 
 repositories {
-    //mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
@@ -16,7 +16,5 @@ dependencies {
     implementation(platform("org.springframework.boot:spring-boot-dependencies:2.7.18"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
