@@ -1,21 +1,17 @@
 package demo.application.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
-import demo.application.service.LogicService
 import demo.application.dto.CreditApplication
-
+import demo.application.service.LogicService
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class ScoreController(
-    private val logicService: LogicService,
+        private val logicService: LogicService,
 ) {
 
-    @GetMapping("score")
-    fun simpleScore(@RequestParam creditApplication: CreditApplication) =
-        logicService.simpleScore(creditApplication)
-
-
+    @PostMapping("score")
+    fun simpleScore(@RequestBody creditApplication: CreditApplication) =
+            logicService.simpleScore(creditApplication)
 }
-
