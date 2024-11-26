@@ -10,18 +10,16 @@ import java.time.LocalDateTime
 class ScoreController(
     val logicService: LogicService,
 ) {
-
-    @GetMapping("score")
-    fun simpleScore(@RequestParam creditApplication: CreditApplication) =
-        logicService.simpleScore(creditApplication)
-
+    @GetMapping("new_credit")
+    fun get_new_credit(@RequestParam creditApplication: CreditApplication) =
+        logicService.canGet(creditApplication)
 
 }
 
 data class User(
     val age: Int,
     val name: String,
-    val sex: Int,
+    val sex: Boolean,
     val income: Long,
     val loans: List<Loan>,
 ) {
@@ -38,4 +36,4 @@ data class CreditApplication(
     val totalAmount: Long,
     val monthlyPayment: Long,
     val user: User,
-    )
+)
