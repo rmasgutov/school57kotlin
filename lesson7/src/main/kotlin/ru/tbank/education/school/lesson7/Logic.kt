@@ -9,7 +9,7 @@ import kotlin.math.pow
  */
 fun currentBalance(deposit: Deposit) = deposit.initialDeposit + (
     1 + (
-        deposit.`сложная процентная ставка`.let {
+        deposit.interestRate.let {
             if (deposit.isVip == 1) {
                 it + 1
             } else {

@@ -21,13 +21,13 @@ class ReadFilesExamples {
             }
     }
 
-    @Test
-    fun `read file using file input stream`() {
-        val file = File(javaClass.classLoader.getResource("data.txt")!!.file)
-        FileInputStream(file).use { fileInputStream ->
-            println("file input stream 2: " + readFromInputStream(fileInputStream))
-        }
-    }
+//    @Test
+//    fun `read file using file input stream`() {
+//        val file = File(javaClass.classLoader.getResource("data.txt")!!.file)
+//        FileInputStream(file).use { fileInputStream ->
+//            println("file input stream 2: " + readFromInputStream(fileInputStream))
+//        }
+//    }
 
     @Test
     fun `read file using buffered reader`() {
