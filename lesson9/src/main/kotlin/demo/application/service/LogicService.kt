@@ -1,6 +1,5 @@
 package demo.application.service
 
-import org.springframework.stereotype.Service
 import demo.application.dto.CreditApplication
 
 class LogicService {
