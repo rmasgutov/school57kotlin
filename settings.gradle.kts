@@ -12,4 +12,5 @@ plugins {
 
 rootProject.name = "school57kotlin"
 include("simple")
+include("lesson8")
 include("lesson9")

@@ -4,6 +4,8 @@ import demo.application.controller.ScoreController
 import demo.application.dto.CreditApplication
 import demo.application.dto.Loan
 import demo.application.dto.User
+import demo.application.controller.CreditApplication
+import demo.application.controller.ScoreController
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
