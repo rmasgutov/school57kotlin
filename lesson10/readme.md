@@ -6,4 +6,4 @@
 1) Конфигурации https://docs.spring.io/spring-framework/reference/core/beans/java/configuration-annotation.html
 2) jacoco https://docs.gradle.org/current/userguide/jacoco_plugin.html
 3) docker run https://docs.docker.com/reference/cli/docker/container/run/
-4) 
+4) Самостоятельно создадим Feign client
