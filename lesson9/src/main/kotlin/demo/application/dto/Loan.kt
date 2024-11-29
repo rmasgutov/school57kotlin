@@ -3,8 +3,8 @@ package demo.application.dto
 import java.time.LocalDateTime
 
 data class Loan(
-        val createdAt: LocalDateTime,
+        val createdAt: LocalDateTime = LocalDateTime.now(),
         val amount: Long,
-        val isClosed: Boolean,
+        val isClosed: Boolean = false,
         val monthlyPayment: Long,
 )

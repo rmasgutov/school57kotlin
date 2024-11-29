@@ -5,9 +5,7 @@ plugins {
     id("com.bmuschko.docker-spring-boot-application") version "9.4.0"
 }
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
     implementation(platform("org.springframework.boot:spring-boot-dependencies:3.3.5"))

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController
 class ScoreController(
         private val logicService: LogicService,
 ) {
-
     @PostMapping("score")
     fun simpleScore(@RequestBody creditApplication: CreditApplication) =
             logicService.simpleScore(creditApplication)

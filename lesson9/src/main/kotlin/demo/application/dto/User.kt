@@ -7,7 +7,6 @@ data class User(
         val income: Long,
         val loans: List<Loan>,
 ) {
-
     enum class Sex {
         MALE,
         FEMALE

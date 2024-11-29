@@ -7,12 +7,19 @@ import org.springframework.stereotype.Component
 @Component
 class LogicService {
     fun simpleScore(creditApplication: CreditApplication): Boolean {
-        // Нельзя выдавать кредит клиентам не достигшим 18 лет
-        return creditApplication.user.age >= 18 &&
-                // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать
-                // новый кредит
-                creditApplication.user.loans.filterNot(Loan::isClosed).sumOf(Loan::monthlyPayment) +
-                        creditApplication.correspondingLoan.monthlyPayment <=
-                        creditApplication.user.income / 3
+        // Нельзя выдавать кредит клиентам, не достигшим 18 лет
+        if (creditApplication.user.age < 18) {
+            return false
+        }
+
+        val openedLoans = creditApplication.user.loans.filterNot(Loan::isClosed)
+
+        val totalMonthlyPayment =
+                openedLoans.sumOf(Loan::monthlyPayment) +
+                        creditApplication.correspondingLoan.monthlyPayment
+
+        // Если суммарный месячный платеж составляет больше трети дохода то, нельзя выдавать новый
+        // кредит
+        return totalMonthlyPayment <= creditApplication.user.income / 3
     }
 }
