@@ -1,13 +1,27 @@
 package demo.application
 
-import org.junit.jupiter.api.Test
+import demo.application.controller.ScoreController
+import org.junit.jupiter.api.Assertions
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 class DemoApplicationTests {
 
-	@Test
-	fun contextLoads() {
-	}
+    @Autowired
+    lateinit var scoreController: ScoreController
+
+    fun someTest() {
+        val request = TODO()
+        val result = scoreController.simpleScore(request)
+        Assertions.assertEquals(true, result)
+    }
+
+
+    fun otherTest() {
+        val request = TODO()
+        val result = scoreController.simpleScore(request)
+        Assertions.assertEquals(false, result)
+    }
 
 }
