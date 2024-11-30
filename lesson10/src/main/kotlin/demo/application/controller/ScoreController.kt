@@ -22,14 +22,14 @@ class ScoreController {
             return false
         }
 
-        val existMonflyPayment = creditApplication.user.loans.filterNot {
+        val existMonthlyPayment = creditApplication.user.loans.filterNot {
             it.isClose
         }.sumOf { it.monthlyPayment }
 
-        val totalMonthlyPayment = existMonflyPayment + creditApplication.monthlyPayment
+        val totalMonthlyPayment = existMonthlyPayment + creditApplication.monthlyPayment
 
         // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
-        return totalMonthlyPayment / 3 < creditApplication.user.income
+        return totalMonthlyPayment < creditApplication.user.income / 3
     }
 
 

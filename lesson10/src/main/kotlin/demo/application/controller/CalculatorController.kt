@@ -17,7 +17,7 @@ class CalculatorController(
 ) {
 
 
-    @DeleteMapping("calculate/userId={userId}/")
+    @GetMapping("calculate/userId={userId}/")
     fun simpleScore(
         @PathVariable userId: String,
         @RequestParam monthlyPayment: Long,
@@ -29,13 +29,13 @@ class CalculatorController(
             syntheticUserGenerator.generateUser()
         }
 
-        val existMonflyPayment = user.loans.filterNot {
+        val existMonthlyPayment = user.loans.filterNot {
             it.isClose
         }.sumOf { it.monthlyPayment }
 
-        val totalMonthlyPayment = existMonflyPayment + monthlyPayment
+        val totalMonthlyPayment = existMonthlyPayment + monthlyPayment
 
         // Если суммарный месячный платеж не может составлять больше трети дохода
-        return totalMonthlyPayment / 3 - user.income
+        return user.income / 3 - totalMonthlyPayment
     }
 }
