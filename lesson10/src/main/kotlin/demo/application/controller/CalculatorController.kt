@@ -39,3 +39,6 @@ class CalculatorController(
         return user.income / 3 - totalMonthlyPayment
     }
 }
+
+
+//lsflgklsfkg
