@@ -16,6 +16,7 @@ class DemoApplicationTests {
 	@Autowired
 	lateinit var scoreController: ScoreController
 
+
 	@Test
 	fun someTest() {
 		val user = User(45,"ДАННЫЕ УДАЛЕНЫ", 1, 800, 52, listOf())

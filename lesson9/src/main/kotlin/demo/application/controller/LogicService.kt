@@ -7,6 +7,7 @@ class LogicService {
         if (creditApplication.user.age <  18) {
             return false
         }
+
         if(creditApplication.user.income < creditApplication.monthlyPayment){
             return false
         }
