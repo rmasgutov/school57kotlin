@@ -1,4 +1,4 @@
-package demo.application.controller
+package demo.application.client
 
 
 import demo.application.dto.User

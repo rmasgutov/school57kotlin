@@ -2,6 +2,7 @@ package demo.application.controller
 
 import demo.application.client.CrmClient
 import demo.application.dto.User
+import demo.application.services.ServiceCalc
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @Tag(name = "Оценка кредитной нагрузки", description = "Эти методы вызываются напрямую с фронта, для расчета кредитной нагрузки")
 @RestController
 class CalculatorController(
-    val crmClient : CrmClient,
-    val syntheticUserGenerator: SyntheticUserGenerator,
+    val calculator : ServiceCalc,
 ) {
 
 
@@ -22,23 +22,6 @@ class CalculatorController(
         @PathVariable userId: String,
         @RequestParam monthlyPayment: Long,
     ): Long {
-
-        val user: User = if(System.getenv("environment") == "Test"){
-            crmClient.getUserById(userId)
-        }else{
-            syntheticUserGenerator.generateUser()
-        }
-
-        val existMonthlyPayment = user.loans.filterNot {
-            it.isClose
-        }.sumOf { it.monthlyPayment }
-
-        val totalMonthlyPayment = existMonthlyPayment + monthlyPayment
-
-        // Если суммарный месячный платеж не может составлять больше трети дохода
-        return user.income / 3 - totalMonthlyPayment
+        return calculator.calc(userId, monthlyPayment)
     }
 }
-
-
-//lsflgklsfkg
