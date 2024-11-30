@@ -2,6 +2,7 @@ package ru.tbank.education.school.lesson5
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import ru.tbank.education.school.ru.tbank.education.school.lesson5.Person1
