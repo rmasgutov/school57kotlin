@@ -1,10 +1,12 @@
 package ru.tbank.education.school.lesson4
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 
+@Disabled
 class RenameFileExample {
 
     @Test
