@@ -12,6 +12,7 @@ import kotlin.math.max
 class CalculatorService(
     private val crmClient: CrmClient,
     private val syntheticUserGenerator: SyntheticUserGenerator,
+    private val pdnService: PDNService,
 ) {
 
     fun calculate(userId: String): Long {
@@ -25,8 +26,11 @@ class CalculatorService(
             return 0
         }
 
+        val maxMonthlyPayment = pdnService.calculateMaxMonthlyPayment(user)
+        val currentMonthlyPayment = user.calculateMonthlyPayment()
+
         // максимальный месячный платеж не должен превышать треть дохода
-        return max(user.income / 3 - user.calculateMonthlyPayment(), 0) // ну вдруг...
+        return max(maxMonthlyPayment - currentMonthlyPayment, 0) // ну вдруг...
     }
 
 }
