@@ -1,16 +1,18 @@
-package demo.application.controller
+package demo.application.util
 
 import demo.application.dto.User
-import kotlin.random.Random
+import org.springframework.stereotype.Component
 
 // Доступ до CRM возможен только с продового сервера. На тесте используем сгенеренных пользователей
+@Component
 class SyntheticUserGenerator {
 
     fun generateUser() = User(
-        name = "test",
-        age = 0,
-        sex = Random.nextInt(),
-        income = Random.nextLong(),
+        name = "Test User",
+        age = (18..65).random(),
+        sex = User.Sex.entries.toTypedArray().random(),
+        income = (1..(1e6.toLong())).random(),
         loans = listOf()
     )
+
 }
