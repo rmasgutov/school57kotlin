@@ -12,8 +12,8 @@ data class User(
         MALE, FEMALE
     }
 
-}
+    fun calculateMonthlyPayment(): Long {
+        return loans.filterNot { it.isClosed }.sumOf { it.monthlyPayment }
+    }
 
-fun User.calculateMonthlyPayment(): Long {
-    return loans.filterNot { it.isClosed }.sumOf { it.monthlyPayment }
 }
