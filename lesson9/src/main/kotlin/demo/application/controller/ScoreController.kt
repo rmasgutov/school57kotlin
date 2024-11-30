@@ -17,25 +17,3 @@ class ScoreController(
 
 
 }
-
-data class User(
-    val age: Int,
-    val name: String,
-    val sex: Int,
-    val income: Long,
-    val loans: List<Loan>,
-) {
-
-    data class Loan(
-        val creteAt: LocalDateTime,
-        val isClose: Boolean,
-        val monthlyPayment: Long,
-    )
-}
-
-data class CreditApplication(
-    val createdAt: LocalDateTime,
-    val totalAmount: Long,
-    val monthlyPayment: Long,
-    val user: User,
-    )

@@ -1,14 +1,23 @@
 package demo.application.controller
-
+import org.springframework.stereotype.Component
+import java.time.LocalDateTime
+@Component
 class LogicService {
     fun simpleScore(creditApplication: CreditApplication): Boolean {
-        // Нельзя выдавать кредит клиентам не достигшим 18 лет
-        if (creditApplication.user.age <=  18 ) {
-            throw RuntimeException("Клиент слишком мал")
+        if (creditApplication.user.age <  18) {
+            return false
         }
-        // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
+        if(creditApplication.user.income < creditApplication.monthlyPayment){
+            return false
+        }
+        if(creditApplication.user.loans.filter{it.loanTerm<LocalDateTime.now()&&!it.isClose}.size>0){
+            return false
+        }
+        if(creditApplication.user.creditScore<600){
+            return false
+        }
         return creditApplication.user.loans.filter {
             it.isClose
-        }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income * 0.3
+        }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income / 3
     }
 }

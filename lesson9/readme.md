@@ -1,5 +1,5 @@
 На этом уроке изучали 
-1) [Spring DI](https://www.baeldung.com/spring-dependency-injection) Посмотрели еще раз ка ксоздавать бины и как из инжектить в другие бины через конструктор
+1) [Spring DI](https://www.baeldung.com/spring-dependency-injection) Посмотрели еще раз как создавать бины и как из инжектить в другие бины через конструктор
 2) Из чего стоит build.gradle.kts: [plugins](https://docs.gradle.org/current/userguide/plugins.html), [dependencies](https://docs.gradle.org/current/userguide/declaring_dependencies.html), [BOM](https://docs.gradle.org/current/userguide/platforms.html)
 3) Посмотрели как выглядит [swagger](https://www.baeldung.com/spring-rest-openapi-documentation)
 
