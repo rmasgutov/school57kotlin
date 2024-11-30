@@ -1,6 +1,7 @@
 package demo.application.controller
 
 import demo.application.dto.CreditApplication
+import demo.application.services.ServiceScore
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
@@ -13,26 +14,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @Tag(name = "Скоринг заявки", description = "Эти методы предназначены для вызова из процесса оформления заявки")
 @RestController
-class ScoreController {
+class ScoreController (
+    val Servicescore : ServiceScore,
+){
 
     @GetMapping("score")
-    fun simpleScore(@RequestBody creditApplication: CreditApplication): Boolean {
-        // Нельзя выдавать кредит клиентам не достигшим 18 лет
-        if (creditApplication.user.age <= 18) {
-            return false
-        }
-
-        val existMonflyPayment = creditApplication.user.loans.filterNot {
-            it.isClose
-        }.sumOf { it.monthlyPayment }
-
-        val totalMonthlyPayment = existMonflyPayment + creditApplication.monthlyPayment
-
-        // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
-        return totalMonthlyPayment / 3 < creditApplication.user.income
-    }
-
-
-
+    fun simpleScore(@RequestBody creditApplication: CreditApplication) = Servicescore.getScore(creditApplication)
 }
 
