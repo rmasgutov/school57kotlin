@@ -1,6 +1,7 @@
 package demo.application.service
 
 import demo.application.dto.CreditApplication
+import demo.application.dto.calculateMonthlyPayment
 import org.springframework.stereotype.Service
 
 /**
@@ -15,11 +16,8 @@ class ScoreService {
             return false
         }
 
-        val currentMonthlyPayment = creditApplication.user.loans.filterNot {
-            it.isClosed
-        }.sumOf { it.monthlyPayment }
-
-        val newMonthlyPayment = currentMonthlyPayment + creditApplication.monthlyPayment
+        val newMonthlyPayment = creditApplication.user.calculateMonthlyPayment() +
+                creditApplication.monthlyPayment
 
         // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
         return newMonthlyPayment <= creditApplication.user.income / 3

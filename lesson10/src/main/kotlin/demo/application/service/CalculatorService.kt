@@ -1,6 +1,7 @@
 package demo.application.service
 
 import demo.application.client.CrmClient
+import demo.application.dto.calculateMonthlyPayment
 import demo.application.util.SyntheticUserGenerator
 import org.springframework.stereotype.Service
 import kotlin.math.max
@@ -21,12 +22,12 @@ class CalculatorService(
             crmClient.getUserById(userId)
         }
 
-        val currentMonthlyPayment = user.loans.filterNot {
-            it.isClosed
-        }.sumOf { it.monthlyPayment }
+        if (user.age < 18) {
+            return 0
+        }
 
         // максимальный месячный платеж не должен превышать треть дохода
-        return max(user.income / 3 - currentMonthlyPayment, 0) // ну вдруг...
+        return max(user.income / 3 - user.calculateMonthlyPayment(), 0) // ну вдруг...
     }
 
 }
