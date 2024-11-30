@@ -1,7 +1,6 @@
 package demo.application.service
 
 import demo.application.client.CrmClient
-import demo.application.dto.calculateMonthlyPayment
 import demo.application.util.SyntheticUserGenerator
 import org.springframework.stereotype.Service
 import kotlin.math.max
