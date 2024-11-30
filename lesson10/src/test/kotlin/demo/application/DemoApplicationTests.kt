@@ -14,7 +14,7 @@ class DemoApplicationTests {
     @Test
     fun someTest() {
         // вроде чето покрывает
-        calculatorController.simpleScore(userId = "123", monthlyPayment = 213)
-
+        calculatorController.simpleScore(userId = "123")
     }
+
 }
