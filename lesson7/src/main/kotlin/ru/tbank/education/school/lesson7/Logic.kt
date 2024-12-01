@@ -1,20 +1,16 @@
 package ru.tbank.education.school.lesson7
 
-import java.time.Duration
 import java.time.LocalDate
 import kotlin.math.pow
 
 /**
  * Текущий баланс по вкладу, отображающийся в личном кабинете с учетом всех начислений.
  */
-fun currentBalance(deposit: Deposit) = deposit.initialDeposit + (
-    1 + (
-        deposit.`сложная процентная ставка`.let {
-            if (deposit.isVip == 1) {
-                it + 1
-            } else {
-                it
-            }
-        }
-        ) / 356
-    ).pow(Duration.between(deposit.createAt, LocalDate.now()).toDays().toDouble())
+fun currentBalance(deposit: Deposit): Double {
+    val rate = deposit.`сложная процентная ставка`.toDouble() / 100
+    val countDay = LocalDate.now().toEpochDay() - deposit.createAt.toEpochDay()
+    val totalByRate = deposit.initialDeposit * (1 + countDay / 365).toDouble().pow(rate)
+    val countMonth = countDay / 30
+    val bonus = deposit.initialDeposit * countMonth
+    return totalByRate + bonus
+}
