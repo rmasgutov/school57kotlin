@@ -14,5 +14,6 @@ fun calculate(a: Double, b: Double, operation: OperationType): Double? {
  */
 @Suppress("ReturnCount")
 fun String.calculate(): Double? {
-    TODO()
+    val a = 1.0
+    return a
 }
