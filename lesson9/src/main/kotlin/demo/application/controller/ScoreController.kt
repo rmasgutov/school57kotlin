@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping
 
 @RestController
 class ScoreController(
-    val logicService: LogicService = LogicService(),
+    val logicService: LogicService,
 ) {
 
     @PostMapping("score")

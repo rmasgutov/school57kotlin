@@ -1,5 +1,8 @@
 package demo.application.controller
 
+import org.springframework.stereotype.Service
+
+@Service
 class LogicService {
     fun simpleScore(creditApplication: CreditApplication): Boolean {
         // Нельзя выдавать кредит клиентам не достигшим 18 лет
