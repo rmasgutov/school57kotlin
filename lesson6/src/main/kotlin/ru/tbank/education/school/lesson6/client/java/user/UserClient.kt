@@ -12,7 +12,7 @@ import kotlin.random.Random
 class UserClient(private val url: String) {
     private val javaHttpClient = HttpClient.newBuilder().build()
 
-    fun createUser(user: User): User? {
+    fun createUser(user: User): ApiResponse? {
         val body = lessonObjectMapper.writeValueAsString(user)
         val request = HttpRequest.newBuilder()
             .uri(URI.create("$url/v2/user"))
@@ -23,13 +23,13 @@ class UserClient(private val url: String) {
         val response = javaHttpClient.send(request, HttpResponse.BodyHandlers.ofString())
 
         return if (response.statusCode() == 200 || response.statusCode() == 201) {
-            lessonObjectMapper.readValue(response.body(), User::class.java)
+            lessonObjectMapper.readValue(response.body(),  ApiResponse::class.java)
         } else {
             null
         }
     }
 
-    fun getUser(username: String): ApiResponse? {
+    fun getUser(username: String): User? {
         val request = HttpRequest.newBuilder()
             .uri(URI.create("$url/v2/user/$username"))
             .header("Content-Type", "application/json")
@@ -39,7 +39,7 @@ class UserClient(private val url: String) {
         val response = javaHttpClient.send(request, HttpResponse.BodyHandlers.ofString())
 
         return if (response.statusCode() == 200 || response.statusCode() == 201) {
-            lessonObjectMapper.readValue(response.body(), ApiResponse::class.java)
+            lessonObjectMapper.readValue(response.body(), User::class.java)
         } else {
             null
         }
