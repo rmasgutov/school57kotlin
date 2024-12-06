@@ -36,3 +36,9 @@ tasks {
         useJUnitPlatform()
     }
 }
+
+docker{
+	springBootApplication{
+		baseImage.set("openjdk:17-alpine")
+	}
+}
