@@ -9,6 +9,7 @@ import ru.tbank.education.school.lesson6.client.lessonObjectMapper
 import kotlin.math.abs
 import kotlin.random.Random
 
+
 class UserClient(url: String) {
 
     private val feignClient = Feign

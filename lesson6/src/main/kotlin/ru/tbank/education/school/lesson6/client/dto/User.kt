@@ -10,3 +10,4 @@ data class User(
     val phone: String,
     val userStatus: Int,
 )
+
