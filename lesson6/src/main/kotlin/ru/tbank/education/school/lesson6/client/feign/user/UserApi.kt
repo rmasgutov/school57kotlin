@@ -6,13 +6,16 @@ import feign.RequestLine
 import ru.tbank.education.school.lesson6.client.dto.ApiResponse
 import ru.tbank.education.school.lesson6.client.dto.User
 
+/**
+ * @author <a href="https://github.com/Neruxov">Neruxov</a>
+ */
 interface UserApi {
 
     @RequestLine("PUT /user/{username}")
     @Headers("Content-Type: application/json")
     fun updateUser(@Param("username") username: String, user: User): ApiResponse
 
-    @RequestLine("POST /user") // Исправленный адрес для создания пользователя
+    @RequestLine("POST /pet")
     @Headers("Content-Type: application/json")
     fun createUser(user: User): ApiResponse
 
@@ -23,4 +26,5 @@ interface UserApi {
     @RequestLine("DELETE /user/{username}")
     @Headers("Content-Type: application/json")
     fun deleteUser(@Param("username") username: String): ApiResponse
+
 }
