@@ -24,7 +24,6 @@ class UserClient(url: String) {
     fun updatePet(user: User) = feignClient.updateUser(user.username, user)
 
     fun getUser(username: String) = feignClient.getUser(username)
-
 }
 
 

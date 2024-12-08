@@ -26,5 +26,4 @@ interface UserApi {
     @RequestLine("DELETE /user/{username}")
     @Headers("Content-Type: application/json")
     fun deleteUser(@Param("username") username: String): ApiResponse
-
 }
