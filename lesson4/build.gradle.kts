@@ -5,7 +5,7 @@ plugins {
 
 tasks.test {
     doFirst {
-        project.projectDir.resolve("src/test/resources").listFiles().forEach {
+        project.projectDir.resolve("src/test/resources")?.listFiles()?.forEach {
             it.deleteRecursively()
         }
     }
