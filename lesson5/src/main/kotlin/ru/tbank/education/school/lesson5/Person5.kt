@@ -1,7 +1,8 @@
 package ru.tbank.education.school.ru.tbank.education.school.lesson5
 
 import java.time.LocalDate
-
+import com.fasterxml.jackson.annotation.JsonInclude
+@JsonInclude(JsonInclude.Include.NON_NULL)//
 data class Person5(
     val firstName: String? = null,
     val lastName: String? = null,
@@ -10,3 +11,4 @@ data class Person5(
     val passportSerial: String? = null,
     val birthDate: LocalDate? = null
 )
+//
