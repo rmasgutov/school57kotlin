@@ -6,9 +6,6 @@ import feign.RequestLine
 import ru.tbank.education.school.lesson6.client.dto.ApiResponse
 import ru.tbank.education.school.lesson6.client.dto.User
 
-/**
- * @author <a href="https://github.com/Neruxov">Neruxov</a>
- */
 interface UserApi {
 
     @RequestLine("PUT /user/{username}")
