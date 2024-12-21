@@ -1,20 +1,16 @@
 package demo.application.controller
 
-import org.springframework.stereotype.Service
+import demo.application.dto.CreditApplication
 
-@Service
 class LogicService {
-
     fun simpleScore(creditApplication: CreditApplication): Boolean {
         // Нельзя выдавать кредит клиентам не достигшим 18 лет {
-            if (creditApplication.user.age < 18) {
-                throw RuntimeException("Клиент слишком мал")
-            }
-
-            // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
-            return creditApplication.user.loans.filter {
-                !it.isClosed
-        }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income / 3
+        if (creditApplication.user.age < 18 ) {
+            throw RuntimeException("Клиент слишком мал")
+        }
+        // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
+        return creditApplication.user.loans.filter {
+            it.isClose
+        }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income * 0.3
     }
-
 }
