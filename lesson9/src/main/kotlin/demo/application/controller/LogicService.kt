@@ -10,7 +10,7 @@ class LogicService {
         }
         // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
         return creditApplication.user.loans.filter {
-            it.isClose
+            it.isClosed
         }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income * 0.3
     }
 }
