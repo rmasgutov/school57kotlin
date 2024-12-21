@@ -1,6 +1,6 @@
 package demo.application.controller
 
-import demo.application.dto.CreditApplication
+import demo.application.controller.CreditApplication
 
 class LogicService {
     fun simpleScore(creditApplication: CreditApplication): Boolean {
@@ -8,9 +8,9 @@ class LogicService {
         if (creditApplication.user.age < 18 ) {
             throw RuntimeException("Клиент слишком мал")
         }
-        // Если суммарный месячный платеж составляет больше трети дохода то нельзя выдавать новый кредит
+        // Если суммарный месячный платеж составляет больше трети дохода, то нельзя выдавать новый кредит
         return creditApplication.user.loans.filter {
-            it.isClosed
+            it.isClose
         }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income * 0.3
     }
 }

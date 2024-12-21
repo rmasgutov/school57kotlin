@@ -1,5 +1,4 @@
 package demo.application
-
 import demo.application.controller.CreditApplication
 import demo.application.controller.Loan
 import demo.application.controller.ScoreController
