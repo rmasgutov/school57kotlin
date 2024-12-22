@@ -11,4 +11,3 @@ data class Person6(
     val passportSerial: String? = null,
     val birthDate: LocalDate? = null
 )
-//
