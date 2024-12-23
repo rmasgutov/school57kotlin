@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 
+import org.springframework.web.bind.annotation.PostMapping
 
 @RestController
 class ScoreController(
@@ -12,6 +13,7 @@ class ScoreController(
 ) {
 
     @GetMapping("score")
+    @PostMapping("score")
     fun simpleScore(@RequestParam creditApplication: CreditApplication) =
         logicService.simpleScore(creditApplication)
 
