@@ -7,4 +7,4 @@ data class User(
     val creditScore: Int,
     val income: Long,
     val loans: List<demo.application.controller.Loan>,
-)
+)//
