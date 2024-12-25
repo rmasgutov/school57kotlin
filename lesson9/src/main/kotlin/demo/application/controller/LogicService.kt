@@ -13,4 +13,4 @@ class LogicService {
             it.isClose
         }.sumOf { it.monthlyPayment } + creditApplication.monthlyPayment < creditApplication.user.income * 0.3
     }
-}
+}//

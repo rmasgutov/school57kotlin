@@ -10,4 +10,4 @@ class ScoreController(
     @GetMapping("score")
     fun simpleScore(@RequestParam creditApplication: CreditApplication) =
         logicService.simpleScore(creditApplication)
-}
+}//

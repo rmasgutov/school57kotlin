@@ -7,4 +7,4 @@ data class Loan(
     val loanTerm: LocalDateTime,
     val isClose: Boolean,
     val monthlyPayment: Long,
-)
+)//

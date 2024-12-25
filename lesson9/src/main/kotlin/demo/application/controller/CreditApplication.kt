@@ -7,4 +7,4 @@ data class CreditApplication(
     val totalAmount: Long,
     val monthlyPayment: Long,
     val user: User,
-)
+)//
