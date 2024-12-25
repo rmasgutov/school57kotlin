@@ -12,4 +12,4 @@ data class Person2(
     val passportSerial: String,
     val birthDate: LocalDate
 )
-//
+///
