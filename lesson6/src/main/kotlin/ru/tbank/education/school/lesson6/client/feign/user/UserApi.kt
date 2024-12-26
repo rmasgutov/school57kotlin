@@ -5,7 +5,11 @@ import feign.Param
 import feign.RequestLine
 import ru.tbank.education.school.lesson6.client.dto.ApiResponse
 import ru.tbank.education.school.lesson6.client.dto.User
-interface UserApi {
+interface UserApi{
+    @RequestLine("GET /user/{username}")
+    @Headers("Content-Type: application/json")
+    fun getUser(@Param("username") username: String): User
+
     @RequestLine("PUT /user/{username}")
     @Headers("Content-Type: application/json")
     fun updateUser(@Param("username") username: String, user: User): ApiResponse
@@ -14,11 +18,8 @@ interface UserApi {
     @Headers("Content-Type: application/json")
     fun addUser(user: User): ApiResponse
 
-    @RequestLine("GET /user/{username}")
-    @Headers("Content-Type: application/json")
-    fun getUser(@Param("username") username: String): User
 
     @RequestLine("DELETE /user/{username}")
     @Headers("Content-Type: application/json")
     fun deleteUser(@Param("username") username: String): ApiResponse
-}//
+}

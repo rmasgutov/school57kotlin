@@ -8,10 +8,6 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import kotlin.math.abs
 import kotlin.random.Random
-
-/**
- * @author <a href="https://github.com/Neruxov">Neruxov</a>
- */
 class UserClient(
     private val url: String
 ) {
