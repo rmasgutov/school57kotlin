@@ -33,4 +33,4 @@ class JsonSerializationTest {
         // then
         assertEquals("{}", data)
     }
-}
+}//

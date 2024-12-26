@@ -10,3 +10,4 @@ data class Person3(
     val passportSerial: String,
     val birthDate: LocalDate
 )
+//

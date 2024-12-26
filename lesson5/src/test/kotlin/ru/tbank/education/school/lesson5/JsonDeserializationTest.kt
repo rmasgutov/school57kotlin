@@ -130,5 +130,5 @@ class JsonDeserializationTest {
         // then
         assertNotNull(client2.middleName)
         assertFalse(client2.middleName.isPresent)
-    }
+    }//
 }
