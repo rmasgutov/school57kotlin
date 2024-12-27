@@ -30,6 +30,8 @@ data class User(
         val creteAt: LocalDateTime,
         val isClose: Boolean,
         val monthlyPayment: Long,
+        val remainingAmount: Long
+
     )
 }
 
