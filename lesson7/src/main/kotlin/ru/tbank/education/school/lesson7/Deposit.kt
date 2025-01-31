@@ -32,3 +32,4 @@ data class Deposit(
      */
     val isVip: Int,
 )
+

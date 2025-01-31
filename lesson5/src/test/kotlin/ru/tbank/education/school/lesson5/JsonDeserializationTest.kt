@@ -31,6 +31,7 @@ class JsonDeserializationTest {
         assertEquals(LocalDate.of(1990, 1, 1), client.birthDate)
     }
 
+
     @Test
     fun `В JSON есть лишние свойства Настроить ObjectMapper`() {
         // given
