@@ -1,4 +1,4 @@
-package ru.tbank.education.school.lesson1
+package ru.tbank.education.school
 
 import java.io.File
 import java.io.FileInputStream
@@ -13,19 +13,28 @@ import java.io.FileWriter
 
 fun main() {
 //    создание файла
-//1    val file = File("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config.json")
+//1  io
+//    val file = File("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config.json")
+//    val type = file.javaClass
+//    println(type)
 //    file.createNewFile()
-//2    val path: Path = Paths.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config2.json")
+//2  nio
+//    val path: Path = Paths.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config2.json") // class sun.nio.fs.WindowsPath
+//    val path = Paths.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config2.json")
+//    val type = path.javaClass
+//    println(type)
 //    Files.createFile(path)
-//3    FileOutputStream("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config3.json")
+//3  io  FileOutputStream("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config3.json")
 //    чтение файла
 //1    val file = File("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config.json")
 //    val stream = FileInputStream(file)
 //    val bytes = stream.readAllBytes()
 //    val string = String(bytes)
 //    println("Content: $string")
-//2   val data1 = Files.readAllLines(Paths.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config.json"))
-//    data1.forEach { println(it) }
+    val data1 = Files.readAllLines(Paths.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config4.json"))
+    val type = data1.javaClass
+    println(type)
+    data1.forEach { println(it) }
 //3    val data2 = Files.lines(Paths.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config.json"))
 //    data2.forEach { println(it) }
 //4    val scanner = Scanner(Paths.get("lesson1/src/main/kotlin/ru/tbank/education/school/lesson1/config.json"))

@@ -19,6 +19,11 @@ class RenameFileExample {
     fun `rename file NIO`() {
         val source = Paths.get("src/test/resources/2.txt")
         val target = Paths.get("src/test/resources/1.txt")
-        Files.move(source, target)
+        try {
+            Files.move(source, target)
+        } catch (e: Exception) {
+            println("File not found")
+        }
+
     }
 }
