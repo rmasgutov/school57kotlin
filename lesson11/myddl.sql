@@ -29,3 +29,4 @@ create table reactions_type
     emoji varchar(7),
     description text
 )
+
