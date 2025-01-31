@@ -24,4 +24,13 @@ CREATE table Reactions
     Sender_id INT NOT NULL,
     Recipient_id INT NOT NULL
 )
+
+
+create table reactions_type
+(
+    id primary key,
+    type varchar,
+    emotion_type varchar,
+    emoji varchar
+)
 ```
