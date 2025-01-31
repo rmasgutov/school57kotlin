@@ -26,11 +26,12 @@ CREATE table Reactions
 )
 
 
-create table reactions_type
+
+CREATE table reactions_type
 (
     id primary key,
-    type varchar,
-    emotion_type varchar,
-    emoji varchar
+    Type VARCHAR(7),
+    Emotion_type VARCHAR(255),
+    Emoji VARCHAR(255)
 )
 ```
