@@ -69,6 +69,11 @@ fun main() {
         statement.executeUpdate(createTableSQL_third)
         println("Таблицы успешно созданы.")
 
+        val resultSet = statement.executeQuery("select 1")
+        resultSet.next()
+        val string = resultSet.getString(0)
+        println(string)
+
     } catch (e: SQLException) {
         println("Ошибка при подключении к базе данных.")
         e.printStackTrace()
