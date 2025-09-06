@@ -1,6 +1,5 @@
 package ru.tbank.education.school.lesson1
 fun sumEvenNumbers(numbers: Array<Int>): Int {
-    // От 0 до 4 (включительно)
     var s=0
     for (f in numbers) {
         if (f%2==0) {
