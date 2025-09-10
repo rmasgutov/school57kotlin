@@ -23,7 +23,6 @@ fun main() {
  * @return результат вычисления строки или null, если вычисление невозможно
  * @sample "5 * 2".calculate()
  */
-@Suppress("ReturnCount")
 fun String.calculate(): Double? {
     val parts = this.trim().split(" ")
     if (parts.size != 3) return null
