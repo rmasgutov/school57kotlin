@@ -1,6 +1,7 @@
 package ru.tbank.education.school.lesson1
 
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 /**
  * Метод для вычисления простых арифметических операций.
@@ -14,7 +15,7 @@ fun calculate(a: BigDecimal, b: BigDecimal, operation: OperationType = Operation
             if (b == BigDecimal(0.0)) {
                 null
             } else {
-                a / b
+                a.divide(b, 10, RoundingMode.HALF_UP)
             }
         }
     }
