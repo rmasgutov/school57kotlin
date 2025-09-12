@@ -12,7 +12,7 @@ fun calculate(a: BigDecimal, b: BigDecimal, operation: OperationType = Operation
         OperationType.SUBTRACT -> a - b
         OperationType.MULTIPLY -> a * b
         OperationType.DIVIDE -> {
-            if (b == BigDecimal(0.0)) {
+            if (b == BigDecimal.ZERO) {
                 null
             } else {
                 a.divide(b, 10, RoundingMode.HALF_UP)
@@ -46,11 +46,5 @@ fun String.calculate(): Double? {
 }
 
 fun main() {
-    val res = readlnOrNull()?.calculate()
-
-    if (res == null) {
-        println("Ошибка")
-    } else {
-        println("Результат: $res")
-    }
+    readlnOrNull()?.calculate()?.let { println("Результат: $it") } ?: println("Ошибка")
 }
