@@ -7,18 +7,18 @@ fun calculate(a: Double, b: Double, operation: OperationType): Double? {
     enum class Operation {
     ADD, SUBTRACT, MULTIPLY, DIVIDE
 }
-    return when (operation) {
-        Operation.ADD -> firstNumber + secondNumber
-        Operation.SUBTRACT -> firstNumber - secondNumber
-        Operation.MULTIPLY -> firstNumber * secondNumber
-        Operation.DIVIDE -> {
-            if (secondNumber == 0) {
-                null
-            } else {
-                firstNumber / secondNumber
-            }
-        }
+    val result = calculate(firstNumber, secondNumber, operation)
+    
+    val operationSymbol = when (operation) {
+        Operation.ADD -> "+"
+        Operation.SUBTRACT -> "-"
+        Operation.MULTIPLY -> "*"
+        Operation.DIVIDE -> "/"
     }
+    
+    result?.let {
+        println("$firstNumber $operationSymbol $secondNumber = $it")
+    } ?: println("Ошибка: невозможно выполнить операцию $firstNumber $operationSymbol $secondNumber (деление на ноль!)")
 }
 
 /**
