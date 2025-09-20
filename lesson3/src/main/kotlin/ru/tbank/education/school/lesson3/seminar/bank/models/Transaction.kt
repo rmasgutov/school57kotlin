@@ -1,4 +1,6 @@
-package ru.tbank.education.school.lesson3.seminar.bank
+package ru.tbank.education.school.lesson3.seminar.bank.models
+
+import ru.tbank.education.school.lesson3.seminar.bank.accounts.Account
 
 sealed class Transaction(
     val id: String,

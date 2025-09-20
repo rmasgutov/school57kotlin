@@ -1,4 +1,11 @@
-package ru.tbank.education.school.lesson3.seminar.bank
+package ru.tbank.education.school.lesson3.seminar.bank.accounts
+
+import ru.tbank.education.school.lesson3.seminar.bank.models.Currency
+import ru.tbank.education.school.lesson3.seminar.bank.models.Customer
+import ru.tbank.education.school.lesson3.seminar.bank.models.DepositTransaction
+import ru.tbank.education.school.lesson3.seminar.bank.models.Transaction
+import ru.tbank.education.school.lesson3.seminar.bank.models.TransferTransaction
+import ru.tbank.education.school.lesson3.seminar.bank.models.WithdrawalTransaction
 
 abstract class Account(
     val id: String,
@@ -6,6 +13,10 @@ abstract class Account(
     val currency: Currency
 ) {
     protected var balance: Int = 0
+
+    val balanceView: Int
+        get() = balance
+
     protected val transactions = mutableListOf<Transaction>()
 
     abstract fun deposit(amount: Int, description: String): Boolean
