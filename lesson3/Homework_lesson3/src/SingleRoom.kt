@@ -10,8 +10,8 @@ class SimpleRoom(
         return when (housing) {
             "Апарт" -> if (hasBalcony) 2000.0 else 1750.0
             "Спа" -> if (hasBalcony) 3000.0 else 2500.0
-            "Люкс" -> if (hasBalcony) 5000.0 else 4700.0
-            else -> 0.0 // или какое-то значение по умолчанию
+            "Конгресс" -> if (hasBalcony) 4000.0 else 3700.0
+            else -> 1750.0
         }
     }
 
@@ -28,7 +28,7 @@ class SimpleRoom(
         housing = when (housingNum) {
             1 -> "Апарт"
             2 -> "Спа"
-            3 -> "Люкс"
+            3 -> "Конгресс"
             else -> {
                 println("Некорректный выбор, устанавливаем по умолчанию 'Апарт'")
                 "Апарт"
