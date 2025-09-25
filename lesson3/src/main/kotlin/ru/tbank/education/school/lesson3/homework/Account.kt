@@ -19,8 +19,8 @@ abstract class Account(val email: String, displayName: String? = null) {
         this.server = server
     }
 
-    internal fun deliver(message: EmailMessage) {
-        mailbox?.add(message) ?: throw IllegalStateException("account is not registered")
+    internal open fun deliver(emailMessage: EmailMessage) {
+        mailbox?.add(emailMessage) ?: throw IllegalStateException("account is not registered")
     }
 
     open fun canSend(): Boolean = true
