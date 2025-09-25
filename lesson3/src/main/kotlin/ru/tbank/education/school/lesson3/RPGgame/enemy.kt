@@ -9,6 +9,6 @@ open class enemy (var name: String, protected var stats: statblock, val dmg: Flo
 class boss(name: String, stats: statblock, dmg: Float, dmgD: Float) : enemy(name, stats, dmg, dmgD) {
     override fun getHit (dmg: Float) {
         super.getHit(dmg)
-        println("Ты ранишь эту тварь!")
+        println("Ты смог ранить эту тварь!")
     }
 }
