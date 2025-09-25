@@ -1,8 +1,9 @@
-package ru.tbank.education.school.lesson3.homework.email
+package ru.tbank.education.school.lesson3.homework
 
 import java.util.*
+import kotlin.random.Random
 
-data class Attachment(
+data class EmailAttachment(
     val filename: String,
     val sizeBytes: Long,
 ) {
@@ -13,8 +14,5 @@ data class Attachment(
         require(sizeBytes > 0)
     }
 
-    /*
-    Mock
-     */
-    constructor() : this(UUID.randomUUID().toString(), Random().nextLong(100, 10_000))
+    constructor() : this(UUID.randomUUID().toString(), Random.nextLong(100, 10_000))
 }
