@@ -36,7 +36,7 @@ import ru.tbank.education.school.lesson3.lection.inheritance.Transport
 //
 //}
 //
-//fun ru.tbank.education.school.lesson3.main() {
+//fun main() {
 //    val animals: List<Animal> = listOf(
 //        Dog("Шарик"),
 //        Cat("Маруся"),
