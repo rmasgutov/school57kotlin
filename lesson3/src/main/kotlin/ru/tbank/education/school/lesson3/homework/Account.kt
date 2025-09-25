@@ -4,8 +4,7 @@ import java.util.*
 
 abstract class Account(val email: String, displayName: String? = null) {
     val id: String = UUID.randomUUID().toString()
-
-    protected var displayName: String? = displayName
+    var displayName: String? = displayName
         set(value) {
             field = value?.trim()?.takeIf { it.isNotBlank() }
         }
@@ -27,5 +26,19 @@ abstract class Account(val email: String, displayName: String? = null) {
 
     fun register(server: MailServer) {
         server.register(this)
+    }
+
+    fun inbox(): List<EmailMessage> {
+        return this.mailbox?.list() ?: throw IllegalStateException("account is not registered")
+    }
+
+    fun inboxUnread(): List<EmailMessage> {
+        return this.mailbox?.listUnread() ?: throw IllegalStateException("account is not registered")
+    }
+
+    fun read(vararg emailMessages: EmailMessage) {
+        for (emailMessage in emailMessages) {
+            this.mailbox?.read(emailMessage) ?: throw IllegalStateException("account is not registered")
+        }
     }
 }

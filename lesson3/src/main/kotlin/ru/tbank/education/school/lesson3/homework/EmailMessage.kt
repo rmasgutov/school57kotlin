@@ -4,9 +4,9 @@ import ru.tbank.education.school.lesson3.isValidEmail
 import java.time.Instant
 import java.util.*
 
-class EmailMessage(
+data class EmailMessage(
     val from: String,
-    val cc: List<String>,
+    val cc: List<String> = emptyList(),
     private val bcc: List<String> = emptyList(),
     val subject: String,
     val bodyPlain: String = "",
