@@ -59,7 +59,7 @@ fun engageBattle(plr: player, enm: enemy) {
             println("Нажмите Enter для атаки!")
             readln()
             val deDmg = plr.stats.power*(1+(1..50).random().toFloat()/100)
-            println("Ты наносишь ${deDmg} урона!")
+            println("Ты наносишь $deDmg урона!")
             enm.getHit(deDmg)
             current=1
         }
@@ -68,7 +68,7 @@ fun engageBattle(plr: player, enm: enemy) {
             println("${enm.name} наносит удар!")
             val ooop = enm.dmgD
             val ooo = enm.dmg + ((-ooop.roundToInt()..ooop.roundToInt()).random())
-            println("Ты получаешь ${ooo} урона!")
+            println("Ты получаешь $ooo урона!")
             plr.getHit(ooo)
             current=0
         }
@@ -91,7 +91,6 @@ fun engageBattle(plr: player, enm: enemy) {
 
 fun main(){
     var innit = false
-    val mainPosl = mapOf<location, location>(Village() to DarkWoods(), DarkWoods() to Cave())
     var savedData = loadData()
     var playerStats= statblock()
     if (savedData.first=="") {
@@ -142,7 +141,7 @@ fun main(){
 
         var playerStats = statblock(clasS = claSS, race = race)
         println(Cname)
-        var playerInstance = player(Cname, playerStats, mutableMapOf<item, Int>(item(1,"Неизвестная таблетка","Вы когда-нибудь хотели стать лучшей версией себя?",mapOf("hp" to 100000, "power" to 50000)) to 1), Village(), hp=playerStats.hp)
+        var playerInstance = player(Cname, playerStats, mutableMapOf(item(1,"Неизвестная таблетка","Вы когда-нибудь хотели стать лучшей версией себя?",mapOf("hp" to 100000, "power" to 50000)) to 1), Village(), false, playerStats.hp)
         if (claSS == "Маг") {
             playerInstance.getItem(playerInstance.inv, item(3, "Посох", "Магический посох, нужен для сражений.", mapOf("hp" to -5, "power" to 5)))
             val ouio = playerInstance.equipItem(playerInstance.inv, item(3, "Меч", "Стальной меч, нужен для сражений.", mapOf("hp" to 5, "power" to 1)))
@@ -224,19 +223,36 @@ fun main(){
 
             var playerStats = statblock(savedData = savedData.first)
             val lll = savedData.first.split(',')[9]
-            var playerInstance = player(savedData.first.split(",")[0], playerStats, savedData.second, Village(), hp=savedData.first.split(',').last().toFloat())
-            when {
-                lll == "Деревня" -> playerInstance = player(savedData.first.split(",")[0], playerStats, savedData.second, Village(), hp=savedData.first.split(',').last().toFloat())
-                lll == "Тёмный лес" -> playerInstance = player(savedData.first.split(",")[0], playerStats, savedData.second, DarkWoods(), hp=savedData.first.split(',').last().toFloat())
-                lll == "Пещера" -> playerInstance = player(savedData.first.split(",")[0], playerStats, savedData.second, Cave(), hp=savedData.first.split(',').last().toFloat())
-            }
+            var playerInstance = player(savedData.first.split(",")[0], playerStats, savedData.second, hp = 0.0f)
+        when (lll) {
+            "Деревня" -> playerInstance = player(
+                savedData.first.split(",")[0],
+                playerStats,
+                savedData.second,
+                hp = 0.0f
+            )
+            "Тёмный лес" -> playerInstance = player(
+                savedData.first.split(",")[0],
+                playerStats,
+                savedData.second,
+                DarkWoods(),
+                hp = 0.0f
+            )
+            "Пещера" -> playerInstance = player(
+                savedData.first.split(",")[0],
+                playerStats,
+                savedData.second,
+                Cave(),
+                hp = 0.0f
+            )
+        }
 
             saveData(playerInstance, playerInstance.inv)
 
         println("Вы сейчас в локации '${playerInstance.currentLocation.name}'.\n\n[${playerInstance.currentLocation.description}]")
         while(true) {
 
-            println("Выберите действие:\n1 - Отдохнуть\n2 - Идти дальше\n3 - Где я?\n4 - Сохранить и выйти\n5 - Посмотреть инвентарь") // !!! чтобы съесть таблетку нужно ввести 6(пасхалка)
+            println("Выберите действие:\n1 - Отдохнуть\n2 - Идти дальше\n3 - Где я?\n4 - Сохранить и выйти\n5 - Посмотреть инвентарь") // !!! чтобы съесть таблетку, нужно ввести 6(пасхалка)
             var deistvie = readln().toIntOrNull()
             var dododo = 0
             val alls = listOf(1, 2, 3, 4, 5, 6)

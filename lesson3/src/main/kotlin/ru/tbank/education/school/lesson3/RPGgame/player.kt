@@ -1,8 +1,24 @@
 package ru.tbank.education.school.lesson3.RPGgame
 
 import kotlin.io.println
+import kotlin.system.exitProcess
 
-open class player (val name: String, var stats: statblock, var inv: MutableMap<item, Int>, var currentLocation: location = Village(), var hp: Float, var completedLoc: Boolean = false) {
+open class player (
+    val name: String,
+    var stats: statblock,
+    var inv: MutableMap<item, Int>,
+    var currentLocation: location = Village(),
+    var completedLoc: Boolean = false,
+    hp: Float
+) {
+    var hp = 100.0f
+        set(value) {
+            if (value <= 0) {
+                print("Вы умерли!")
+                exitProcess(0)
+            }
+        }
+
     fun displayInv(invent: MutableMap<item, Int>){
         val alk = invent.keys.toList()
         for (i in 0..alk.size-1) {
@@ -50,7 +66,7 @@ open class player (val name: String, var stats: statblock, var inv: MutableMap<i
         return (if (itm.type==1) {
             mapOf("hp" to itm.stats["hp"], "power" to itm.stats["power"])
         } else {
-            mapOf("hp" to 0, "mana" to 0, "stamina" to 0)
+            mapOf("hp" to 0, "m ana" to 0, "stamina" to 0)
         }) as Map<String, Int>
     }
     fun unequipItem(invent: MutableMap<item, Int?>, itm: item) : Map<String, Int> {
