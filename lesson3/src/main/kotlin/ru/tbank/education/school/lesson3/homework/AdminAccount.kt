@@ -5,8 +5,24 @@ class AdminAccount(email: String, displayName: String) : UserAccount(email, disp
         val scamKeywords = listOf("scam", "бесплатные деньги")
         val newsletterKeywords = listOf("new", "breaking")
 
-        if (scamKeywords.any { emailMessage.bodyPlain.contains(it) }) markAsSpam(emailMessage)
-        if (newsletterKeywords.any { emailMessage.bodyPlain.contains(it) }) markAsNewsletter(emailMessage)
+        if (scamKeywords.any { emailMessage.bodyPlain.contains(it) } or scamKeywords.any {
+                emailMessage.subject.contains(
+                    it
+                )
+            } or scamKeywords.any {
+                emailMessage.subject.contains(
+                    it
+                )
+            }) markAsSpam(emailMessage)
+        if (newsletterKeywords.any { emailMessage.bodyPlain.contains(it) } or newsletterKeywords.any {
+                emailMessage.subject.contains(
+                    it
+                )
+            } or newsletterKeywords.any {
+                emailMessage.subject.contains(
+                    it
+                )
+            }) markAsNewsletter(emailMessage)
 
         super.deliver(emailMessage)
     }
