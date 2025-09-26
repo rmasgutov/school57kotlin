@@ -1,9 +1,21 @@
 package ru.tbank.education.school.lesson3.seminar
 
-/*
- * 1. Зарегистрировать клиента и открыть ему кредитный и дебетовый счёт.
- * 2. Пополнить кредитный счёт (например, 3000).
- * 3. Снять часть денег с кредитного счёта (например, 1000).
- * 4. Перевести деньги с кредитного счёта на дебетовый счёт (например, 500).
- * 5. Вывести отчёты по обоим счетам и убедиться, что перевод отображается в истории.
- */
+import ru.tbank.education.school.lesson3.seminar.bank.Bank
+import ru.tbank.education.school.lesson3.seminar.bank.models.Currency
+
+fun main() {
+    val Bank = Bank("Z-Bank")
+    val user = Bank.registerCustomer("Empty")
+    val DebAccount = Bank.openDebitAccount(user, Currency.USD)
+    val CreditAccount = Bank.openCreditAccount(user, Currency.RUB, 10000)
+    Bank.deposit(DebAccount, 1000, "TopUp")
+    Bank.transfer(DebAccount,CreditAccount, 1000, "Transfer")
+    CreditAccount.printReport()
+    DebAccount.printReport()
+
+
+
+
+
+
+}
