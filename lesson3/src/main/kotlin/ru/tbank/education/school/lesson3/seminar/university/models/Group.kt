@@ -1,4 +1,4 @@
-package ru.tbank.education.school.lesson3.seminar.bank.models
+package ru.tbank.education.school.lesson3.seminar.university.models
 
 import ru.tbank.education.school.lesson3.seminar.university.people.User
 
@@ -29,7 +29,7 @@ data class Group(val id: String, val fullName: String) {
             |Группа: $fullName
             |Количество участников: ${users.size}
             |Участники группы:
-            ${usersList}
+            $usersList
         """.trimIndent()
     }
 }

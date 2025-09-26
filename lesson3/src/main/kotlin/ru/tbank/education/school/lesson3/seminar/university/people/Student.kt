@@ -1,6 +1,5 @@
 package ru.tbank.education.school.lesson3.seminar.university.people
 
-import ru.tbank.education.school.lesson3.seminar.bank.models.Group
 import ru.tbank.education.school.lesson3.seminar.university.dataclasses.Course
 import ru.tbank.education.school.lesson3.seminar.university.dataclasses.Mark
 

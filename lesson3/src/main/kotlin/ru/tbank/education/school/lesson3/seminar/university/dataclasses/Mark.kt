@@ -1,6 +1,6 @@
 package ru.tbank.education.school.lesson3.seminar.university.dataclasses
 
-import Lecturer
+import ru.tbank.education.school.lesson3.seminar.university.people.Lecturer
 import ru.tbank.education.school.lesson3.seminar.university.people.Student
 import java.time.LocalDateTime
 

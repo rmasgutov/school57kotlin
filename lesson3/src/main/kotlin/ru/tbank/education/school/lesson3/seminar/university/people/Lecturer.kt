@@ -1,10 +1,9 @@
-import com.sun.jdi.Value
+package ru.tbank.education.school.lesson3.seminar.university.people
+
 import ru.tbank.education.school.lesson3.seminar.university.dataclasses.Course
 import ru.tbank.education.school.lesson3.seminar.university.dataclasses.Mark
-import ru.tbank.education.school.lesson3.seminar.university.people.Student
-import ru.tbank.education.school.lesson3.seminar.university.people.User
 import ru.tbank.education.school.lesson3.seminar.university.sealedclasses.CourseMaterial
-import java.util.UUID
+import java.util.*
 
 class Lecturer(
     override val id: String,

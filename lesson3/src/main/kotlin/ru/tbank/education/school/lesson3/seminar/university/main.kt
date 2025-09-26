@@ -1,10 +1,9 @@
 package ru.tbank.education.school.lesson3.seminar.university
 
-import Lecturer
-import ru.tbank.education.school.lesson3.seminar.bank.models.Group
+import ru.tbank.education.school.lesson3.seminar.university.people.Lecturer
+import ru.tbank.education.school.lesson3.seminar.university.models.Group
 import ru.tbank.education.school.lesson3.seminar.university.dataclasses.Course
 import ru.tbank.education.school.lesson3.seminar.university.people.Student
-import ru.tbank.education.school.lesson3.seminar.university.people.User
 import ru.tbank.education.school.lesson3.seminar.university.sealedclasses.CourseMaterial
 import java.time.LocalDateTime
 
