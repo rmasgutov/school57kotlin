@@ -16,7 +16,7 @@ class Map {
     fun ShowRoutes() {
         println("Routes:")
         for (route in routes) {
-            println("$route.name, $route.transport, $route.cost")
+            println("${route.name}, ${route.cost}$")
         }
     }
 }
