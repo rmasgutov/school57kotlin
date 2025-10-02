@@ -10,6 +10,7 @@ class statblock(
     var race: String = "Human",
     var power: Float = 10F
 ) {
+    // Дополнительный конструктор
     constructor(savedData: String) : this(
         hp = savedData.split(",")[1].toFloat(),
         mana = savedData.split(",")[2].toFloat(),
@@ -21,4 +22,14 @@ class statblock(
         power = savedData.split(",")[8].toFloat()
     )
 
+    // Кастомный геттер
+    val isMaxLevel: Boolean
+        get() = lvl >= 100
+
+    fun levelUp() {
+        lvl++
+        hp += 10f
+        power += 2f
+        println("🎉 Уровень повышен! Теперь у вас $lvl уровень")
+    }
 }

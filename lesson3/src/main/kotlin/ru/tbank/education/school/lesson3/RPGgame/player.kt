@@ -1,83 +1,98 @@
 package ru.tbank.education.school.lesson3.RPGgame
 
-import kotlin.io.println
+import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
-open class player (
+class player(
     val name: String,
     var stats: statblock,
     var inv: MutableMap<item, Int>,
     var currentLocation: location = Village(),
     var completedLoc: Boolean = false,
-    hp: Float
-) {
-    var hp = 100.0f
+    override var hp: Float = 100F
+) : Damageable, Attacker {
+
+    /*override var hp: Float = 100.0f
         set(value) {
             if (value <= 0) {
                 print("Вы умерли!")
                 exitProcess(0)
             }
+        }*/
+
+    private val equippedItems = mutableMapOf<String, item>()
+
+    // Функциональный интерфейс для обработки получения предметов
+    private val itemGetListener: BattleEventListener = BattleEventListener { itemName ->
+        println("🎁 Получен предмет: $itemName")
+    }
+
+    override val damage: Float
+        get() {
+            return stats.power + (equippedItems.values.sumOf { (it.stats["power"]?.toFloat() ?: 0f).toInt() })
         }
 
-    fun displayInv(invent: MutableMap<item, Int>){
-        val alk = invent.keys.toList()
-        for (i in 0..alk.size-1) {
-            val y = invent[alk[i]]
-            println("${(alk[i]).itemName} - $y шт.")
-        }
-    }
-    fun getHit (dmg: Float) {
+    override val damageDeviation: Float
+        get() = damage * 0.1f
+
+    override fun getHit(dmg: Float) {
         hp -= dmg
+        println("Вы получаете $dmg урона! Осталось HP: ${hp.toInt()}")
+    }
+
+    override fun attack(target: Damageable) {
+        val actualDamage = damage + (-damageDeviation.roundToInt()..damageDeviation.roundToInt()).random()
+        println("Вы атакуете и наносите ${actualDamage.toInt()} урона!")
+        target.getHit(actualDamage)
+    }
+
+    private fun onDeath() {
+        println("Вы умерли! Игра окончена.")
+        exitProcess(0)
     }
 
     fun rest() {
-        hp=stats.hp
+        hp = stats.hp
+        println("Вы отдохнули. HP восстановлено до $hp")
     }
 
-    fun getItem(invent: MutableMap<item, Int>, itm: item, quantity: Int = 1) {
-        val alk = invent.keys.toList()
-        if (itm in alk) {
-            invent[itm] = invent[itm]!!.plus(quantity)
+    fun displayInv() {
+        if (inv.isEmpty()) {
+            println("Инвентарь пуст")
+            return
         }
-        else{
-            invent[itm] = quantity
+        println("=== ИНВЕНТАРЬ ===")
+        inv.forEach { (item, quantity) ->
+            println("${item.itemName} - $quantity шт.")
         }
-        println("Был получен предмет: ${itm.itemName} в количестве $quantity шт.")
     }
-    fun takeItem(invent: MutableMap<item, Int?>, itm: item, quantity: Int = 1) {
-        val alk = invent.keys.toList()
-        if (itm in alk) {
-            if (invent[itm]!! > quantity) {
-            invent[itm] = invent[itm]?.minus(quantity)
+
+    fun getItem(itm: item, quantity: Int = 1) {
+        inv[itm] = inv.getOrDefault(itm, 0) + quantity
+        itemGetListener.onEvent("${itm.itemName} x$quantity")
+    }
+
+    fun useItem(itm: item): Boolean {
+        if ((inv[itm] ?: 0) > 0) {
+            val used = itm.use(this)
+            if (used) {
+                inv[itm] = inv[itm]!! - 1
+                if (inv[itm] == 0) inv.remove(itm)
+                return true
             }
-        }
-        println("Был убран предмет: ${itm.itemName} в количестве $quantity шт.")
-    }
-    fun equipItem(invent: MutableMap<item, Int>, itm: item) : Map<String, Int> {
-        println("Экипирован предмет: ${itm.itemName}")
-        return if (itm in invent.keys.toList()){
-            itm.stats
         } else {
-            mapOf("hp" to 0, "power" to 0, "mana" to 0, "stamina" to 0)
+            println("Предмет '${itm.itemName}' не найден в инвентаре")
         }
+        return false
     }
-    fun useItem(invent: MutableMap<item, Int>, itm: item): Map<String, Int> {
-        invent.remove(itm)
-        return (if (itm.type==1) {
-            mapOf("hp" to itm.stats["hp"], "power" to itm.stats["power"])
-        } else {
-            mapOf("hp" to 0, "m ana" to 0, "stamina" to 0)
-        }) as Map<String, Int>
-    }
-    fun unequipItem(invent: MutableMap<item, Int?>, itm: item) : Map<String, Int> {
-        return if (itm in invent.keys.toList()){
-            var temp = mutableMapOf<String, Int>()
-            itm.stats.forEach { (key, value) ->
-                temp[key] = value*(-1)
-            }
-            temp
-        } else {
-            mapOf("hp" to 0, "power" to 0, "mana" to 0, "stamina" to 0)
+
+    fun equipItem(itm: item): Boolean {
+        if (itm.type == 3 || itm.type == 4) { // броня или оружие
+            equippedItems[itm.itemName] = itm
+            println("✅ Экипирован: ${itm.itemName}")
+            return true
         }
+        println("Этот предмет нельзя экипировать")
+        return false
     }
 }
