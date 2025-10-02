@@ -14,6 +14,9 @@ abstract class Account(
 ) {
     protected var balance: Int = 0
 
+    protected var percent_cashback: Int = 15
+    protected var balance_cashback: Int = 0
+
     val balanceView: Int
         get() = balance
 
@@ -25,6 +28,12 @@ abstract class Account(
     fun transfer(to: Account, amount: Int, description: String): Boolean {
         if (!withdraw(amount, description)) return false
         if (!to.deposit(amount, description)) return false
+        return true
+    }
+    protected fun cashback_transfer(amount: Int = balance_cashback): Boolean {
+        if (balance_cashback < amount) {return false}
+        balance_cashback -= amount
+        balance += amount
         return true
     }
 

@@ -18,6 +18,7 @@ class DebitAccount(id: String, owner: Customer, currency: Currency) :
         if (balance < amount) return false
         balance -= amount
         record(WithdrawalTransaction("T-${transactions.size + 1}", this, amount, description))
+        balance_cashback += amount * percent_cashback / 100
         return true
     }
 }
