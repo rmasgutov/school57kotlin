@@ -2,12 +2,21 @@ package ru.tbank.education.school.lesson3
 
 import ru.tbank.education.school.lesson3.homework.dataclasses.EmailAttachment
 import ru.tbank.education.school.lesson3.homework.dataclasses.EmailMessage
+import ru.tbank.education.school.lesson3.homework.interfaces.MailboxFactory
+import ru.tbank.education.school.lesson3.homework.interfaces.MessageFilter
 import ru.tbank.education.school.lesson3.homework.models.AdminAccount
+import ru.tbank.education.school.lesson3.homework.models.InMemoryMailbox
 import ru.tbank.education.school.lesson3.homework.models.MailServer
 import ru.tbank.education.school.lesson3.homework.models.UserAccount
 
 fun main() {
-    val server = MailServer("itqdev.xyz")
+    val mailboxFactory = MailboxFactory { InMemoryMailbox() }
+    val promotionalFilter = MessageFilter { msg ->
+        val keywords = listOf("promo", "discount", "free", "бесплатно", "scam")
+        val content = (msg.subject + " " + msg.bodyPlain).lowercase()
+        keywords.any { it in content }
+    }
+    val server = MailServer("itqdev.xyz", mailboxFactory)
 
     val user1 = UserAccount("itq.dev@ya.ru", "ITQ")
     val user2 = UserAccount(
@@ -52,6 +61,11 @@ fun main() {
     println("${user1.displayName} unread inbox:\n${user1.inboxUnread()}")
     println("${user2.displayName} inbox:\n${user2.inbox()}")
     println("${user2.displayName} unread inbox:\n${user2.inbox()}")
+    println(
+        "${user2.displayName} promotes in inbox:\n${
+            user2.inbox().filter { promotionalFilter.accept(it) }.map { it }
+        }"
+    )
     println("${admin.displayName} inbox:\n${admin.inbox()}")
     println("${admin.displayName} unread inbox:\n${admin.inbox()}")
 }

@@ -1,34 +1,35 @@
 package ru.tbank.education.school.lesson3.homework.models
 
 import ru.tbank.education.school.lesson3.homework.dataclasses.EmailMessage
+import ru.tbank.education.school.lesson3.homework.interfaces.MailboxPort
 
-internal class Mailbox {
+internal class InMemoryMailbox : MailboxPort {
     private val emails: MutableList<EmailMessage> = mutableListOf()
     private val readEmails: MutableSet<EmailMessage> = mutableSetOf()
 
-    fun add(message: EmailMessage) {
+    override fun add(message: EmailMessage) {
         emails.add(message)
     }
 
-    fun read(email: EmailMessage): EmailMessage {
+    override fun read(email: EmailMessage): EmailMessage {
         readEmails.add(email)
         return email
     }
 
-    fun read(emailId: String): EmailMessage? {
+    override fun read(emailId: String): EmailMessage? {
         return emails.find { it.id == emailId }?.also { read(it) }
     }
 
-    fun delete(email: EmailMessage) {
+    override fun delete(email: EmailMessage) {
         emails.remove(email)
         readEmails.remove(email)
     }
 
-    fun delete(emailId: String) {
+    override fun delete(emailId: String) {
         emails.find { it.id == emailId }?.let { delete(it) }
     }
 
-    fun list(): List<EmailMessage> = emails.toList()
+    override fun list(): List<EmailMessage> = emails.toList()
 
-    fun listUnread(): List<EmailMessage> = emails.toSet().minus(readEmails).toList()
+    override fun listUnread(): List<EmailMessage> = emails.toSet().minus(readEmails).toList()
 }

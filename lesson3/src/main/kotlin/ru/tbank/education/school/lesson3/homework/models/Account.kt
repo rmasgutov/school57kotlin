@@ -1,6 +1,8 @@
 package ru.tbank.education.school.lesson3.homework.models
 
 import ru.tbank.education.school.lesson3.homework.dataclasses.EmailMessage
+import ru.tbank.education.school.lesson3.homework.interfaces.MailServerPort
+import ru.tbank.education.school.lesson3.homework.interfaces.MailboxPort
 import java.util.*
 
 abstract class Account(val email: String, displayName: String? = null) {
@@ -10,10 +12,10 @@ abstract class Account(val email: String, displayName: String? = null) {
             field = value?.trim()?.takeIf { it.isNotBlank() }
         }
 
-    private var mailbox: Mailbox? = null
-    private var server: MailServer? = null
+    private var mailbox: MailboxPort? = null
+    private var server: MailServerPort? = null
 
-    internal fun attach(server: MailServer, box: Mailbox) {
+    internal fun attach(server: MailServerPort, box: MailboxPort) {
         require(mailbox == null) { "mailbox already assigned" }
         mailbox = box
         this.server = server
@@ -25,7 +27,7 @@ abstract class Account(val email: String, displayName: String? = null) {
 
     open fun canSend(): Boolean = true
 
-    fun register(server: MailServer) {
+    fun register(server: MailServerPort) {
         server.register(this)
     }
 
