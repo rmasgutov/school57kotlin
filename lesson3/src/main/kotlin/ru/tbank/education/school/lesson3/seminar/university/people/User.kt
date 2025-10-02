@@ -3,26 +3,37 @@ package ru.tbank.education.school.lesson3.seminar.university.people
 import ru.tbank.education.school.lesson3.seminar.university.models.Group
 
 
+interface Authenticatable {
+    fun authenticate(inputPassword: String): Boolean
+    fun changePassword(newPassword: String)
+}
+
+interface Informable {
+    fun getInfo(): String
+    fun getRole(): String
+}
+
+
 abstract class User(
     open val id: String,
     open val fullName: String,
     open val email: String,
-) {
+) : Authenticatable, Informable {
     open var group: Group = Group("1", "None")
     protected var password: String = ""
 
-    open fun authenticate(inputPassword: String): Boolean {
+    override fun authenticate(inputPassword: String): Boolean {
         return password == inputPassword
     }
 
-    open fun changePassword(newPassword: String) {
+    override fun changePassword(newPassword: String) {
         if (newPassword == password) {print("Пароль уже был использован ранее")}
         else {
             password = newPassword
         }
     }
 
-    open fun getInfo(): String {
+    override fun getInfo(): String {
         return "Айди: $id, ФИО: $fullName, Группа: ${group.fullName}"
     }
 
@@ -30,5 +41,5 @@ abstract class User(
         this.group = group
     }
 
-    abstract fun getRole(): String
+    abstract override fun getRole(): String
 }

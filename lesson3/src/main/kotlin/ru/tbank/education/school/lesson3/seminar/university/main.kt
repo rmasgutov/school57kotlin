@@ -17,6 +17,8 @@ fun main() {
     val st4 = Student("4", "Карен", "karen@t-bank.t", 2003)
     val st5 = Student("5", "Гремлин", "godzilla@t-bank.t", 2000)
 
+    st5.changePassword("Nope")
+
     groupA.addUser(st1)
     groupA.addUser(st2)
     groupB.addUser(st3)
