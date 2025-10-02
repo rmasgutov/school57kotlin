@@ -1,3 +1,4 @@
+package ru.tbank.education.school
 interface Order {
     val id: Int
     val items: List<MenuItem>
