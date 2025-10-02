@@ -1,12 +1,16 @@
+package ru.tbank.education.school.ru.tbank.education.school.lesson4.seminar.graph
+
 fun main() {
-    var graph = ListEdgeGraph()
-    graph.addVertex(1);
-    graph.addVertex(2);
-    graph.addVertex(3);
-    graph.addVertex(4);
-    graph.addEdge(1, 2);
-    graph.addEdge(1, 3);
-    graph.addEdge(2, 4);
+    var graph: GraphList = GraphList();
+    val n: Int = readln().toInt()
+    for (i in 0 until n) { graph.addVertex(); }
+    for (i in 0 until n) {
+        val (u, v) = readln().split(" ").map { it.toInt() }
+        graph.addEdge(u, v)
+    }
+    val start: Int = readln().toInt()
+    for (i in 0 until n) {
+        println(graph.length(start, i))
+    }
     graph.print()
-    println(graph.bfs(1))
 }
