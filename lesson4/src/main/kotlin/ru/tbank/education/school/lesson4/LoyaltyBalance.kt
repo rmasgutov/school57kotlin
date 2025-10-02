@@ -1,3 +1,4 @@
+package ru.tbank.education.school
 interface LoyaltyBalance {
     fun getCurrentBalance(): Int
 }
