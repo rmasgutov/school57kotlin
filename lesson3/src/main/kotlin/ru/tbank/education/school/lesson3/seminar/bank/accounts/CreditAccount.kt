@@ -22,6 +22,7 @@ class CreditAccount(
         if (balance - amount < -creditLimit) return false
         balance -= amount
         record(WithdrawalTransaction("T-${transactions.size + 1}", this, amount, description))
+        balance_cashback += amount * percent_cashback / 100
         return true
     }
 }

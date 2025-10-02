@@ -45,4 +45,4 @@ class GraphList : Graph, BFS, PrintGraph {
             println("$i ${g[i]}")
         }
     }
-}
+} //
