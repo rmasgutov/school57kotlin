@@ -10,11 +10,11 @@ fun testEdgeListGraphBFS() {
     println("=== Тестирование BFS для EdgeListGraph ===")
 
     println("\n1. Маленький граф (100 вершин):")
-    val smallGraph = createSimpleConnectedGraph(EdgeListGraph(), 5)
+    val smallGraph = createSimpleConnectedGraph(EdgeListGraph(), 100)
 
     val smallTime = measureTimeMillis {
         val result = smallGraph.bfs("V0")
-        println("BFS результат: $result")
+        println("BFS результат: ${result.take(10)}...")
         println("Размер: ${result.size}")
     }
     println("Время выполнения: ${smallTime}ms")
@@ -24,22 +24,23 @@ fun testEdgeListGraphBFS() {
 
     val mediumTime = measureTimeMillis {
         val result = mediumGraph.bfs("V0")
-        println("BFS размер: ${result.size}")
-        println("Первые 10: ${result.take(10)}")
+        println("BFS результат: ${result.take(10)}...")
+        println("Размер: ${result.size}")
     }
     println("Время выполнения: ${mediumTime}ms")
 
-    println("\n3. Большой граф (1000000 вершин):")
-    val largeGraph = createSimpleConnectedGraph(EdgeListGraph(), 1000000)
+    println("\n3. Большой граф (10000 вершин):")
+    val largeGraph = createSimpleConnectedGraph(EdgeListGraph(), 10000)
 
     val largeTime = measureTimeMillis {
         val result = largeGraph.bfs("V0")
-        println("BFS размер: ${result.size}")
+        println("BFS результат: ${result.take(10)}...")
+        println("Размер: ${result.size}")
     }
     println("Время выполнения: ${largeTime}ms")
 
-    println("\n4. Ветвящийся граф (100000 вершин):")
-    val branchedGraph = createBranchedGraph(EdgeListGraph(), 100000, 3)
+    println("\n4. Ветвящийся граф (10000 вершин):")
+    val branchedGraph = createBranchedGraph(EdgeListGraph(), 10000, 10)
 
     val branchedTime = measureTimeMillis {
         val result = branchedGraph.bfs("V0")

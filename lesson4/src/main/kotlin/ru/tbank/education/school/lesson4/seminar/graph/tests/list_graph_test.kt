@@ -27,8 +27,8 @@ fun testAdjacencyListGraphBFS() {
     }
     println("Время выполнения: ${mediumTime}ms")
 
-    println("\n3. Большой граф (1000000 вершин):")
-    val largeGraph = createSimpleConnectedGraph(AdjacencyListGraph(), 1000000)
+    println("\n3. Большой граф (100000 вершин):")
+    val largeGraph = createSimpleConnectedGraph(AdjacencyListGraph(), 100000)
 
     val largeTime = measureTimeMillis {
         val result = largeGraph.bfs("V0")

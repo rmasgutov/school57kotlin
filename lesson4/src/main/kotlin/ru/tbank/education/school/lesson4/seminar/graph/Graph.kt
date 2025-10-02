@@ -84,8 +84,8 @@ class AdjacencyMatrixGraph : Graph {
         addVertex(vertex1)
         addVertex(vertex2)
 
-        val index1 = vertex1.indexOf(vertex1)
-        val index2 = vertex2.indexOf(vertex2)
+        val index1 = vertices.indexOf(vertex1)
+        val index2 = vertices.indexOf(vertex2)
 
         matrix[index1][index2] = weight
         matrix[index2][index1] = weight

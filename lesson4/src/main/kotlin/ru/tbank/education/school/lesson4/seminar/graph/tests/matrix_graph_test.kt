@@ -9,39 +9,38 @@ import kotlin.system.measureTimeMillis
 fun testAdjacencyMatrixGraphBFS() {
     println("=== Тестирование BFS для AdjacencyMatrixGraph ===")
 
-    println("\n1. Маленький граф (5 вершин):")
-    val smallGraph = createSimpleConnectedGraph(AdjacencyMatrixGraph(), 5)
-    smallGraph.printGraph()
+    println("\n1. Маленький граф (100 вершин):")
+    val smallGraph = createSimpleConnectedGraph(AdjacencyMatrixGraph(), 100)
 
     val smallTime = measureTimeMillis {
         val result = smallGraph.bfs("V0")
-        println("BFS результат: $result")
+        println("BFS результат: ${result.take(10)}...")
         println("Размер: ${result.size}")
     }
     println("Время выполнения: ${smallTime}ms")
 
-    println("\n2. Средний граф (50 вершин):")
-    val mediumGraph = createSimpleConnectedGraph(AdjacencyMatrixGraph(), 50)
+    println("\n2. Средний граф (1000 вершин):")
+    val mediumGraph = createSimpleConnectedGraph(AdjacencyMatrixGraph(), 1000)
 
     val mediumTime = measureTimeMillis {
         val result = mediumGraph.bfs("V0")
-        println("BFS размер: ${result.size}")
-        println("Первые 10: ${result.take(10)}")
+        println("BFS результат: ${result.take(10)}...")
+        println("Размер: ${result.size}")
     }
     println("Время выполнения: ${mediumTime}ms")
 
-    println("\n3. Большой граф (200 вершин):")
-    val largeGraph = createSimpleConnectedGraph(AdjacencyMatrixGraph(), 200)
+    println("\n3. Большой граф (5000 вершин):")
+    val largeGraph = createSimpleConnectedGraph(AdjacencyMatrixGraph(), 5000)
 
     val largeTime = measureTimeMillis {
         val result = largeGraph.bfs("V0")
-        println("BFS размер: ${result.size}")
+        println("BFS результат: ${result.take(10)}...")
+        println("Размер: ${result.size}")
     }
     println("Время выполнения: ${largeTime}ms")
 
-    println("\n4. Ветвящийся граф (15 вершин):")
-    val branchedGraph = createBranchedGraph(AdjacencyMatrixGraph(), 15, 2)
-    branchedGraph.printGraph()
+    println("\n4. Ветвящийся граф (3000 вершин):")
+    val branchedGraph = createBranchedGraph(AdjacencyMatrixGraph(), 3000, 10)
 
     val branchedTime = measureTimeMillis {
         val result = branchedGraph.bfs("V0")
