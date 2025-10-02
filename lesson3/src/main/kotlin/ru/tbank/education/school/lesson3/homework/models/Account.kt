@@ -1,5 +1,6 @@
-package ru.tbank.education.school.lesson3.homework
+package ru.tbank.education.school.lesson3.homework.models
 
+import ru.tbank.education.school.lesson3.homework.dataclasses.EmailMessage
 import java.util.*
 
 abstract class Account(val email: String, displayName: String? = null) {

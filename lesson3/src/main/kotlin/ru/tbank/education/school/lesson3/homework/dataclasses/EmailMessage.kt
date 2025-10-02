@@ -1,5 +1,6 @@
-package ru.tbank.education.school.lesson3.homework
+package ru.tbank.education.school.lesson3.homework.dataclasses
 
+import ru.tbank.education.school.lesson3.homework.models.EmailMessageFlag
 import ru.tbank.education.school.lesson3.isValidEmail
 import java.time.Instant
 import java.util.*

@@ -1,4 +1,6 @@
-package ru.tbank.education.school.lesson3.homework
+package ru.tbank.education.school.lesson3.homework.models
+
+import ru.tbank.education.school.lesson3.homework.dataclasses.EmailMessage
 
 class MailServer(val name: String) {
     private val _accounts: MutableMap<String, Account> = mutableMapOf()

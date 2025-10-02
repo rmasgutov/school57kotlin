@@ -1,4 +1,6 @@
-package ru.tbank.education.school.lesson3.homework
+package ru.tbank.education.school.lesson3.homework.models
+
+import ru.tbank.education.school.lesson3.homework.dataclasses.EmailMessage
 
 class AdminAccount(email: String, displayName: String) : UserAccount(email, displayName) {
     override fun deliver(emailMessage: EmailMessage) {

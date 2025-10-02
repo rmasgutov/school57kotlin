@@ -1,4 +1,4 @@
-package ru.tbank.education.school.lesson3.homework
+package ru.tbank.education.school.lesson3.homework.dataclasses
 
 import java.util.*
 import kotlin.random.Random
@@ -14,5 +14,5 @@ data class EmailAttachment(
         require(sizeBytes > 0)
     }
 
-    constructor() : this(UUID.randomUUID().toString(), Random.nextLong(100, 10_000))
+    constructor() : this(UUID.randomUUID().toString(), Random.Default.nextLong(100, 10_000))
 }

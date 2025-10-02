@@ -1,6 +1,10 @@
 package ru.tbank.education.school.lesson3
 
-import ru.tbank.education.school.lesson3.homework.*
+import ru.tbank.education.school.lesson3.homework.dataclasses.EmailAttachment
+import ru.tbank.education.school.lesson3.homework.dataclasses.EmailMessage
+import ru.tbank.education.school.lesson3.homework.models.AdminAccount
+import ru.tbank.education.school.lesson3.homework.models.MailServer
+import ru.tbank.education.school.lesson3.homework.models.UserAccount
 
 fun main() {
     val server = MailServer("itqdev.xyz")
