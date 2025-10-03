@@ -1,17 +1,8 @@
 package ru.tbank.education.school.lesson3.seminar.university.people
 
+import ru.tbank.education.school.lesson3.seminar.university.interfaces.Authenticatable
+import ru.tbank.education.school.lesson3.seminar.university.interfaces.Informable
 import ru.tbank.education.school.lesson3.seminar.university.models.Group
-
-
-interface Authenticatable {
-    fun authenticate(inputPassword: String): Boolean
-    fun changePassword(newPassword: String)
-}
-
-interface Informable {
-    fun getInfo(): String
-    fun getRole(): String
-}
 
 
 abstract class User(
