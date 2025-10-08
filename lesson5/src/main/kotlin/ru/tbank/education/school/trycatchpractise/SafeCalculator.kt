@@ -4,7 +4,6 @@ package ru.tbank.education.school.trycatchpractise
  * Интерфейс безопасного калькулятора.
  */
 interface SafeCalculator {
-
     /**
      * Делит число `a` на `b`.
      *
@@ -16,4 +15,16 @@ interface SafeCalculator {
      * @return результат деления или null, если деление на ноль
      */
     fun divide(a: Int, b: Int): Int?
+}
+
+
+class Calculator : SafeCalculator {
+    override fun divide(a: Int, b: Int): Int? {
+        try {
+            return a / b
+        }
+        catch (e: ArithmeticException) {
+            return null
+        }
+    }
 }

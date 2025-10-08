@@ -3,7 +3,7 @@ package ru.tbank.education.school.trycatchpractise
 /**
  * Интерфейс сервиса бронирования билетов в кинотеатр
  */
-interface MovieBookingService {
+interface SaveMovieBookingService {
 
     /**
      * Бронирует указанное место для фильма.
@@ -36,3 +36,26 @@ interface MovieBookingService {
  * Исключение, которое выбрасывается при попытке забронировать занятое место
  */
 class SeatAlreadyBookedException(message: String) : Exception(message)
+
+data class Seat(val movieId: String, val seat: Int)
+
+
+class MovieBookingService(): SaveMovieBookingService {
+    var bookedSeats = mutableListOf<Seat>()
+
+    override fun bookSeat(movieId: String, seat: Int) {
+        if (seat >= 35) throw IllegalArgumentException()
+        if (seat <= 0) throw IllegalArgumentException()
+        if (Seat(movieId, seat) in bookedSeats) throw SeatAlreadyBookedException("Seat $seat is already booked")
+        bookedSeats.add(Seat(movieId, seat))
+    }
+
+    override fun cancelBooking(movieId: String, seat: Int) {
+        if (Seat(movieId, seat) !in bookedSeats) throw NoSuchElementException()
+        bookedSeats.remove(Seat(movieId, seat))
+    }
+
+    override fun isSeatBooked(movieId: String, seat: Int): Boolean {
+        return bookedSeats.contains(Seat(movieId, seat))
+    }
+}

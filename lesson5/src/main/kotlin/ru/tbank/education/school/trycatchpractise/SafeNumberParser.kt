@@ -16,3 +16,15 @@ interface SafeNumberParser {
      */
     fun parseInt(input: String): Int?
 }
+
+
+class NumberParser() : SafeNumberParser {
+    override fun parseInt(input: String): Int? {
+        try {
+            return input.toInt()
+        }
+        catch (e: Exception) {
+            return null
+        }
+    }
+}

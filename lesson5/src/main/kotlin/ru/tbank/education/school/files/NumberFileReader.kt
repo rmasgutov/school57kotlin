@@ -1,6 +1,8 @@
 package ru.tbank.education.school.files
 
 import java.io.File
+import java.io.FileWriter
+import java.io.IOException
 
 
 /**
@@ -18,4 +20,16 @@ class NumberFileReader(private val path: String) {
         return content.trim().toInt()
     }
 
+}
+
+
+class SaveNumberFileWriter(private val path: String) {
+    fun readNumber(): Int? {
+        try {
+            val file = File(path)
+            return file.readText().toInt()
+        }
+        catch (e: Exception) {}
+        return null
+    }
 }

@@ -1,5 +1,8 @@
 package ru.tbank.education.school.trycatchpractise
 
+import java.io.File
+import java.io.IOException
+
 /**
  * Кастомное исключение, выбрасываемое при неверном формате файла.
  */
@@ -21,4 +24,19 @@ interface FormatValidator {
      * @throws InvalidFileFormatException если формат неверен
      */
     fun validateAndRead(path: String): List<String>
+}
+
+
+class FormatValidatorImpl() : FormatValidator {
+    override fun validateAndRead(path: String): List<String> {
+        val file = File(path)
+        try {
+            for (fileLine in file.readLines()) {
+                if (fileLine.length <= 3) throw InvalidFileFormatException("Invalid file format")
+                if (!fileLine.contains(",")) throw InvalidFileFormatException("Invalid file format")
+            }
+        }
+        catch (e: InvalidFileFormatException) {}
+        return file.readLines()
+    }
 }
