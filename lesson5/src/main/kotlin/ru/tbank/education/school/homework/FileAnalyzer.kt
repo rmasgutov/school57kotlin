@@ -1,5 +1,11 @@
 package ru.tbank.education.school.homework
 
+import java.io.File
+import java.io.FileWriter
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Paths
+
 /**
  * Интерфейс для подсчёта строк и слов в файле.
  */
@@ -20,12 +26,42 @@ interface FileAnalyzer {
 
 class IOFileAnalyzer : FileAnalyzer {
     override fun countLinesAndWordsInFile(inputFilePath: String, outputFilePath: String): Boolean {
-        TODO("Реализовать логику")
-    }
-}
+        return try {
+            val inputFile = File(inputFilePath)
+            val outputFile = File(outputFilePath)
 
-class NIOFileAnalyzer : FileAnalyzer {
-    override fun countLinesAndWordsInFile(inputFilePath: String, outputFilePath: String): Boolean {
-        TODO("Реализовать логику")
+            val lines = inputFile.readLines()
+            val wordCount = lines.sumOf { line ->
+                line.split(Regex("\\s+"))
+                    .count { it.isNotBlank() }
+            }
+
+            FileWriter(outputFile).use { writer ->
+                writer.write("Количество слов: $wordCount\nКоличество строк: ${lines.size}")
+            }
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    class NIOFileAnalyzer : FileAnalyzer {
+        override fun countLinesAndWordsInFile(inputFilePath: String, outputFilePath: String): Boolean {
+            return try {
+                val lines = Files.readAllLines(Paths.get(inputFilePath), StandardCharsets.UTF_8)
+                val wordCount = lines.sumOf { line ->
+                    line.split(Regex("\\s+"))
+                        .count { it.isNotBlank() }
+                }
+
+                Files.write(
+                    Paths.get(outputFilePath),
+                    "Количество слов: $wordCount\nКоличество строк: ${lines.size}".toByteArray(StandardCharsets.UTF_8)
+                )
+                true
+            } catch (e: Exception) {
+                false
+            }
+        }
     }
 }

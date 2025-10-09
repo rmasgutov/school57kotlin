@@ -39,19 +39,25 @@ class SeatAlreadyBookedException(message: String) : Exception(message)
 
 data class Seat(val movieId: String, val seat: Int)
 
+const val SEATSQUANTITY = 35
+
 
 class MovieBookingService(): SaveMovieBookingService {
-    var bookedSeats = mutableListOf<Seat>()
+    var bookedSeats = mutableSetOf<Seat>()
 
     override fun bookSeat(movieId: String, seat: Int) {
-        if (seat >= 35) throw IllegalArgumentException()
-        if (seat <= 0) throw IllegalArgumentException()
-        if (Seat(movieId, seat) in bookedSeats) throw SeatAlreadyBookedException("Seat $seat is already booked")
+        if (seat >= SEATSQUANTITY) throw IllegalArgumentException("Место $seat вне допустимого диапазона. " +
+                "Максимальный номер места: $SEATSQUANTITY")
+        if (seat <= 0) throw IllegalArgumentException("Номер места должен быть положительным числом. " +
+                "Получено: $seat")
+        if (Seat(movieId, seat) in bookedSeats) throw SeatAlreadyBookedException(
+            "Место $seat уже забронировано для фильма $movieId")
         bookedSeats.add(Seat(movieId, seat))
     }
 
     override fun cancelBooking(movieId: String, seat: Int) {
-        if (Seat(movieId, seat) !in bookedSeats) throw NoSuchElementException()
+        if (Seat(movieId, seat) !in bookedSeats) throw NoSuchElementException(
+            "Бронь для места $seat фильма $movieId не найдена")
         bookedSeats.remove(Seat(movieId, seat))
     }
 
