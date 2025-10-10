@@ -19,8 +19,11 @@ class MovieBookingService(
     private val maxQuantityOfSeats: Int // Максимальное кол-во мест
 ) {
     init {
-        TODO("Выбрасывать IllegalArgumentException, максимальное кол-во мест отрицательное или равно нулю")
+        if (maxQuantityOfSeats <= 0) {
+            throw IllegalArgumentException("Число мест в зале должно быть не менее одного")
+        }
     }
+    var Seats : MutableMap<String, BooleanArray> = mutableMapOf()
 
     /**
      * Бронирует указанное место для фильма.
@@ -32,7 +35,18 @@ class MovieBookingService(
      * @throws SeatAlreadyBookedException если место уже забронировано
      */
     fun bookSeat(movieId: String, seat: Int) {
-        TODO("Реализовать логику")
+        if (seat !in 1..maxQuantityOfSeats) {
+            throw IllegalArgumentException("Некорректный номер места")
+        }
+        if (!Seats.containsKey(movieId)) {
+            Seats[movieId] = BooleanArray(maxQuantityOfSeats + 1)
+            Seats[movieId]?.set(0, true)
+            Seats[movieId]?.set(seat, true);
+            return
+        }
+        if (Seats[movieId]!!.all { it }) {throw NoAvailableSeatException("Все места заняты")}
+        if (Seats[movieId]!![seat]) {throw SeatAlreadyBookedException("Место забронированно")}
+        Seats[movieId]?.set(seat, true)
     }
 
     /**
@@ -43,7 +57,8 @@ class MovieBookingService(
      * @throws NoSuchElementException если место не было забронировано
      */
     fun cancelBooking(movieId: String, seat: Int) {
-        TODO("Реализовать логику")
+        if (!Seats[movieId]!![seat]) { throw NoSuchElementException("Место не забронированно") }
+        Seats[movieId]!![seat] = false
     }
 
     /**
@@ -52,6 +67,6 @@ class MovieBookingService(
      * @return true если место занято, false иначе
      */
     fun isSeatBooked(movieId: String, seat: Int): Boolean {
-        TODO("Реализовать логику")
+        return Seats[movieId]?.get(seat) ?: false;
     }
 }
