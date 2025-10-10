@@ -10,10 +10,12 @@ class SeatAlreadyBookedException(message: String) : Exception(message)
  */
 class NoAvailableSeatException(message: String) : Exception(message)
 
+/*
 data class BookedSeat(
     val movieId: String, // идентификатор фильма
     val seat: Int // номер места
 )
+*/
 
 class MovieBookingService(
     private val maxQuantityOfSeats: Int // Максимальное кол-во мест
@@ -41,7 +43,7 @@ class MovieBookingService(
         if (!Seats.containsKey(movieId)) {
             Seats[movieId] = BooleanArray(maxQuantityOfSeats + 1)
             Seats[movieId]?.set(0, true)
-            Seats[movieId]?.set(seat, true);
+            Seats[movieId]?.set(seat, true)
             return
         }
         if (Seats[movieId]!!.all { it }) {throw NoAvailableSeatException("Все места заняты")}
@@ -67,6 +69,6 @@ class MovieBookingService(
      * @return true если место занято, false иначе
      */
     fun isSeatBooked(movieId: String, seat: Int): Boolean {
-        return Seats[movieId]?.get(seat) ?: false;
+        return Seats[movieId]?.get(seat) ?: false
     }
 }
