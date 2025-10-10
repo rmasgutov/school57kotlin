@@ -1,0 +1,120 @@
+interface Flyable {
+    fun fly()
+}
+
+interface Boardable {
+    fun board(passenger: Passenger): Boolean
+}
+
+interface Listable {
+    fun list()
+}
+
+fun interface PassengerFormatter {
+    fun format(passenger: Passenger): String
+}
+
+fun interface FlightAction {
+    fun perform(flight: Flight)
+}
+
+class Aircraft(val model: String, val capacity: Int) {
+    constructor(capacity: Int) : this("Хз что это, но летает", capacity)
+}
+
+data class Passenger(val passport: String, val personName: String) :
+    Person(personName) {
+    override fun getRole(): String = "Пассажир"
+}
+
+abstract class Person(val name: String) {
+    open fun getRole(): String = "Человекоподобное животное"
+}
+
+class Pilot(name: String, val license: String) : Person(name), Flyable {
+    override fun getRole(): String {
+        return super.getRole() + " -> Пилот"
+    }
+
+    override fun fly() {
+        println("Пилот $name с лицензией $license управляет самолётом")
+    }
+
+    fun fly(aircraft: Aircraft) {
+        println("Пилот $name с лицензией $license управляет самолётом ${aircraft.model}")
+    }
+}
+
+class Flight(val flightNumber: String, val aircraft: Aircraft) : Boardable, Listable {
+    private val passengers = mutableListOf<Passenger>()
+    var status: FlightStatus = FlightStatus.Boarding
+
+    val availableSeats: Int get() = aircraft.capacity - passengers.size
+
+    override fun board(passenger: Passenger): Boolean {
+        return if (passengers.size < aircraft.capacity) {
+            passengers.add(passenger)
+            println("Пассажир ${passenger.name} добавлен на рейс $flightNumber")
+            true
+        } else {
+            println("Рейс $flightNumber переполнен!")
+            false
+        }
+    }
+
+    override fun list() {
+        println("Пассажиры рейса $flightNumber:")
+        passengers.forEach { println("${it.name} (${it.passport})") }
+    }
+
+    fun listWithFormatter(formatter: PassengerFormatter) {
+        println("Список пассажиров ($flightNumber):")
+        passengers.forEach { println(formatter.format(it)) }
+    }
+}
+
+sealed class FlightStatus {
+    object Boarding : FlightStatus() {
+        override fun toString() = "Посадка"
+    }
+    object Departed : FlightStatus() {
+        override fun toString() = "Вылетел"
+    }
+    object Cancelled : FlightStatus() {
+        override fun toString() = "Отменён"
+    }
+}
+
+fun main() {
+    val plane = Aircraft("Cessna172", 2)
+    val p1 = Passenger("52052052", "Шрек")
+    val p2 = Passenger("42042042", "Фиона")
+    val p3 = Passenger("10753464", "Осёл")
+    val pilot = Pilot("Кот в сапогах", "Fake20202")
+    val flight = Flight("Болото123", plane)
+
+    flight.board(p1)
+    flight.board(p2)
+    flight.board(p3)
+
+    println("Самолёт: ${plane.model}, мест: ${plane.capacity}")
+    flight.list()
+    println("Свободных мест: ${flight.availableSeats}")
+
+    val people: List<Person> = listOf(p1, p2, pilot)
+    for (person in people) {
+        println("${person.name} - ${person.getRole()}")
+    }
+
+    pilot.fly(plane)
+
+    println("Статус рейса: ${flight.status}")
+    flight.status = FlightStatus.Departed
+    println("Статус рейса изменён: ${flight.status}")
+
+    flight.listWithFormatter { passenger -> ">> ${passenger.personName.uppercase()} (${passenger.passport}) <<" }
+
+    val cancelAction: FlightAction = FlightAction { it.status = FlightStatus.Cancelled }
+    cancelAction.perform(flight)
+    println("Статус рейса после действия: ${flight.status}")
+}
