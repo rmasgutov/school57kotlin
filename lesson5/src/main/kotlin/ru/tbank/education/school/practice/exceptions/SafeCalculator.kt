@@ -31,8 +31,8 @@ class SafeCalculatorImpl : SafeCalculator {
         }
     }
 }
-//
-//fun main() {
-//    val calculator = SafeCalculatorImpl()
-//    println(calculator.divide(10, 0))
-//}
+
+fun main() {
+    val calculator = SafeCalculatorImpl()
+    println(calculator.divide(10, 0))
+}

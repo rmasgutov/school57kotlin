@@ -28,8 +28,8 @@ class SafeNumberParserImpl: SafeNumberParser {
     }
 }
 
-//fun main() {
-//    val parser: SafeNumberParserImpl = SafeNumberParserImpl()
-//
-//    println(parser.parseInt("effe"))
-//}
+fun main() {
+    val parser: SafeNumberParserImpl = SafeNumberParserImpl()
+
+    println(parser.parseInt("effe"))
+}
