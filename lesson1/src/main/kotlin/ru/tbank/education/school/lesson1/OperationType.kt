@@ -3,6 +3,6 @@ package ru.tbank.education.school.lesson1
 /**
  * Список операций.
  */
-enum class OperationType {
-    ADD, SUBTRACT, MULTIPLY, DIVIDE
+enum class OperationType (val symbol: String) {
+    ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/")
 }
