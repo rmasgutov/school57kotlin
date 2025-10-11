@@ -30,7 +30,7 @@ fun task1Lists() {
    val sortedShoppingList = shoppingList.sorted()
    println(sortedShoppingList)
 
-   val filtered = sortedShoppingList.filter { it.toLowerCase().startsWith("с") }
+   val filtered = sortedShoppingList.filter { it.lowercase().startsWith("с") }
    println(filtered)  
 }
 
