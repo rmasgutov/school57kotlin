@@ -30,7 +30,7 @@ fun task1Lists() {
    val sortedShoppingList = shoppingList.sorted()
    println(sortedShoppingList)
 
-   val filtered = sortedShoppingList.filter { it.startsWith("c") }
+   val filtered = sortedShoppingList.filter { it.toLowerCase().startsWith("с") }
    println(filtered)  
 }
 
@@ -54,7 +54,7 @@ fun task2Sets() {
      
 
     val intersected = kotlinStudents.intersect(javaStudents)
-    println(interesected)
+    println(intersected)
 }
 
 // -----------------------
@@ -124,9 +124,8 @@ fun task5Books() {
     }
    }
 
-   books.sortedBy { it.year }
-
-   println(books)
+  
+   println( books.sortedBy { it.year })
   
    val grouped = books.groupBy { it.author }
 
