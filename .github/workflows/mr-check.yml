@@ -20,5 +20,7 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
 
-    - name: Execute Gradle build
+    - name: Check homework for lesson1
       run: ./gradlew lesson1:check
+    - name: Check homework for lesson6
+      run: ./gradlew lesson6:check
