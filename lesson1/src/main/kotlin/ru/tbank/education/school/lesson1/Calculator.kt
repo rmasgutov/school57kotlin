@@ -4,7 +4,21 @@ package ru.tbank.education.school.lesson1
  * Метод для вычисления простых арифметических операций.
  */
 fun calculate(a: Double, b: Double, operation: OperationType): Double? {
-    TODO()
+    enum class Operation {
+    ADD, SUBTRACT, MULTIPLY, DIVIDE
+}
+    val result = calculate(firstNumber, secondNumber, operation)
+    
+    val operationSymbol = when (operation) {
+        Operation.ADD -> "+"
+        Operation.SUBTRACT -> "-"
+        Operation.MULTIPLY -> "*"
+        Operation.DIVIDE -> "/"
+    }
+    
+    result?.let {
+        println("$firstNumber $operationSymbol $secondNumber = $it")
+    } ?: println("Ошибка: невозможно выполнить операцию $firstNumber $operationSymbol $secondNumber (деление на ноль!)")
 }
 
 /**
@@ -14,5 +28,23 @@ fun calculate(a: Double, b: Double, operation: OperationType): Double? {
  */
 @Suppress("ReturnCount")
 fun String.calculate(): Double? {
-    TODO()
+    return try {
+        val parts = this.trim().split("\\s+".toRegex())
+        if (parts.size != 3) return null
+        
+        val firstNumber = parts[0].toInt()
+        val operator = parts[1]
+        val secondNumber = parts[2].toInt()
+        
+        when (operator) {
+            "+" -> firstNumber + secondNumber
+            "-" -> firstNumber - secondNumber
+            "*" -> firstNumber * secondNumber
+            "/" -> if (secondNumber != 0) firstNumber / secondNumber else null
+            else -> null
+        }
+    } catch (e: Exception) {
+        null
+    }
+}
 }
