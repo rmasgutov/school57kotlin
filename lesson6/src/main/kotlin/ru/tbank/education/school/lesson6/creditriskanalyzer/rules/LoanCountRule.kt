@@ -10,7 +10,7 @@ import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.Overdue
  *
  * Как считать score:
  * - Если таких кредитов больше 3 → HIGH (слишком свежие)
- * - Если такой кредит один → MEDIUM
+ * - Если таких кредитов от одного до 3 включительно → MEDIUM
  * - Если таких кредитов нет → LOW
  */
 class LoanCountRule(
