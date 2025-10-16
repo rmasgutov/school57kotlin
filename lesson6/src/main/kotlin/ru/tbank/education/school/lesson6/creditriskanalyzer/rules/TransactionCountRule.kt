@@ -1,8 +1,10 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.TransactionRepository
+import java.time.LocalDateTime
 
 /**
  * Необходимо определить активность клиента.
@@ -20,6 +22,18 @@ class TransactionCountRule(
     override val ruleName: String = "Transaction Count"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val transaction = transactionRepository.getTransactions(client.id)
+        var cntTransaction = 0
+        val timeMonth = LocalDateTime.now().minusMonths(1)
+        for (i in transaction) { if (timeMonth <= i.date) {cntTransaction++} }
+        val risk = when {
+            cntTransaction < 500 -> PaymentRisk.HIGH
+            cntTransaction <= 1000 -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+        return ScoringResult(
+            ruleName,
+            risk
+        )
     }
 }
