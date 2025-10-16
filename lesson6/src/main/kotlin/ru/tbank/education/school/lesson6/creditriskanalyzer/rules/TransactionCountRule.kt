@@ -1,9 +1,10 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.TransactionRepository
-
+import java.time.LocalDateTime
 /**
  * Необходимо определить активность клиента.
  * Для этого нужно посчитать количество транзакций выполненных клиентом за последний месяц
@@ -20,6 +21,22 @@ class TransactionCountRule(
     override val ruleName: String = "Transaction Count"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val transaction = transactionRepository.getTransactions(client.id)
+        val last1month = LocalDateTime.now().minusMonths(1)
+        var quan = 0
+        for (i in transaction) {
+            if (i.date >= last1month) {
+                quan += 1
+            }
+        }
+        val risk = when {
+            quan < 500 -> PaymentRisk.HIGH
+            quan <= 1000 -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+        return ScoringResult (
+            ruleName,
+            risk
+        )
     }
 }

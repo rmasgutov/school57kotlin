@@ -30,7 +30,6 @@ class LargeTransactionFrequencyRule(
 
         val largeTransactionsCount =
             transactionRepo.getTransactions(client.id).count { it.date.isAfter(threeMonthsAgo) && it.amount > 100_000 }
-
         val risk = when {
             largeTransactionsCount > 20 -> PaymentRisk.HIGH
             largeTransactionsCount >= 5 -> PaymentRisk.MEDIUM

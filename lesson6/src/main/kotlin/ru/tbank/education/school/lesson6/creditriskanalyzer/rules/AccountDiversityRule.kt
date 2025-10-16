@@ -1,6 +1,9 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.AccountType
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Currency
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.AccountRepository
 
@@ -25,6 +28,22 @@ class AccountDiversityRule(
     override val ruleName: String = "Account Diversity"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val acc = accountRepo.getAccounts(client.id)
+        val curr : MutableSet<Currency> = mutableSetOf()
+        val typ : MutableSet<AccountType> = mutableSetOf()
+        for (i in acc) {
+            curr.add(i.currency)
+            typ.add(i.type)
+        }
+        val uni = typ.size + curr.size
+        val risk = when {
+            uni <= 2 -> PaymentRisk.HIGH
+            uni <= 4 -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+        return ScoringResult (
+            ruleName,
+            risk
+        )
     }
 }
