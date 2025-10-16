@@ -10,7 +10,6 @@ package ru.tbank.education.school.lesson7.practise.task4
  *
  * Подсказка:
  * - Используй `runCatching { ... }`
- * - Проверь поведение через `isSuccess` и `isFailure`.
  *
  * Пример:
  * ```
@@ -21,9 +20,8 @@ package ru.tbank.education.school.lesson7.practise.task4
  * println(r2.isFailure) // true
  * ```
  */
-fun parseIntSafe(value: String): Result<Int> {
-    TODO()
-}
+fun parseIntSafe(value: String): Result<Int> = TODO()
+
 
 /**
  * Задание 2. Значение по умолчанию
@@ -41,9 +39,8 @@ fun parseIntSafe(value: String): Result<Int> {
  * println(parseWithDefault("abc", 0)) // 0
  * ```
  */
-fun parseWithDefault(input: String, default: Int): Int {
-    TODO()
-}
+fun parseWithDefault(input: String, default: Int): Int = TODO()
+
 
 /**
  * Задание 3. Логирование через onFailure
@@ -60,6 +57,4 @@ fun parseWithDefault(input: String, default: Int): Int {
  * // Выводит: Ошибка деления: / by zero
  * ```
  */
-fun safeDivideLogged(a: Int, b: Int): Result<Double> {
-    TODO()
-}
+fun safeDivideLogged(a: Int, b: Int): Result<Double> = TODO()
