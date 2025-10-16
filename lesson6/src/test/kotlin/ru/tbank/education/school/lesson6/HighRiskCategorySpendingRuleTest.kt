@@ -72,7 +72,7 @@ class HighRiskCategorySpendingRuleTest {
     }
 
     @Test
-    fun `должен вернуть MEDIUM если расходов нет`() {
+    fun `должен вернуть LOW если расходов нет`() {
         val transactions = emptyList<Transaction>()
 
         val rule = HighRiskCategorySpendingRule(
@@ -80,6 +80,6 @@ class HighRiskCategorySpendingRuleTest {
         )
 
         val result = rule.evaluate(Client(clientId, "Павел Кузнецов", 33, Region.OTHER))
-        assertEquals(PaymentRisk.MEDIUM, result.score)
+        assertEquals(PaymentRisk.LOW, result.score)
     }
 }

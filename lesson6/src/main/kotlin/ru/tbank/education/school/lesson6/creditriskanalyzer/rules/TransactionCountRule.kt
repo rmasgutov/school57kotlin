@@ -10,7 +10,7 @@ import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.Transac
  *
  * Как считать score:
  * - Если таких транзакций меньше 500 → HIGH
- * - Если таких транзакций больше или равно 500, но меньше 1000 → MEDIUM
+ * - Если таких транзакций больше или равно 500, но меньше или равно 1000 → MEDIUM
  * - Если таких транзакций больше 1000 → LOW
  */
 class TransactionCountRule(
