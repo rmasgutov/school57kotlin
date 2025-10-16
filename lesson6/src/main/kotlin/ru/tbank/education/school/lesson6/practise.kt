@@ -16,6 +16,9 @@ fun main() {
 fun task1Lists() {
     println("=== Task 1: Lists ===")
     val shoppingList = listOf("Молоко", "Хлеб", "Яблоки", "Сыр")
+    println("Хлеб" in shoppingList)
+    println(shoppingList.sorted())
+    println(shoppingList.filter {it[0] == 'С'})
 
     // TODO: проверить, есть ли "Хлеб" в списке
     // TODO: отсортировать список по алфавиту и вывести
@@ -29,7 +32,9 @@ fun task2Sets() {
     println("=== Task 2: Sets ===")
     val kotlinStudents = mutableSetOf("Анна", "Иван", "Мария")
     val javaStudents = setOf("Иван", "Петр", "Ольга")
-
+    kotlinStudents.add("Анна")
+    println("Мария" in kotlinStudents)
+    println(kotlinStudents.filter {it in javaStudents})
     // TODO: добавить дубликат в kotlinStudents и посмотреть, что произойдет
     // TODO: проверить, есть ли "Мария" в списке студентов Kotlin
     // TODO: найти пересечение студентов Kotlin и Java курсов
@@ -45,7 +50,16 @@ fun task3Maps() {
         "Ноутбук" to 80000,
         "Наушники" to 3000
     )
-
+    products["Телефон"] = 100000
+    products["Планшет"] = 40000
+    println(products.filter {it.value > 10000})
+    val a = readLine()
+    if(!products.containsKey(a)){
+        println("Такого продукта нет")
+    }
+    else{
+        println(products[a])
+    }
     // TODO: изменить цену для "Телефон"
     // TODO: добавить новый товар "Планшет" с ценой 40000
     // TODO: вывести только товары дороже 10000
@@ -58,12 +72,14 @@ fun task3Maps() {
 fun task4FilterAndGroup() {
     println("=== Task 4: Filter & Group ===")
     val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
-
+    val evenNumbers = numbers.filter {it % 2 == 0}
+    val oddNumbers = numbers.filter {it % 2 == 1}
+    println(evenNumbers)
+    println(oddNumbers)
     // TODO: сгруппировать числа на четные и нечетные
     // TODO: преобразовать список чисел в список строк "Число: X"
 
     val words = listOf("кот", "пес", "кот", "лиса", "пес")
-
     // TODO: выделить только уникальные слова
 }
 

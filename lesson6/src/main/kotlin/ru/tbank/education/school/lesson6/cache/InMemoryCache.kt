@@ -25,3 +25,25 @@ interface InMemoryCache<K, V> {
      */
     fun clear()
 }
+
+class InMemoryImpl<K, V> : InMemoryCache<K, V> {
+    private val cache = HashMap<K, V>()
+    override fun put(key: K, value: V) {
+        cache[key] = value
+    }
+
+    override fun get(key: K): V? {
+        return cache[key]
+    }
+
+    override fun remove(key: K) {
+        cache.remove(key)
+    }
+
+    override fun clear() {
+        cache.clear()
+    }
+}
+fun main(){
+    println(System.currentTimeMillis())
+}
