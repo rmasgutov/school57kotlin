@@ -5,7 +5,6 @@ interface Graph {
 
     fun print()
 }
-
 open class Graph(): Graph {
     override fun addVertex(number: Int) { /* уже реализовано выше */ }
     override fun addEdge(edge: Pair<Int, Int>) { /* уже реализовано выше */ }
