@@ -1,4 +1,4 @@
-package ru.tbank.education.school.practice.exceptions
+package ru.tbank.education.school.trycatchpractise
 
 /**
  * Интерфейс безопасного парсера чисел.
@@ -17,19 +17,14 @@ interface SafeNumberParser {
     fun parseInt(input: String): Int?
 }
 
-class SafeNumberParserImpl: SafeNumberParser {
+
+class NumberParser() : SafeNumberParser {
     override fun parseInt(input: String): Int? {
         try {
             return input.toInt()
-        } catch (e: NumberFormatException) {
-            println("Error: string to number cast failed")
+        }
+        catch (e: Exception) {
             return null
         }
     }
 }
-
-//fun main() {
-//    val parser: SafeNumberParserImpl = SafeNumberParserImpl()
-//
-//    println(parser.parseInt("effe"))
-//}
