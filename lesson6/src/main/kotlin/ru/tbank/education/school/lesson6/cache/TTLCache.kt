@@ -29,3 +29,4 @@ interface TTLCache<K, V> {
      */
     fun get(key: K): V?
 }
+//data TTLCacheValue<V>(val:value,val:ttltime:Long)

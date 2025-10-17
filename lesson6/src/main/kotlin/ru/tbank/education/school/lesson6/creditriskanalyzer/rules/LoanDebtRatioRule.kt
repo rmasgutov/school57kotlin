@@ -4,7 +4,7 @@ import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.AccountRepository
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.LoanRepository
-
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 /**
  * Проверяет соотношение между суммарной задолженностью и балансом на счетах.
  *
@@ -25,8 +25,27 @@ class LoanDebtRatioRule(
 ) : ScoringRule {
 
     override val ruleName: String = "Loan Debt Ratio"
-
+    var totalDebt = 0.0
+    var totalBalance = 0.0
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val allLoans = loanRepo.getLoans(client.id)
+        val allAccounts = accountRepo.getAccounts(client.id)
+        for (loan in allLoans) {
+            if (loan.isClosed == false) {
+                totalDebt = totalDebt + loan.debt
+            }
+        }
+        for (account in allAccounts) {
+            totalBalance = totalBalance + account.balance
+        }
+        val risk = when {
+            totalDebt > 3 * totalBalance -> PaymentRisk.HIGH
+            totalDebt > totalBalance && totalDebt < 3 * totalBalance -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+        return ScoringResult(
+            ruleName,
+            risk
+        )
     }
 }

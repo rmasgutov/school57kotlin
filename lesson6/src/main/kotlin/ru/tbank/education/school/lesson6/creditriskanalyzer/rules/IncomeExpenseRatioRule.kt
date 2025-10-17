@@ -3,7 +3,8 @@ package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.TransactionRepository
-
+import java.time.LocalDateTime
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 /**
  * Анализирует соотношение доходов и расходов клиента за последние 3 месяца.
  *
@@ -24,8 +25,32 @@ class IncomeExpenseRatioRule(
 ) : ScoringRule {
 
     override val ruleName: String = "Loan Count"
-
+    var totalIncome = 0.0
+    var totalExpenses = 0.0
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val threeMonthsAgo = LocalDateTime.now().minusMonths(3)
+        val allTransactions = transactionRepo.getTransactions(client.id)
+        val categories = mutableListOf<String>()
+        // Перебираем все транзакции
+        for (transaction in allTransactions) {
+            if (transaction.date.isAfter(threeMonthsAgo)) {
+                if (transaction.category.toString() == "SALARY") {
+                    totalIncome += transaction.amount
+                } else {
+                    totalExpenses += transaction.amount
+                }
+            }
+        }
+    val risk = when {
+        totalIncome == 0.0 && totalExpenses > 0 -> PaymentRisk.HIGH
+        totalExpenses > totalIncome -> PaymentRisk.HIGH
+        totalExpenses >= totalIncome * 0.8 && totalExpenses <= totalIncome * 1.2 -> PaymentRisk.MEDIUM
+        else -> PaymentRisk.LOW
     }
+
+     return ScoringResult(
+    ruleName,
+    risk
+    )
+  }
 }
