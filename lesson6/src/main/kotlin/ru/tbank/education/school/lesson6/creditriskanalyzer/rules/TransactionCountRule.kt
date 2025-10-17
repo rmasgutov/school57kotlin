@@ -20,6 +20,35 @@ class TransactionCountRule(
     override val ruleName: String = "Transaction Count"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val transactions = transactionRepo.getTransactions(client.id)
+
+        val now = LocalDate.now()
+        val oneMonthAgo = now.minusMonths(1)
+        var recentTransactionCount = 0
+
+        var i = 0
+        while (i < transactions.size) {
+            val transaction = transactions[i]
+
+            val date = transaction.date
+            val isRecent = !date.isBefore(oneMonthAgo) && !date.isAfter(now)
+
+            if (isRecent) {
+                recentTransactionCount = recentTransactionCount + 1
+            }
+
+            i = i + 1
+        }
+
+        val risk = if (recentTransactionCount < 500) {
+            PaymentRisk.HIGH
+        } else if (recentTransactionCount < 1000) {
+            PaymentRisk.MEDIUM
+        } else {
+            PaymentRisk.LOW
+        }
+
+        return ScoringResult(ruleName, risk)
+
     }
 }

@@ -26,6 +26,41 @@ class HighRiskCategorySpendingRule(
     override val ruleName: String = "High-Risk Category Spending"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val transactions = transactionRepo.getTransaction(client.id)
+
+        var riskyTotal = 0.0
+        var overalTotal = 0.0
+        var i = 0
+
+        while (i < transactions.size) {
+            val transaction = transactions[i]
+
+            if (transaction.category != "SALARY") {
+                overalTotal = overalTotal + transaction.amount
+
+                if (transaction.category == "GAMBLING" ||
+                    transaction.category == "CRYPTO" ||
+                    transaction.category == "TRANSFER") {
+                    riskyTotal = riskyTotal + transaction.amount
+                }
+            }
+
+            i = i + 1
+        }
+
+        val share: Double = if (overalTotal > 0) {
+            riskyTotal / overalTotal
+        } else {
+            0.0
+        }
+
+        val risk = if (share > 0.6) {
+            PaymentRisk.HIGH
+        } else if (share > 0.3) {
+            PaymentRisk.MEDIUM
+        } else {
+            PaymentRisk.LOW
+        }
+        return ScoringResult(ruleName, risk)
     }
 }
