@@ -3,7 +3,8 @@ package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.TicketRepository
-
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.TicketTopic
 /**
  * Проверяет, были ли у клиента обращения, связанные с мошенничеством.
  *
@@ -25,6 +26,36 @@ class FraudAlertTicketRule(
     override val ruleName: String = "Fraud Alert Ticket"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val tickets = ticketRepo.getTickets(client.id)
+        var flag=0
+        if (tickets.isEmpty()) {
+            flag=1
+        }
+
+        var hasFraudAlert = false
+        var hasUnresolvedFraudAlert = false
+
+        // Проходим по всем тикетам и проверяем наличие FRAUD_ALERT
+        for (ticket in tickets) {
+            if (ticket.topic == TicketTopic.FRAUD_ALERT) {
+                hasFraudAlert = true
+                if (!ticket.resolved) {
+                    hasUnresolvedFraudAlert = true
+                    // Можно прервать цикл, так как нашли нерешённый FRAUD_ALERT
+                    break
+                }
+            }
+        }
+        val risk = when {
+            hasUnresolvedFraudAlert -> PaymentRisk.HIGH
+            hasFraudAlert -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+
+
+        return ScoringResult(
+            ruleName,
+            risk
+        )
     }
 }
