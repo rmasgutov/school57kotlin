@@ -1,4 +1,4 @@
-package ru.tbank.education.school.lesson7
+package ru.tbank.education.school.lesson7.task2
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

@@ -1,4 +1,5 @@
 package ru.tbank.education.school.lesson7.practise.task1// 4) FILTER — выявление «подозрительных» транзакций
+
 /**
  * Задание: Найди потенциально мошеннические операции.
  *

@@ -1,5 +1,7 @@
 package ru.tbank.education.school.lesson7.practise.task3
 
+import java.time.LocalDate
+
 /**
  * Задание 4. Дата через infix
  *
@@ -11,3 +13,5 @@ package ru.tbank.education.school.lesson7.practise.task3
  * println(deadline) // Текущая дата + 5 дней
  * ```
  */
+
+infix fun Int.daysFromNow(ignore: Unit): LocalDate = TODO()
