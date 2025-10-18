@@ -43,7 +43,7 @@ class SuspiciousTransactionsTest {
     fun `должен находить операции из другой страны с суммой выше foreignThreshold`() {
         val txs = listOf(
             Tx(5000.0, TxCategory.SHOPPING, now, "US"),
-            Tx(2000.0, TxCategory.FOOD, now, "FR"),
+            Tx(3000.0, TxCategory.FOOD, now, "FR"),
             Tx(1000.0, TxCategory.FOOD, now, "RU")
         )
 
