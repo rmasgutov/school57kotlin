@@ -25,6 +25,32 @@ class AccountDiversityRule(
     override val ruleName: String = "Account Diversity"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val accounts = accountRepo.getAccounts(client.id)
+
+        val uniqueTypes = mitavleListOf<String>()
+        val uniqueCurrencies = mutableSetOf<String>()
+
+        var i = 0
+        while (i < accounts.size) {
+            val acc = accounts[i]
+            uniqueTypes.add(acc.type)
+            uniqueCurrencies.add(acc.currency)
+            i++
+        }
+
+        val total = uniqueTypes.size + uniqueCurrencies.size
+
+        val risk = if (total <= 2) {
+            PaymentRisk.HIGH
+        } else if (total <= 4) {
+            PaymentRisk.MEDIUM
+        } else {
+            PaymentRisk.LOW
+        }
+
+
+        return ScoringResult(ruleName, risk)
     }
 }
+
+

@@ -24,6 +24,36 @@ class RecentLoanActivityRule(
     override val ruleName: String = "Recent Loan Activity"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val loans = loanRepo.getLoans(client.id)
+
+        val now = LocalDate.now()
+        val sixMonthsAgo = now.minusMonths(6)
+        var recentActiveLoans = 0
+
+        var i = 0
+        while (i < loans.size) {
+            val loan = loans[i]
+
+            // Проверяем только активные кредиты
+            if (!loan.isClosed) {
+                // Проверяем дату открытия
+                if (loan.startDate.isAfter(sixMonthsAgo)) {
+                    recentActiveLoans = recentActiveLoans + 1
+                }
+            }
+
+            i = i + 1
+        }
+
+        val risk = if (recentActiveLoans > 3) {
+            PaymentRisk.HIGH
+        } else if (recentActiveLoans >= 1) {
+            PaymentRisk.MEDIUM
+        } else {
+            PaymentRisk.LOW
+        }
+
+        return ScoringResult(ruleName, risk)
+
     }
 }

@@ -24,6 +24,38 @@ class UnresolvedTicketsRule(
     override val ruleName: String = "Unresolved Tickets"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val tickets = ticketRepo.getTickets(client.id)
+
+        var totalTickets = 0
+        var unresolvedTickets = 0
+
+        var i = 0
+        while (i < tickets.size) {
+            val ticket = tickets[i]
+            totalTickets = totalTickets + 1
+
+            if (!ticket.resolved) {
+                unresolvedTickets = unresolvedTickets + 1
+            }
+
+            i = i + 1
+        }
+
+        val ratio: Double = if (totalTickets > 0) {
+            unresolvedTickets.toDouble() / totalTickets.toDouble()
+        } else {
+            0.0
+        }
+
+        val risk = if (ratio > 0.5) {
+            PaymentRisk.HIGH
+        } else if (ratio > 0.2) {
+            PaymentRisk.MEDIUM
+        } else {
+            PaymentRisk.LOW
+        }
+
+        return ScoringResult(ruleName, risk)
+
     }
 }

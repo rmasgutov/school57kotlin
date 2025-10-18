@@ -22,6 +22,41 @@ class LoanCountRule(
     override val ruleName: String = "Loan Count"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val loans = loanRepo.getLoans(client.id)
+        val overdues = overdueRepo.getOverdues(client.id)
+
+        var countOver30Days = 0
+        val now = LocalDate.now()
+
+        var i = 0
+        while (i < overdues.size) {
+            val overdue = overdues[i]
+
+            // Проверяем только открытые кредиты с просрочкой
+            var j = 0
+            while (j < loans.size) {
+                val loan = loans[j]
+                if (loan.id == overdue.loanId && loan.isOpen) {
+                    val days = ChronoUnit.DAYS.between(overdue.startDate, now)
+                    if (days > 30) {
+                        countOver30Days = countOver30Days + 1
+                    }
+                }
+                j = j + 1
+            }
+
+            i = i + 1
+        }
+
+        val risk = if (countOver30Days > 3) {
+            PaymentRisk.HIGH
+        } else if (countOver30Days == 1) {
+            PaymentRisk.MEDIUM
+        } else {
+            PaymentRisk.LOW
+        }
+
+        return ScoringResult(ruleName, risk)
     }
+
 }

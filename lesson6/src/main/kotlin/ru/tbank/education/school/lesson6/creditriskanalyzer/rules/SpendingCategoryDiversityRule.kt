@@ -24,6 +24,38 @@ class SpendingCategoryDiversityRule(
     override val ruleName: String = "Spending Category Diversity"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val transactions = transactionRepo.getTransactions(client.id)
+
+        val now = LocalDate.now()
+        val threeMonthsAgo = now.minusMonths(3)
+        val uniqueCategories = mutableSetOf<String>()
+
+        var i = 0
+        while (i < transactions.size) {
+            val transaction = transactions[i]
+
+            // Учитываем только расходы за последние 3 месяца
+            val date = transaction.date
+            val isRecent = !date.isBefore(threeMonthsAgo) && !date.isAfter(now)
+
+            if (isRecent && transaction.category != "SALARY") {
+                uniqueCategories.add(transaction.category)
+            }
+
+            i = i + 1
+        }
+
+        val categoryCount = uniqueCategories.size
+
+        val risk = if (categoryCount < 3) {
+            PaymentRisk.HIGH
+        } else if (categoryCount <= 6) {
+            PaymentRisk.MEDIUM
+        } else {
+            PaymentRisk.LOW
+        }
+
+        return ScoringResult(ruleName, risk)
+
     }
 }
