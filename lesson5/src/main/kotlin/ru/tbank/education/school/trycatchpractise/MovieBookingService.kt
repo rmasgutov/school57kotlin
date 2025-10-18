@@ -35,6 +35,4 @@ interface MovieBookingService {
 /**
  * Исключение, которое выбрасывается при попытке забронировать занятое место
  */
-class SeatAlreadyBookedException(message: String) : Exception(message) {
-
-}
+class SeatAlreadyBookedException(message: String) : Exception(message)
