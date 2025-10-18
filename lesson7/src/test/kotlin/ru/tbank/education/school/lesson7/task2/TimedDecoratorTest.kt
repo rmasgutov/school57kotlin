@@ -1,6 +1,6 @@
-package ru.tbank.education.school.lesson7
+package ru.tbank.education.school.lesson7.task2
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import ru.tbank.education.school.lesson7.practise.task2.timed
 import java.io.ByteArrayOutputStream
@@ -22,19 +22,19 @@ class TimedDecoratorTest {
 
             val result = slowFn(5)
 
-            assertEquals(10, result, "Функция должна возвращать результат исходной функции")
+            Assertions.assertEquals(10, result, "Функция должна возвращать результат исходной функции")
 
             val printed = output.toString().trim()
 
-            assertTrue(
+            Assertions.assertTrue(
                 printed.startsWith("[Slow sum] выполнено за"),
                 "Лог должен начинаться с '[Slow sum] выполнено за'"
             )
 
             // Извлекаем число миллисекунд
             val duration = printed.substringAfter("за ").substringBefore(" мс").toLongOrNull()
-            assertNotNull(duration, "Время выполнения должно быть числом")
-            assertTrue(duration!! >= 90L, "Ожидается, что длительность будет хотя бы 90 мс (sleep 100)")
+            Assertions.assertNotNull(duration, "Время выполнения должно быть числом")
+            Assertions.assertTrue(duration!! >= 90L, "Ожидается, что длительность будет хотя бы 90 мс (sleep 100)")
         } finally {
             System.setOut(originalOut)
         }
@@ -50,8 +50,8 @@ class TimedDecoratorTest {
 
         val result = timedFn(10)
 
-        assertEquals(1, callCount, "Функция должна вызываться ровно один раз")
-        assertEquals(11, result)
+        Assertions.assertEquals(1, callCount, "Функция должна вызываться ровно один раз")
+        Assertions.assertEquals(11, result)
     }
 
     @Test
@@ -68,9 +68,9 @@ class TimedDecoratorTest {
         try {
             val result = timedConcat("Hi")
 
-            assertEquals("Hi!", result)
+            Assertions.assertEquals("Hi!", result)
             val printed = output.toString().trim()
-            assertTrue(printed.contains("[Concat] выполнено за"), "Ожидается вывод таймера в консоль")
+            Assertions.assertTrue(printed.contains("[Concat] выполнено за"), "Ожидается вывод таймера в консоль")
         } finally {
             System.setOut(originalOut)
         }

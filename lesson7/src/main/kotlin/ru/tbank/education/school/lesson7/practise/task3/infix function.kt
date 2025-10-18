@@ -1,4 +1,4 @@
-package ru.tbank.education.school.lesson7.practise
+package ru.tbank.education.school.lesson7.practise.task3
 
 data class Client(
     val name: String,
