@@ -1,7 +1,7 @@
 package ru.tbank.education.school.files
 
 import java.io.File
-
+import java.io.IOException
 
 /**
  * Читает число из файла.
@@ -14,8 +14,13 @@ class NumberFileReader(private val path: String) {
 
     fun readNumber(): Int? {
         val file = File(path)
-        val content = file.readText()
-        return content.trim().toInt()
-    }
 
+        return try {
+            if (!file.exists()) return null
+            val content = file.readText().trim()
+            content.toIntOrNull()
+        } catch (e: IOException) {
+            null
+        }
+    }
 }
