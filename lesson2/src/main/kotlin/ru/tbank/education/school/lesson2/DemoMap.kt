@@ -38,25 +38,5 @@ object DemoMap {
     }
 
 
-fun main() {
-    val map: Map<String, Int> = DemoMap.createMap()
-    for ((key, value) in map) {
-        println("$key -> $value")
-    }
-    println("Максимальное значение: ${DemoMap.maxValue(map)}")
-    val maxVal = DemoMap.maxValue(map)
-    if (maxVal != null) {
-        println("Ключ для максимального значения: ${DemoMap.keyForMaxValue(maxVal, map.toMutableMap())}")
-    }
-    println("Отсортированные по убыванию:")
-    val sortedList = map.entries.sortedByDescending { it.value }
-    for ((key, value) in sortedList) {
-        println("$key -> $value")
-    }
-    val filteredMap = DemoMap.filterOddValues(map.toMutableMap())
-    println("Нечетные значения:")
-    for ((key, value) in filteredMap) {
-        println("$key -> $value")
-    }
-}
-main()
+
+

@@ -1,5 +1,5 @@
 package ru.tbank.education.school.lesson2
-
+import kotlin.random.Random
 object DemoList {
     fun createList(): List<Int> {
         val list = mutableListOf<Int>()
@@ -44,12 +44,3 @@ object DemoList {
     }
 }
 
-fun main(){
-    var list = DemoList.createList()
-    println(DemoList.sumList(list))
-    println(DemoList.sumEvenList(list))
-    println(DemoList.multiplyList(list as MutableList<Int>))
-    println(DemoList.maxElement(list))
-    println(DemoList.sortDesc(list))
-}
-main()
