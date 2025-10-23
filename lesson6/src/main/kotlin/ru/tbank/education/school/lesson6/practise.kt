@@ -17,9 +17,14 @@ fun task1Lists() {
     println("=== Task 1: Lists ===")
     val shoppingList = listOf("Молоко", "Хлеб", "Яблоки", "Сыр")
 
-    // TODO: проверить, есть ли "Хлеб" в списке
-    // TODO: отсортировать список по алфавиту и вывести
-    // TODO: вывести только товары, начинающиеся на букву "С"
+    val hasBread = "Хлеб" in shoppingList
+    println("Есть ли Хлеб: $hasBread")
+
+    val sorted = shoppingList.sorted()
+    println("Отсортированный список: $sorted")
+
+    val startsWithC = shoppingList.filter { it.startsWith("С") }
+    println("Товары на С: $startsWithC")
 }
 
 // -----------------------
@@ -30,9 +35,14 @@ fun task2Sets() {
     val kotlinStudents = mutableSetOf("Анна", "Иван", "Мария")
     val javaStudents = setOf("Иван", "Петр", "Ольга")
 
-    // TODO: добавить дубликат в kotlinStudents и посмотреть, что произойдет
-    // TODO: проверить, есть ли "Мария" в списке студентов Kotlin
-    // TODO: найти пересечение студентов Kotlin и Java курсов
+    kotlinStudents.add("Анна")
+    println("После добавления дубликата: $kotlinStudents")
+
+    val hasMaria = "Мария" in kotlinStudents
+    println("Есть ли Мария: $hasMaria")
+
+    val both = kotlinStudents.intersect(javaStudents)
+    println("Общие студенты: $both")
 }
 
 // -----------------------
@@ -46,10 +56,17 @@ fun task3Maps() {
         "Наушники" to 3000
     )
 
-    // TODO: изменить цену для "Телефон"
-    // TODO: добавить новый товар "Планшет" с ценой 40000
-    // TODO: вывести только товары дороже 10000
-    // TODO: обработать случай, когда пользователь запрашивает отсутствующий товар
+    products["Телефон"] = 55000
+    products["Планшет"] = 40000
+
+    println("Обновленный список товаров: $products")
+
+    val expensive = products.filter { it.value > 10000 }
+    println("Товары дороже 10000: $expensive")
+
+    val item = "Телевизор"
+    val price = products[item] ?: "Нет в наличии"
+    println("$item: $price")
 }
 
 // -----------------------
@@ -59,12 +76,15 @@ fun task4FilterAndGroup() {
     println("=== Task 4: Filter & Group ===")
     val numbers = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
 
-    // TODO: сгруппировать числа на четные и нечетные
-    // TODO: преобразовать список чисел в список строк "Число: X"
+    val grouped = numbers.groupBy { if (it % 2 == 0) "Четные" else "Нечетные" }
+    println(grouped)
+
+    val labeled = numbers.map { "Число: $it" }
+    println(labeled)
 
     val words = listOf("кот", "пес", "кот", "лиса", "пес")
-
-    // TODO: выделить только уникальные слова
+    val unique = words.toSet()
+    println("Уникальные слова: $unique")
 }
 
 // -----------------------
@@ -80,9 +100,14 @@ fun task5Books() {
         Book("Современный Kotlin", "Иванов", 2021),
     )
 
-    // TODO: найти все книги автора "Иванов"
-    // TODO: отсортировать книги по году
-    // TODO: сгруппировать книги по авторам
+    val byIvanov = books.filter { it.author == "Иванов" }
+    println("Книги Иванова: $byIvanov")
+
+    val sorted = books.sortedBy { it.year }
+    println("Отсортировано по году: $sorted")
+
+    val grouped = books.groupBy { it.author }
+    println("Сгруппировано по авторам: $grouped")
 }
 
 // -----------------------
@@ -97,8 +122,16 @@ fun task6Store() {
     )
     val cart = listOf("Молоко", "Хлеб", "Сыр")
 
-    // TODO: посчитать общую стоимость покупок
-    // TODO: вывести сообщение для товаров, которых нет в магазине
+    var total = 0
+    for (item in cart) {
+        val price = store[item]
+        if (price != null) {
+            total += price
+        } else {
+            println("Товара '$item' нет в магазине")
+        }
+    }
+    println("Общая сумма покупок: $total")
 }
 
 // -----------------------
@@ -120,6 +153,9 @@ fun task7Students() {
         Student("Ольга", "104")
     )
 
-    // TODO: найти студентов, которые учатся и на Kotlin, и на Java
-    // TODO: сгруппировать студентов Kotlin по группам
+    val both = kotlinCourse.intersect(javaCourse)
+    println("Учится на обоих курсах: $both")
+
+    val grouped = kotlinCourse.groupBy { it.group }
+    println("Сгруппировано по группам: $grouped")
 }
