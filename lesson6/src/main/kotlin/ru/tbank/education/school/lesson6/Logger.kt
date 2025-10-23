@@ -50,3 +50,39 @@ data class LogEntry(
     val message: String,
     val source: String
 )
+
+/**
+ * Простая реализация интерфейса Logger.
+ */
+class SimpleLogger : Logger {
+    private val logs = mutableListOf<LogEntry>()
+
+    override fun log(level: LogLevel, message: String, source: String) {
+        val entry = LogEntry(System.currentTimeMillis(), level, message, source)
+        logs.add(entry)
+    }
+
+    override fun getAllLogs(): List<LogEntry> {
+        return logs.toList()
+    }
+
+    override fun getLogsByLevel(level: LogLevel): List<LogEntry> {
+        val result = mutableListOf<LogEntry>()
+        for (entry in logs) {
+            if (entry.level == level) result.add(entry)
+        }
+        return result
+    }
+
+    override fun getLogsAfter(timestamp: Long): List<LogEntry> {
+        val result = mutableListOf<LogEntry>()
+        for (entry in logs) {
+            if (entry.timestamp > timestamp) result.add(entry)
+        }
+        return result
+    }
+
+    override fun clear() {
+        logs.clear()
+    }
+}
