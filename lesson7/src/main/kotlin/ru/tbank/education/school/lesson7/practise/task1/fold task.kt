@@ -29,5 +29,10 @@ data class Employee(val name: String, val salary: Double, val department: String
 data class SalaryReport(val totalSalary: Double, val avgSalary: Double, val departmentsCount: Int)
 
 fun buildSalaryReport(employees: List<Employee>): SalaryReport {
-    TODO()
+    val totalSalary = employees.sumOf { it.salary }
+    return SalaryReport(
+        totalSalary = totalSalary,
+        avgSalary = if (employees.isEmpty()) 0.0 else totalSalary / employees.size,
+        departmentsCount = employees.map { it.department }.toSet().size
+    )
 }

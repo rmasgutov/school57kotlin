@@ -6,13 +6,14 @@ package ru.tbank.education.school.lesson7.practise.task1
  * Перепиши императивный код ниже в функциональном стиле (используя filter).
  */
 fun filterEvenNumbers(numbers: List<Int>): List<Int> {
-    val evenNumbers = mutableListOf<Int>()
-    for (n in numbers) {
-        if (n % 2 == 0) {
-            evenNumbers.add(n)
-        }
-    }
-    return evenNumbers
+//    val evenNumbers = mutableListOf<Int>()
+//    for (n in numbers) {
+//        if (n % 2 == 0) {
+//            evenNumbers.add(n)
+//        }
+//    }
+//    return evenNumbers
+    return numbers.filter { it % 2 == 0 }
 }
 
 /**
@@ -21,11 +22,12 @@ fun filterEvenNumbers(numbers: List<Int>): List<Int> {
  * Используй map вместо цикла.
  */
 fun lowerCaseNames(names: List<String>): List<String> {
-    val lowerNames = mutableListOf<String>()
-    for (n in names) {
-        lowerNames.add(n.lowercase())
-    }
-    return lowerNames
+//    val lowerNames = mutableListOf<String>()
+//    for (n in names) {
+//        lowerNames.add(n.lowercase())
+//    }
+//    return lowerNames
+    return names.map { it.lowercase() }
 }
 
 /**
@@ -34,11 +36,12 @@ fun lowerCaseNames(names: List<String>): List<String> {
  * Используй sum() или reduce().
  */
 fun sumPrices(prices: List<Int>): Int {
-    var total = 0
-    for (p in prices) {
-        total += p
-    }
-    return total
+//    var total = 0
+//    for (p in prices) {
+//        total += p
+//    }
+//    return total
+    return prices.sum()
 }
 
 /**
@@ -49,11 +52,12 @@ fun sumPrices(prices: List<Int>): Int {
 data class Person(val name: String, val age: Int)
 
 fun averageAge(people: List<Person>): Double {
-    var totalAge = 0
-    for (p in people) {
-        totalAge += p.age
-    }
-    return totalAge.toDouble() / people.size
+//    var totalAge = 0
+//    for (p in people) {
+//        totalAge += p.age
+//    }
+//    return totalAge.toDouble() / people.size
+    return people.map { it.age }.average()
 }
 
 /**
@@ -62,13 +66,14 @@ fun averageAge(people: List<Person>): Double {
  * Используй filter и sum().
  */
 fun sumPositive(numbers: List<Int>): Int {
-    var sum = 0
-    for (n in numbers) {
-        if (n > 0) {
-            sum += n
-        }
-    }
-    return sum
+//    var sum = 0
+//    for (n in numbers) {
+//        if (n > 0) {
+//            sum += n
+//        }
+//    }
+//    return sum
+    return numbers.filter { it > 0 }.sum()
 }
 
 /**
@@ -77,15 +82,16 @@ fun sumPositive(numbers: List<Int>): Int {
  * Используй groupBy.
  */
 fun groupWordsByFirstLetter(words: List<String>): Map<Char, List<String>> {
-    val grouped = mutableMapOf<Char, MutableList<String>>()
-    for (w in words) {
-        val first = w.first()
-        if (first !in grouped) {
-            grouped[first] = mutableListOf()
-        }
-        grouped[first]!!.add(w)
-    }
-    return grouped
+//    val grouped = mutableMapOf<Char, MutableList<String>>()
+//    for (w in words) {
+//        val first = w.first()
+//        if (first !in grouped) {
+//            grouped[first] = mutableListOf()
+//        }
+//        grouped[first]!!.add(w)
+//    }
+//    return grouped
+    return words.groupBy { it.first() }
 }
 
 /**
@@ -94,14 +100,15 @@ fun groupWordsByFirstLetter(words: List<String>): Map<Char, List<String>> {
  * Используй all { it > 0 }.
  */
 fun areAllPositive(numbers: List<Int>): Boolean {
-    var allPositive = true
-    for (n in numbers) {
-        if (n <= 0) {
-            allPositive = false
-            break
-        }
-    }
-    return allPositive
+//    var allPositive = true
+//    for (n in numbers) {
+//        if (n <= 0) {
+//            allPositive = false
+//            break
+//        }
+//    }
+//    return allPositive
+    return numbers.all { it > 0 }
 }
 
 
@@ -111,11 +118,12 @@ fun areAllPositive(numbers: List<Int>): Boolean {
  * Используй count.
  */
 fun countLongWords(words: List<String>): Int {
-    var count = 0
-    for (w in words) {
-        if (w.length > 3) count++
-    }
-    return count
+//    var count = 0
+//    for (w in words) {
+//        if (w.length > 3) count++
+//    }
+//    return count
+    return words.count { it.length > 3 }
 }
 
 /**
@@ -124,13 +132,14 @@ fun countLongWords(words: List<String>): Int {
  * Используй цепочку filter → map.
  */
 fun squaredEvenNumbers(numbers: List<Int>): List<Int> {
-    val squaredEven = mutableListOf<Int>()
-    for (n in numbers) {
-        if (n % 2 == 0) {
-            squaredEven.add(n * n)
-        }
-    }
-    return squaredEven
+//    val squaredEven = mutableListOf<Int>()
+//    for (n in numbers) {
+//        if (n % 2 == 0) {
+//            squaredEven.add(n * n)
+//        }
+//    }
+//    return squaredEven
+    return numbers.filter { it % 2 == 0 }.map { it * it }
 }
 
 /**
@@ -139,13 +148,14 @@ fun squaredEvenNumbers(numbers: List<Int>): List<Int> {
  * Используй distinct().
  */
 fun uniqueElements(data: List<Int>): List<Int> {
-    val unique = mutableListOf<Int>()
-    for (d in data) {
-        if (d !in unique) {
-            unique.add(d)
-        }
-    }
-    return unique
+//    val unique = mutableListOf<Int>()
+//    for (d in data) {
+//        if (d !in unique) {
+//            unique.add(d)
+//        }
+//    }
+//    return unique
+    return data.distinct()
 }
 
 /**
@@ -154,10 +164,11 @@ fun uniqueElements(data: List<Int>): List<Int> {
  * Используй плюс-оператор (+) или plus().
  */
 fun mergeLists(list1: List<Int>, list2: List<Int>): List<Int> {
-    val result = mutableListOf<Int>()
-    for (a in list1) result.add(a)
-    for (b in list2) result.add(b)
-    return result
+//    val result = mutableListOf<Int>()
+//    for (a in list1) result.add(a)
+//    for (b in list2) result.add(b)
+//    return result
+    return list1 + list2
 }
 
 
@@ -169,11 +180,12 @@ fun mergeLists(list1: List<Int>, list2: List<Int>): List<Int> {
 data class Transaction(val id: Int, val amount: Int, val category: String)
 
 fun totalFoodExpenses(txs: List<Transaction>): Int {
-    val foodAmounts = mutableListOf<Int>()
-    for (t in txs) {
-        if (t.category == "FOOD") {
-            foodAmounts.add(t.amount)
-        }
-    }
-    return foodAmounts.sum()
+//    val foodAmounts = mutableListOf<Int>()
+//    for (t in txs) {
+//        if (t.category == "FOOD") {
+//            foodAmounts.add(t.amount)
+//        }
+//    }
+//    return foodAmounts.sum()
+    return txs.filter { it.category == "FOOD" }.sumOf { it.amount }
 }

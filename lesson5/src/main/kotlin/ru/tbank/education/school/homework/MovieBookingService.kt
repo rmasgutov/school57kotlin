@@ -18,8 +18,10 @@ data class BookedSeat(
 class MovieBookingService(
     private val maxQuantityOfSeats: Int // Максимальное кол-во мест
 ) {
+    private val bookedSeats = mutableListOf<BookedSeat>()
+
     init {
-        TODO("Выбрасывать IllegalArgumentException, максимальное кол-во мест отрицательное или равно нулю")
+        require(maxQuantityOfSeats > 0) { "максимальное кол-во мест отрицательное или равно нулю" }
     }
 
     /**
@@ -32,8 +34,21 @@ class MovieBookingService(
      * @throws SeatAlreadyBookedException если место уже забронировано
      */
     fun bookSeat(movieId: String, seat: Int) {
-        TODO("Реализовать логику")
+        if (seat <= 0 || seat > maxQuantityOfSeats) {
+            throw IllegalArgumentException("от 1 до $maxQuantityOfSeats")
+        }
+        val bookedSeatsForMovie = bookedSeats.count { it.movieId == movieId }
+        if (bookedSeatsForMovie >= maxQuantityOfSeats) {
+            throw NoAvailableSeatException("все места заняты для фильма: $movieId")
+        }
+        val isSeatAlreadyBooked = bookedSeats.any { it.movieId == movieId && it.seat == seat }
+
+        if (isSeatAlreadyBooked) {
+            throw SeatAlreadyBookedException("место $seat уже забронировано для $movieId")
+        }
+        bookedSeats.add(BookedSeat(movieId, seat))
     }
+
 
     /**
      * Отменяет бронь указанного места.
@@ -43,8 +58,14 @@ class MovieBookingService(
      * @throws NoSuchElementException если место не было забронировано
      */
     fun cancelBooking(movieId: String, seat: Int) {
-        TODO("Реализовать логику")
+        val bookedSeat = BookedSeat(movieId, seat)
+        val wasRemoved = bookedSeats.remove(bookedSeat)
+
+        if (!wasRemoved) {
+            throw NoSuchElementException("место $seat не было забронировано для $movieId")
+        }
     }
+
 
     /**
      * Проверяет, забронировано ли место
@@ -52,6 +73,6 @@ class MovieBookingService(
      * @return true если место занято, false иначе
      */
     fun isSeatBooked(movieId: String, seat: Int): Boolean {
-        TODO("Реализовать логику")
+        return bookedSeats.any { it.movieId == movieId && it.seat == seat }
     }
 }
