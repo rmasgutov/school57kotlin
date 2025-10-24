@@ -22,5 +22,14 @@ fun sliceEvents(
     events: List<Event>,
     nToday: Int
 ): Triple<Event?, List<Event>, List<Event>> {
-    TODO()
+    var counter = 0
+    var first = false
+//    val second: MutableList<Event> = mutableListOf()
+//    val third: MutableList<Event> = mutableListOf()
+//    events.forEach {if (it.type == EventType.ERROR) first = true; if (second.size < 2 && it.type == EventType.LOGIN) second.add(it); if (third.size < nToday && it.date.toLocalDate() == LocalDate.now()) third.add(it)} // За 1 проход
+    return Triple(
+        try { events.find { it.type == EventType.ERROR } } catch (e: Throwable) { null },
+        try { events.filter { it.type == EventType.LOGIN }.takeLast(2) } catch (e: Throwable) { emptyList() },
+        try { events.filter { it.date.toLocalDate() == LocalDate.now() }.take(nToday) } catch (e: Throwable) { emptyList() }
+    )
 }

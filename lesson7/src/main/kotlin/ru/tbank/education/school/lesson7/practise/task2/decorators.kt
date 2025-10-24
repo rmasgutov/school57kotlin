@@ -1,5 +1,8 @@
 package ru.tbank.education.school.lesson7.practise.task2
 
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+
 /**
  * Реализуй декоратор limitRate(intervalMs: Long, f: (A) -> R): (A) -> R?
  *
@@ -20,8 +23,21 @@ package ru.tbank.education.school.lesson7.practise.task2
  * printMessage("C") // выполняется
  */
 fun <A, R> limitRate(intervalMs: Long, f: (A) -> R): (A) -> R? {
-    TODO()
+
+    var lastCallTime = 0L
+
+    return { a: A ->
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastCallTime >= intervalMs) {
+            lastCallTime = currentTime
+            f(a)
+        } else {
+            null
+        }
+
+    }
 }
+
 
 
 /**
@@ -40,8 +56,16 @@ fun <A, R> limitRate(intervalMs: Long, f: (A) -> R): (A) -> R? {
  * println(safeDivide(0))  // Failure(java.lang.ArithmeticException: / by zero)
  */
 fun <A, R> safeCall(f: (A) -> R): (A) -> Result<R> {
-    TODO()
-}
+    return { arg ->
+        try {
+            Result.success(f(arg))
+        }
+        catch (e: Throwable) {
+            Result.failure(e)
+        }
+    }
+    }
+
 
 /**
  * Реализуй декоратор logCalls(name: String, f: (A) -> R): (A) -> R
@@ -62,7 +86,17 @@ fun <A, R> safeCall(f: (A) -> R): (A) -> Result<R> {
  * 15
  */
 fun <A, R> logCalls(name: String, f: (A) -> R): (A) -> R {
-    TODO()
+
+    return { arg ->
+        try {
+            val res = f(arg)
+            println("[$name] вызвана с аргументом: $arg\n[$name] вернула результат: $res")
+            res
+        } catch (e: Throwable) {
+            TODO()
+        }
+
+    }
 }
 
 
@@ -81,8 +115,17 @@ fun <A, R> logCalls(name: String, f: (A) -> R): (A) -> R {
  * println(safe()) // ok
  */
 fun <T> retry(times: Int, f: () -> T): () -> T {
-    TODO()
+    return {
+        for (i in 2..times) {
+            runCatching {
+                f()
+            }
+        }
+
+        f()
+    }
 }
+
 
 /**
  * Таймер-декоратор.
@@ -101,7 +144,11 @@ fun <T> retry(times: Int, f: () -> T): () -> T {
  * println(slowFn(10))
  */
 fun <A, R> timed(name: String, f: (A) -> R): (A) -> R {
-    TODO()
+    return { arg ->
+        val srart = LocalDateTime.now()
+        f(arg).also { println("[$name] выполнено за ${ChronoUnit.MILLIS.between(srart, LocalDateTime.now())} мс") }
+
+    }
 }
 
 /**
@@ -124,5 +171,14 @@ fun <A, R> timed(name: String, f: (A) -> R): (A) -> R {
  *
  */
 fun <A, R> memoizeWith(capacity: Int, f: (A) -> R): (A) -> R {
-    TODO()
+    val cache = object : LinkedHashMap<A, R>(capacity, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<A, R>?): Boolean {
+            return size > capacity
+        }
+
+    }
+    return { arg ->
+        cache.getOrPut(arg) { f(arg) }
+    }
+
 }
