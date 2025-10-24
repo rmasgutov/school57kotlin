@@ -20,7 +20,16 @@ package ru.tbank.education.school.lesson7.practise.task2
  * printMessage("C") // выполняется
  */
 fun <A, R> limitRate(intervalMs: Long, f: (A) -> R): (A) -> R? {
-    TODO()
+    var lastCallTime: Long = 0
+    return { argument: A ->
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastCallTime < intervalMs) {
+            null
+        } else {
+            lastCallTime = currentTime
+            f(argument)
+        }
+    }
 }
 
 
@@ -40,7 +49,12 @@ fun <A, R> limitRate(intervalMs: Long, f: (A) -> R): (A) -> R? {
  * println(safeDivide(0))  // Failure(java.lang.ArithmeticException: / by zero)
  */
 fun <A, R> safeCall(f: (A) -> R): (A) -> Result<R> {
-    TODO()
+    return { arg: A ->
+        try { Result.success(f(arg))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
 
 /**
@@ -62,7 +76,12 @@ fun <A, R> safeCall(f: (A) -> R): (A) -> Result<R> {
  * 15
  */
 fun <A, R> logCalls(name: String, f: (A) -> R): (A) -> R {
-    TODO()
+    return { arg: A ->
+        println("[$name] вызвана с аргументом: $arg")
+        val result = f(arg)
+        println("[$name] вернула результат: $result")
+        result
+    }
 }
 
 
@@ -81,7 +100,19 @@ fun <A, R> logCalls(name: String, f: (A) -> R): (A) -> R {
  * println(safe()) // ok
  */
 fun <T> retry(times: Int, f: () -> T): () -> T {
-    TODO()
+    return {
+        var lastException: Throwable? = null
+
+        for (attempt in 1..times) {
+            try {
+                f()
+            } catch (e: Throwable) {
+                lastException = e
+            }
+        }
+
+        throw lastException!!
+    }
 }
 
 /**
