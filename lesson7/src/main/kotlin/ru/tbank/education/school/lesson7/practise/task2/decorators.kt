@@ -36,7 +36,6 @@ fun <A, R> limitRate(intervalMs: Long, f: (A) -> R): (A) -> R? {
     }
 }
 
-
 /**
  * Реализуй декоратор safeCall(f: (A) -> R): (A) -> Result<R>
  *

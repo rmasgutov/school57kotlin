@@ -23,6 +23,6 @@ fun sliceEvents(
     nToday: Int
 ): Triple<Event?, List<Event>, List<Event>> {
     return (events.filter { (it.type == EventType.LOGIN) and (it.type == EventType.LOGIN)}) and (events.filter { it.type == EventType.ERROR }) and (for(i in 1..nToday) {
-        println(events[i]))
+        println(events[i])
     }
 }

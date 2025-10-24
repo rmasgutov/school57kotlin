@@ -15,3 +15,4 @@ import java.time.LocalDate
  */
 
 infix fun Int.daysFromNow(ignore: Unit): LocalDate = java.time.LocalDate.now().plusDays(this.toLong())
+

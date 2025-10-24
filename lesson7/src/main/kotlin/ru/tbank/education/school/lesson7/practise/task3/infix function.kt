@@ -34,3 +34,4 @@ fun main() {
 
     val cleanClients = rawClients.mapNotNull(normalizeClient)
 }
+
