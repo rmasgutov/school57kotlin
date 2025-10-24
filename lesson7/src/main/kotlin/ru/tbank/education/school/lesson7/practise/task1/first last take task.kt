@@ -22,5 +22,7 @@ fun sliceEvents(
     events: List<Event>,
     nToday: Int
 ): Triple<Event?, List<Event>, List<Event>> {
-    TODO()
+    return (events.filter { (it.type == EventType.LOGIN) and (it.type == EventType.LOGIN)}) and (events.filter { it.type == EventType.ERROR }) and (for(i in 1..nToday) {
+        println(events[i]))
+    }
 }

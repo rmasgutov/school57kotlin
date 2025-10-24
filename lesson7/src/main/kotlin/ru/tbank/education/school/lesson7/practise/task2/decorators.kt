@@ -1,5 +1,8 @@
 package ru.tbank.education.school.lesson7.practise.task2
 
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+
 /**
  * Реализуй декоратор limitRate(intervalMs: Long, f: (A) -> R): (A) -> R?
  *
@@ -20,7 +23,17 @@ package ru.tbank.education.school.lesson7.practise.task2
  * printMessage("C") // выполняется
  */
 fun <A, R> limitRate(intervalMs: Long, f: (A) -> R): (A) -> R? {
-    TODO()
+    var lastCall: LocalDateTime? = null
+
+    return {arg: A ->
+        val now = LocalDateTime.now()
+        if (lastCall == null or ChronoUnit.MILLIS.between(lastCall, now) > intervalMs){
+            lastCall = now
+            f(arg)
+        } else {
+            null
+        }
+    }
 }
 
 
