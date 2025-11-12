@@ -25,3 +25,4 @@ fun suspiciousTransactions(
         ((it.country != "RU") and (it.amount > foreignThreshold))
         }
 }
+

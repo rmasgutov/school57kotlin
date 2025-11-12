@@ -113,6 +113,7 @@ fun areAllPositive(numbers: List<Int>): Boolean {
 
 
 
+
 /**
  * Задание 8.
  * Подсчитай количество слов длиной больше 3 символов.

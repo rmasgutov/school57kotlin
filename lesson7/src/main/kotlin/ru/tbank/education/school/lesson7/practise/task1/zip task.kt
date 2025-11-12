@@ -16,3 +16,4 @@ data class Measurement(val date: LocalDate, val value: Double)
 fun zipMeasurements(dates: List<LocalDate>, values: List<Double>): List<Measurement> {
     return dates.zip(values)
 }
+

@@ -15,3 +15,4 @@ infix fun Int.add(other: Int): Int = this + other
 infix fun Int.subtract(other: Int): Int = this - other
 infix fun Int.multiply(other: Int): Int = this * other
 infix fun Int.divide(other: Int): Int = if(other != 0) this / other else 0
+

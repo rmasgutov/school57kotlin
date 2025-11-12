@@ -20,3 +20,4 @@ infix fun User.ageGreaterThan(age: Int): Boolean = this.age > age
 
 // Инфиксная функция для проверки города
 infix fun User.livesIn(city: String): Boolean = this.city == city
+
