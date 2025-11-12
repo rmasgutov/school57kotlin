@@ -135,4 +135,3 @@ class RegionRiskRule : ScoringRule {
 }
 fun main() {
 }
-
