@@ -16,3 +16,4 @@ data class Transfer(val category: String, val amount: Double)
 fun top3Categories(transfers: List<Transfer>): List<Pair<String, Double>> {
     return (transfers.groupBy { it.category, amount }).sorted().reversed()
 }
+
