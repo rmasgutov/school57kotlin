@@ -32,6 +32,6 @@ class LibraryService {
     }
 
     private fun hasOutstandingFines(borrower: String): Boolean {
-        return borrowerFines[borrower] ?: 0 > 0
+        return (borrowerFines[borrower] ?: 0) > 0
     }
 }
