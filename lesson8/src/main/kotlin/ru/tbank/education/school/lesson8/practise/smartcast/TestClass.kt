@@ -6,7 +6,7 @@ fun demoVarProperty() {
     val t = TestClass(10)
 
     if (t.value != null) {
-        val x: Int = t.value?.let { it + 5} ?: 0
+        val x: Int = t.value?.let { it + 5 } ?: 0
         println(x)
     }
 }

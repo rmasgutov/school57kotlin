@@ -37,7 +37,6 @@ class UserProfileTests {
         assertFalse(isUserOlder(profile, 18))
     }
 
-
     // --- Tests for isProfileCompleted ---
 
     @Test

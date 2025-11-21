@@ -48,7 +48,6 @@ class ProductTests {
         assertNull(result)
     }
 
-
     // ---- Tests for groupProductsByCategory ----
 
     @Test

@@ -8,12 +8,15 @@ data class UserProfile(
 
 fun getUserProfile(): UserProfile? {
     // Имитация получения данных (может вернуть null)
-    return if ((0..2).random() == 0) null 
-    else UserProfile(
-        name = if ((0..1).random() == 0) "Алексей" else null,
-        age = if ((0..1).random() == 0) 25 else null,
-        email = if ((0..1).random() == 0) "alex@mail.com" else null
-    )
+    return if ((0..2).random() == 0) {
+        null
+    } else {
+        UserProfile(
+            name = if ((0..1).random() == 0) "Алексей" else null,
+            age = if ((0..1).random() == 0) 25 else null,
+            email = if ((0..1).random() == 0) "alex@mail.com" else null
+        )
+    }
 }
 
 /**
@@ -38,4 +41,3 @@ fun validateUser(minAge: Int): Pair<Boolean, Boolean> {
 
     return older to completed
 }
-

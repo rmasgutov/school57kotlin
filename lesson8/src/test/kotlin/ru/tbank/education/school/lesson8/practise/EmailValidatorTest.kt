@@ -25,4 +25,3 @@ class EmailValidatorTest {
         Assertions.assertFalse(EmailValidator.validateEmail("   "))
     }
 }
-

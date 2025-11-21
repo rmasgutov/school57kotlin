@@ -1,5 +1,5 @@
 plugins {
-    id("buildlogic.kotlin-library-conventions")
+    id("buildlogic.kotlin-common-conventions-no-detekt")
     id("jacoco")
 }
 dependencies {

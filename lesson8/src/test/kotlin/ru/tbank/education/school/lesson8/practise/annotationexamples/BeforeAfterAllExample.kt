@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test
 class BeforeAfterAllExample {
     companion object {
         private lateinit var databaseConnection: String
-        
+
         @BeforeAll
         @JvmStatic
         fun setUpAll() {
             databaseConnection = "Connected to DB"
             println("Установлено соединение с базой данных")
         }
-        
+
         @AfterAll
         @JvmStatic
         fun tearDownAll() {
@@ -23,10 +23,9 @@ class BeforeAfterAllExample {
             println("Соединение с базой данных закрыто")
         }
     }
-    
+
     @Test
     fun `test database connection`() {
         assertEquals("Connected to DB", databaseConnection)
     }
 }
-

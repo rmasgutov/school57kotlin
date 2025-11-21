@@ -10,4 +10,3 @@ object EmailValidator {
         return emailRegex.matches(email)
     }
 }
-

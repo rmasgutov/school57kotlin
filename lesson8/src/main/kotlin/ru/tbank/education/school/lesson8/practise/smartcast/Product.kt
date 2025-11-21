@@ -26,6 +26,3 @@ fun getMostExpensivePrice(products: List<Product>): Double? {
 fun groupProductsByCategory(products: List<Product>): Map<String, List<Product>> {
     TODO()
 }
-
-
-
