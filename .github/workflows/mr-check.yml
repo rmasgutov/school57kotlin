@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        module: [lesson1, lesson6, lesson7]
+        module: [lesson1, lesson6, lesson7, lesson8]
 
     steps:
       - uses: actions/checkout@v4
