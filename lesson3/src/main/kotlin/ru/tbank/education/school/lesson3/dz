@@ -1,0 +1,39 @@
+package ru.tbank.education.school.lesson3
+
+
+
+abstract class Animal(var name: String,var aviaryNumber: Int){
+    constructor( name: String, aviaryNumber: Int, age:Int) : this(name,aviaryNumber) {
+        println("Вызван дополнительный конструктор")
+    }
+}
+
+
+
+open class Bird(name: String,  aviaryNumber: Int) : Animal(name,aviaryNumber) {
+    open fun fly(time:Int=1) {
+        println("$name летает")
+    }
+}
+open class Mammal( name: String, aviaryNumber: Int) : Animal(name,aviaryNumber) {
+    open fun run(time:Int=1) {
+        println("$name летает")
+    }
+}
+
+
+class Eagle(name: String, aviaryNumber: Int) : Bird(name,aviaryNumber) {
+    override fun fly(time:Int) {
+        super.fly(time)
+        val distance = time * 200
+        println("Пролетел :$distance км")
+    }
+}
+
+
+fun main() {
+    println("=== ДЕМОНСТРАЦИЯ РАБОТЫ ЗООПАРКА ===\n")
+    val eagle1 = Eagle("Орлан", 1,3)
+    val eagle2 = Eagle("Беркут", 2)
+    eagle2.fly(3)
+}
