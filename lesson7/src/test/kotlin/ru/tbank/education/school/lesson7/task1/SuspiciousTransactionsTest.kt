@@ -59,7 +59,7 @@ class SuspiciousTransactionsTest {
         val txs = listOf(
             Tx(500.0, TxCategory.FOOD, now, "RU"),
             Tx(1000.0, TxCategory.SHOPPING, now, "RU"),
-            Tx(2000.0, TxCategory.TRANSFER, now, "RU")
+            Tx(2500.0, TxCategory.TRANSFER, now, "RU")
         )
 
         val result = suspiciousTransactions(txs, threshold = 5000.0, foreignThreshold = 3000.0)
