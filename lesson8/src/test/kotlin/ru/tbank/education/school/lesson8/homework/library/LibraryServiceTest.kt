@@ -2,13 +2,15 @@ package ru.tbank.education.school.lesson8.homework.library
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.DisplayName
-
 class LibraryServiceTest {
 
     private lateinit var library: LibraryService
-
+    private val books = mutableMapOf<String, Book>()
+    private val borrowedBooks = mutableMapOf<String, String>() // ISBN -> Borrower
+    private val borrowerFines = mutableMapOf<String, Int>()
     @BeforeEach
     fun setUp() {
         library = LibraryService()
@@ -104,4 +106,68 @@ class LibraryServiceTest {
             library.borrowBook("978-0-441-17271-9", "Ivan")
         }
     }
+
+    @Test
+    fun addBook(book: Book) {
+        if (book.isbn.isBlank()) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        books[book.isbn] = book
+    }
+
+    @Test
+    fun borrowBook(isbn: String, borrower: String) {
+        if (isbn.isBlank() or borrower.isBlank()) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        if (!books.containsKey(isbn)) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        if (borrowedBooks.containsKey(isbn)) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        if (hasOutstandingFines(borrower)) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        borrowedBooks[isbn] = borrower
+    }
+    @Test
+    fun returnBook(isbn: String) {
+        if (isbn.isBlank()) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        if (!borrowedBooks.containsKey(isbn)) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        borrowedBooks.remove(isbn)
+    }
+    @Test
+    fun isAvailable(isbn: String): Boolean {
+        if (isbn.isBlank()) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+
+        return !borrowedBooks.containsKey(isbn) and books.containsKey(isbn)
+    }
+    @Test
+    fun calculateOverdueFine(isbn: String, daysOverdue: Int): Int {
+        if (isbn.isBlank()) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        if (daysOverdue < 0) {
+            throw IllegalArgumentException("IllegalArgumentException")
+        }
+        if (!borrowedBooks.containsKey(isbn)) {
+            return 0
+        }
+        return if (daysOverdue <= 10) {
+            0
+        } else {
+            (daysOverdue - 10) * 60
+        }
+    }
+    private fun hasOutstandingFines(borrower: String): Boolean {
+        return (borrowerFines[borrower] ?: 0) > 0
+    }
+}
 }

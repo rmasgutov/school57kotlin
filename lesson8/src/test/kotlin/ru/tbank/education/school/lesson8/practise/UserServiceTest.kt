@@ -3,10 +3,10 @@ package ru.tbank.education.school.lesson8.practise
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.assertThrows
-
 class UserServiceTest {
     
     private lateinit var userService: UserService
