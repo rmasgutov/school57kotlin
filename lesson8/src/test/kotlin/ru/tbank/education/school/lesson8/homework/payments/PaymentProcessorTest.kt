@@ -120,7 +120,7 @@ class PaymentProcessorTest {
         val result = processor.processPayment(
             100, "4444333322221111", 12, 2026, "USD", "C11"
         )
-        assertEquals("FAILED", result.status)
+        assertEquals("REJECTED", result.status)
     }
 
     @Test
@@ -128,7 +128,7 @@ class PaymentProcessorTest {
         val result = processor.processPayment(
             100, "5500550055005500", 12, 2026, "USD", "C12"
         )
-        assertEquals("FAILED", result.status)
+        assertEquals("REJECTED", result.status)
     }
 
     @Test
