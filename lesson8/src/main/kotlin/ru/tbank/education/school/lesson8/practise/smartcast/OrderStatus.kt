@@ -19,5 +19,12 @@ sealed class OrderStatus {
  */
 
 fun handleOrderStatus(status: OrderStatus): String {
-    TODO()
+    return when (status) {
+        is OrderStatus.Processing -> "Заказ обрабатывает менеджер: ${status.manager}"
+        is OrderStatus.Shipped -> "Заказ отправлен. Трек-номер: ${status.trackingNumber}"
+        is OrderStatus.Canceled  -> " Заказ отменён. Причина: ${status.reason}"
+        else -> "Заказ доставлен."
+
+    }
+
 }

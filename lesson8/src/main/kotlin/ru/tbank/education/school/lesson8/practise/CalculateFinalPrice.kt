@@ -24,3 +24,4 @@ fun calculateFinalPrice(
 
     return finalPrice.coerceAtLeast(0.0)
 }
+
