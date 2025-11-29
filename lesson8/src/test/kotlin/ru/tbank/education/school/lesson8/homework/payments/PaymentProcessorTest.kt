@@ -1,6 +1,9 @@
 package ru.tbank.education.school.lesson8.homework.payments
 
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class PaymentProcessorTest {
     private lateinit var processor: PaymentProcessor
