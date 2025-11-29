@@ -20,9 +20,9 @@ data class Product(
  */
 
 fun getMostExpensivePrice(products: List<Product>): Double? {
-    TODO()
+    return products.mapNotNull{it.price}.maxOrNull()
 }
 
 fun groupProductsByCategory(products: List<Product>): Map<String, List<Product>> {
-    TODO()
+    return products.groupBy(){it.category?:"Без категории"}
 }
