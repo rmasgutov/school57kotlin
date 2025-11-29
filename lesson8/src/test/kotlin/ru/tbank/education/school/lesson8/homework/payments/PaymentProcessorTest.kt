@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 class PaymentProcessorTest {
     private lateinit var processor: PaymentProcessor
 
+
     @BeforeEach
     fun setUp() {
         processor = PaymentProcessor()
