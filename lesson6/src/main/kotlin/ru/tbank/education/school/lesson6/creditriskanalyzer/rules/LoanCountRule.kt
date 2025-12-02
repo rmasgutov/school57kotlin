@@ -1,6 +1,7 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.LoanRepository
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.OverdueRepository
@@ -18,10 +19,33 @@ class LoanCountRule(
     private val overdueRepository: OverdueRepository
 ) : ScoringRule {
 
-
     override val ruleName: String = "Loan Count"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val loans = loanRepository.getLoans(client.id)
+        val overdues = overdueRepository.getOverdues(client.id)
+
+        var countOverdueLoans = 0
+
+        for (loan in loans) {
+            if (loan.isClosed) {
+                continue
+            }
+
+            for (overdue in overdues) {
+                if (overdue.loanId == loan.id && overdue.daysOverdue > 30) {
+                    countOverdueLoans++
+                    break
+                }
+            }
+        }
+
+        val risk = when {
+            countOverdueLoans > 3 -> PaymentRisk.HIGH
+            countOverdueLoans >= 1 -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+
+        return ScoringResult(ruleName, risk)
     }
 }

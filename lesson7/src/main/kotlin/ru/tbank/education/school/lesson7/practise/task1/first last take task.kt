@@ -18,9 +18,14 @@ import java.time.LocalDateTime
 enum class EventType { LOGIN, LOGOUT, ERROR, INFO }
 data class Event(val type: EventType, val date: LocalDateTime)
 
+
 fun sliceEvents(
     events: List<Event>,
     nToday: Int
 ): Triple<Event?, List<Event>, List<Event>> {
-    TODO()
+    val firstError = events.firstOrNull { it.type == EventType.ERROR }
+    val lastTwoLogins = events.filter { it.type == EventType.LOGIN }.takeLast(2)
+    val firstNToday = events.filter { it.date.toLocalDate() == LocalDate.now() }.take(nToday)
+
+    return Triple(firstError, lastTwoLogins, firstNToday)
 }

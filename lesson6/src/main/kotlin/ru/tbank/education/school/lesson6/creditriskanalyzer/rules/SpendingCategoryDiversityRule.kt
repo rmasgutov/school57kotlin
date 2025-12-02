@@ -1,8 +1,11 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.TransactionCategory
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.TransactionRepository
+import java.time.LocalDateTime
 
 /**
  * Проверяет разнообразие категорий трат клиента.
@@ -24,6 +27,35 @@ class SpendingCategoryDiversityRule(
     override val ruleName: String = "Spending Category Diversity"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val allTransactions = transactionRepo.getTransactions(client.id)
+        val threeMonthsAgo = LocalDateTime.now().minusMonths(3)
+
+        val categories = mutableListOf<TransactionCategory>()
+
+        for (transaction in allTransactions) {
+            if (transaction.date >= threeMonthsAgo) {
+                var found = false
+                for (existingCategory in categories) {
+                    if (existingCategory == transaction.category) {
+                        found = true
+                        break
+                    }
+                }
+                if (!found) {
+                    categories.add(transaction.category)
+                }
+            }
+        }
+        val categoryCount = categories.size
+
+        val risk = if (categoryCount < 3) {
+            PaymentRisk.HIGH
+        } else if (categoryCount > 6) {
+            PaymentRisk.LOW
+        } else {
+            PaymentRisk.MEDIUM
+        }
+
+        return ScoringResult(ruleName, risk)
     }
 }

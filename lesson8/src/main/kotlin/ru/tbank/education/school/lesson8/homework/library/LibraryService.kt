@@ -6,18 +6,40 @@ class LibraryService {
     private val borrowerFines = mutableMapOf<String, Int>()
 
     fun addBook(book: Book) {
+        if (books.containsKey(book.isbn)) {
+            throw IllegalArgumentException("Book with ISBN ${book.isbn} already exists")
+        }
         books[book.isbn] = book
     }
 
     fun borrowBook(isbn: String, borrower: String) {
-        if (borrowedBooks.contains(isbn)) {
-            return
+        if (!books.containsKey(isbn)) {
+
+            throw IllegalArgumentException("Book $isbn is not registered")
+
+        } else if (!borrowerFines.containsKey(borrower) && !borrowedBooks.contains(isbn)) {
+
+            borrowedBooks.add(isbn)
+            borrowerFines[borrower] = 0
+
+        } else if (borrowerFines.containsKey(borrower)) {
+
+            throw IllegalArgumentException("User $borrower have fine")
+
+        } else {
+
+            throw IllegalArgumentException("Book $isbn is already borrowed")
+
         }
-        borrowedBooks.add(isbn)
     }
 
     fun returnBook(isbn: String) {
-        borrowedBooks.remove(isbn)
+        if (borrowedBooks.contains(isbn)) {
+            borrowedBooks.remove(isbn)
+        }
+        else {
+            throw IllegalArgumentException("Book $isbn is not borrowed")
+        }
     }
 
     fun isAvailable(isbn: String): Boolean {
@@ -25,13 +47,18 @@ class LibraryService {
     }
 
     fun calculateOverdueFine(isbn: String, daysOverdue: Int): Int {
-        if (!borrowedBooks.contains(isbn)) {
-            return 0
+        if (borrowedBooks.contains(isbn)) {
+            if (daysOverdue <= 10) {
+                return 0
+            } else {
+                return (daysOverdue - 10) * 60
+            }
+        } else {
+            throw IllegalArgumentException("Book $isbn is not borrowed")
         }
-        return daysOverdue * 60
     }
 
     private fun hasOutstandingFines(borrower: String): Boolean {
-        return (borrowerFines[borrower] ?: 0) > 0
+        return borrowerFines.containsKey(borrower)
     }
 }
