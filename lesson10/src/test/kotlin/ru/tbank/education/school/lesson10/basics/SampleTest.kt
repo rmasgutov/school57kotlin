@@ -3,8 +3,8 @@ package ru.tbank.education.school.lesson10.basics
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
-import ru.tbank.education.school.lesson10.basics.annotations.MyRuntimeAnnotation
-import ru.tbank.education.school.lesson10.basics.model.Person
+import ru.tbank.education.school.lesson10.basics.runtime.MyRuntimeAnnotation
+import ru.tbank.education.school.lesson10.basics.runtime.Person
 import kotlin.reflect.KType
 import kotlin.reflect.full.IllegalCallableAccessException
 import kotlin.reflect.full.declaredFunctions

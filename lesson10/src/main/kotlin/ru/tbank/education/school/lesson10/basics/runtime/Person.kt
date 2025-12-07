@@ -1,6 +1,8 @@
-package ru.tbank.education.school.lesson10.basics.model
+package ru.tbank.education.school.lesson10.basics.runtime
 
-import ru.tbank.education.school.lesson10.basics.annotations.MyRuntimeAnnotation
+import kotlin.reflect.full.memberFunctions
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
 
 /**
  * Data class Person с пользовательской аннотацией.
@@ -20,4 +22,17 @@ data class Person(
     private fun sayHelloTo(target: String): String {
         return "Hello, $target! I'm $name $surname."
     }
+}
+
+fun main() {
+    val person = Person("John", "Doe", 20)
+    val personClass = Person::class
+
+    val property = personClass.memberProperties.first { it.name == "name" }
+    val function = personClass.memberFunctions.first { it.name == "sayHelloTo" }
+
+    function.isAccessible = true
+
+    println(property.get(person))
+    println(function.call(person, "Jane"))
 }

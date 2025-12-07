@@ -1,4 +1,4 @@
-package ru.tbank.education.school.lesson10.basics.annotations
+package ru.tbank.education.school.lesson10.basics.runtime
 
 /**
  * Пример пользовательской аннотации с retention policy RUNTIME.
