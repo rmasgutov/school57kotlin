@@ -1,0 +1,5 @@
+2025-01-01 INFO Application started
+2025-01-01 INFO Listening on port 8080
+2025-01-01 ERROR Failed to connect to metrics service
+2025-01-01 INFO Retrying connection
+2025-01-01 ERROR Metrics service unreachable
