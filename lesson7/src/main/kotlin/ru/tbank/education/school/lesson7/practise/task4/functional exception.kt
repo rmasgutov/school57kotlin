@@ -24,3 +24,4 @@ fun main() {
         .onFailure { println("Ошибка: ${it.message}") }
 }
 
+
