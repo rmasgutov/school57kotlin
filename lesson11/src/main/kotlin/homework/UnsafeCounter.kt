@@ -16,7 +16,8 @@ class UnsafeCounter {
 
     private var value = 0
 
-    fun increment() {
+    suspend fun increment() {
+        delay(1)
         value++
     }
 
