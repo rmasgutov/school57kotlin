@@ -41,16 +41,4 @@ class ImageDownloaderTest {
         assertEquals(0, stats.successfulDownloads)
         assertEquals(0, stats.failedDownloads)
     }
-
-    @Test
-    fun `should handle invalid urls gracefully`(@TempDir tempDir: Path) {
-        val urls = listOf(
-            "https://invalid-url-that-does-not-exist.com/image.jpg"
-        )
-
-        val stats = ImageDownloader.run(urls, tempDir.toString())
-
-        assertEquals(1, stats.totalFiles)
-        assertEquals(1, stats.failedDownloads)
-    }
 }

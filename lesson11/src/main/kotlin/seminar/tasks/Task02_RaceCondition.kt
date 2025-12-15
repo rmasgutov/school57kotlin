@@ -13,6 +13,20 @@ object RaceCondition {
      * @return финальное значение counter (может быть меньше 10000 из-за race condition)
      */
     fun run(): Int {
-        TODO("Реализуйте демонстрацию race condition")
+        var counter = 0
+
+        val threads = (1..10).map {
+            Thread {
+                repeat(1000) {
+                    counter++ // Не атомарная операция - race condition!
+                }
+            }
+        }
+
+        threads.forEach { it.start() }
+        threads.forEach { it.join() }
+
+        println("Task2 result: $counter (expected 10000)")
+        return counter
     }
 }

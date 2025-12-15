@@ -1,8 +1,9 @@
 package seminar.tasks
 
 import java.math.BigInteger
+import java.util.concurrent.Callable
 import java.util.concurrent.Executors
-import java.util.concurrent.Future
+import java.util.concurrent.TimeUnit
 
 /**
  * Задание 6. Future
@@ -16,13 +17,29 @@ object FutureFactorial {
      * @return Map<Int, BigInteger> где ключ - число, значение - его факториал
      */
     fun run(): Map<Int, BigInteger> {
-        TODO("Реализуйте параллельное вычисление факториалов")
+        val executor = Executors.newFixedThreadPool(4)
+
+        val futures = (1..10).map { n ->
+            n to executor.submit(Callable { factorial(n) })
+        }
+
+        val results = futures.associate { (n, future) ->
+            n to future.get()
+        }
+
+        executor.shutdown()
+        executor.awaitTermination(1, TimeUnit.MINUTES)
+
+        return results
     }
 
     /**
      * Вспомогательная функция для вычисления факториала
      */
     fun factorial(n: Int): BigInteger {
-        TODO("Реализуйте вычисление факториала")
+        if (n <= 1) return BigInteger.ONE
+        return (2..n).fold(BigInteger.ONE) { acc, i ->
+            acc * BigInteger.valueOf(i.toLong())
+        }
     }
 }
