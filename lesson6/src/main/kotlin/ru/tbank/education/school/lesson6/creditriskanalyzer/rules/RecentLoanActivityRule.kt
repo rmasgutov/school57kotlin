@@ -1,8 +1,10 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.LoanRepository
+import java.time.LocalDateTime
 
 /**
  * Проверяет, сколько кредитов клиент открыл за последние 6 месяцев.
@@ -24,6 +26,17 @@ class RecentLoanActivityRule(
     override val ruleName: String = "Recent Loan Activity"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        var loans = 0
+        for (i in loanRepo.getLoans(client.id)) {
+            if (i.startDate >= LocalDateTime.now().minusMonths(6)) {
+                loans++
+            }
+        }
+        return ScoringResult(ruleName, when {
+            loans > 3 -> PaymentRisk.HIGH
+            loans > 0 -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        })
+
     }
 }
