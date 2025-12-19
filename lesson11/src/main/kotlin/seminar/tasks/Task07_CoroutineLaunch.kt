@@ -1,5 +1,8 @@
 package seminar.tasks
 
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -14,6 +17,19 @@ object CoroutineLaunch {
      * @return список имён корутин в порядке их запуска
      */
     fun run(): List<String> = runBlocking {
-        TODO("Реализуйте запуск корутин с launch")
+        val names = listOf("Coroutine-A", "Coroutine-B", "Coroutine-C")
+
+        val jobs = names.map { name ->
+            launch(CoroutineName(name)) {
+                repeat(5) {
+                    println("Hello from $name")
+                    delay(500)
+                }
+            }
+        }
+
+        jobs.forEach { it.join() }
+
+        names
     }
 }

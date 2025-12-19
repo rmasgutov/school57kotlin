@@ -1,5 +1,6 @@
 package seminar.tasks
 
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -15,19 +16,21 @@ object ExecutorServiceExample {
      * @return список имён потоков, которые выполняли задачи
      */
     fun run(): List<String> {
+        val threadNames = CopyOnWriteArrayList<String>()
         val executor = Executors.newFixedThreadPool(4)
-        val threads = mutableListOf<String>()
+
         repeat(20) { taskNum ->
             executor.submit {
-                println(taskNum)
-                println(Thread.currentThread().name)
-                threads.add(Thread.currentThread().name)
+                val threadName = Thread.currentThread().name
+                println("Task $taskNum executed by $threadName")
+                threadNames.add(threadName)
+                Thread.sleep(200)
             }
         }
 
         executor.shutdown()
         executor.awaitTermination(1, TimeUnit.MINUTES)
 
-        return threads
+        return threadNames.toList()
     }
 }
