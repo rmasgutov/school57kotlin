@@ -1,5 +1,7 @@
 package homework
 
+import kotlin.plus
+
 
 /**
  *
@@ -18,10 +20,12 @@ package homework
 class BankAccount(val id: String, var balance: Int) {
 
     fun transfer(to: BankAccount, amount: Int) {
-        synchronized(this) {
+        val first = if (this.id < to.id) this else to
+        val second = if (this.id < to.id) to else this
+        synchronized(first) {
             Thread.sleep(10)
-            
-            synchronized(to) {
+
+            synchronized(second) {
                 if (balance >= amount) {
                     balance -= amount
                     to.balance += amount
