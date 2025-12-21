@@ -15,10 +15,12 @@ import java.util.concurrent.atomic.AtomicInteger
 class UnsafeCounter {
 
     private var value = 0
+    private val mutex = Mutex()
 
     suspend fun increment() {
-        delay(1)
-        value++
+        mutex.withLock {
+            value++
+        }
     }
 
     fun getValue(): Int = value
@@ -27,7 +29,6 @@ class UnsafeCounter {
         coroutineCount: Int = 10,
         incrementsPerCoroutine: Int = 1000
     ): Int = coroutineScope {
-
         val jobs = List(coroutineCount) {
             launch(Dispatchers.Default) {
                 repeat(incrementsPerCoroutine) {
@@ -35,9 +36,7 @@ class UnsafeCounter {
                 }
             }
         }
-
         jobs.joinAll()
-
         getValue()
     }
 }

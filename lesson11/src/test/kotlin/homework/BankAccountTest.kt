@@ -1,4 +1,4 @@
-package homework
+package  homework
 
 import org.junit.jupiter.api.Test
 import java.util.concurrent.CountDownLatch
@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
 class BankAccountTest {
-    
+
     @Test
     fun `simultaneous transfers should not deadlock`() {
         val account1 = BankAccount("ACC1", 1000)
