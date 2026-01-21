@@ -13,4 +13,4 @@ package ru.tbank.education.school.lesson7.practise.task3
  * ```
  */
 
-infix fun Int.inRange(range: IntRange): Boolean = TODO()
+infix fun Int.inRange(range: IntRange): Boolean = this in range

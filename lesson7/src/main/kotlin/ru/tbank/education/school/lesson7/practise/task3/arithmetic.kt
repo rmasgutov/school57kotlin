@@ -11,7 +11,7 @@ package ru.tbank.education.school.lesson7.practise.task3
  * ```
  */
 
-infix fun Int.add(other: Int): Int = TODO()
-infix fun Int.subtract(other: Int): Int = TODO()
-infix fun Int.multiply(other: Int): Int = TODO()
-infix fun Int.divide(other: Int): Int = TODO()
+infix fun Int.add(other: Int): Int = other + this
+infix fun Int.subtract(other: Int): Int = this - other
+infix fun Int.multiply(other: Int): Int = this * other
+infix fun Int.divide(other: Int): Int = this / other

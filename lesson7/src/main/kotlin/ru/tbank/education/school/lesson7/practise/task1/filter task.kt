@@ -19,5 +19,10 @@ fun suspiciousTransactions(
     threshold: Double,
     foreignThreshold: Double
 ): List<Tx> {
-    TODO("filter с несколькими условиями")
+    return txs.filter {
+        it.amount > threshold ||
+                it.category == TxCategory.CRYPTO ||
+                it.category == TxCategory.GAMBLING ||
+                (it.country == "RU" && it.amount > foreignThreshold)
+    }
 }

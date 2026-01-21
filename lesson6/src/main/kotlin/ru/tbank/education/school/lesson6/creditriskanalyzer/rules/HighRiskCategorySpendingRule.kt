@@ -1,7 +1,9 @@
 package ru.tbank.education.school.lesson6.creditriskanalyzer.rules
 
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.Client
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.PaymentRisk
 import ru.tbank.education.school.lesson6.creditriskanalyzer.models.ScoringResult
+import ru.tbank.education.school.lesson6.creditriskanalyzer.models.TransactionCategory
 import ru.tbank.education.school.lesson6.creditriskanalyzer.repositories.TransactionRepository
 
 /**
@@ -26,6 +28,29 @@ class HighRiskCategorySpendingRule(
     override val ruleName: String = "High-Risk Category Spending"
 
     override fun evaluate(client: Client): ScoringResult {
-        TODO()
+        val transactions = transactionRepo.getTransactions(client.id)
+
+        var totalSpending = 0.0
+        var riskySpending = 0.0
+
+        for (transaction in transactions) {
+            if (transaction.category != TransactionCategory.SALARY) {
+                totalSpending += transaction.amount
+
+                if (transaction.category == TransactionCategory.GAMBLING ||
+                    transaction.category == TransactionCategory.CRYPTO ||
+                    transaction.category == TransactionCategory.TRANSFER
+                ) {
+                    riskySpending += transaction.amount
+                }
+            }
+        }
+        val riskyRatio = if (totalSpending > 0) riskySpending / totalSpending else 0.0
+        val risk = when {
+            riskyRatio > 0.6 -> PaymentRisk.HIGH
+            riskyRatio > 0.3 -> PaymentRisk.MEDIUM
+            else -> PaymentRisk.LOW
+        }
+        return ScoringResult(ruleName, risk)
     }
 }
