@@ -21,6 +21,7 @@ class CreditAccount(
     override fun withdraw(amount: Int, description: String): Boolean {
         if (balance - amount < -creditLimit) return false
         balance -= amount
+
         record(WithdrawalTransaction("T-${transactions.size + 1}", this, amount, description))
         return true
     }
