@@ -29,5 +29,5 @@ data class Employee(val name: String, val salary: Double, val department: String
 data class SalaryReport(val totalSalary: Double, val avgSalary: Double, val departmentsCount: Int)
 
 fun buildSalaryReport(employees: List<Employee>): SalaryReport {
-    TODO()
+    return setOf("totalSalary=", ${totalsalary}, "avgSalary≈", ${avgSalary}, "departmentsCount=", ${departmentsCount})
 }
