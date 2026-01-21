@@ -1,0 +1,166 @@
+package ru.tbank.education.school.lesson3
+
+import ru.tbank.education.school.lesson3.Animal
+
+interface BirthYearCalculatable {
+    val age: Int
+    fun calculateBirthYear(): Int
+}
+
+fun interface BirthYearProcessor {
+    fun processBirthYear(animalName: String, birthYear: Int, age: Int)
+}
+fun interface Cleaner {
+   fun cleanEnclosure( cleaningType: String)
+}
+
+interface SoundMaker {
+    fun makeSound()
+}
+
+abstract class Animal(var name: String,var aviaryNumber: Int) : Cleaner,SoundMaker,BirthYearCalculatable {
+    override var age: Int = 0
+    override fun makeSound() {
+        println("$name издает звук")
+    }
+
+    override fun cleanEnclosure(cleaningType: String) {
+        println("Вольер $aviaryNumber ($name) очищен: $cleaningType")
+    }
+
+    override fun calculateBirthYear(): Int {
+        return 2025 - age
+    }
+}
+
+open class Bird(name: String,  aviaryNumber: Int) : Animal(name,aviaryNumber) {
+    open fun fly(time:Int=1) {
+        println("$name летает")
+    }
+    override fun makeSound() {
+        println("$name издает птичий звук")
+    }
+}
+open class Mammal( name: String, aviaryNumber: Int) : Animal(name,aviaryNumber) {
+    open fun run(time:Int=1) {
+        println("$name бегает")
+    }
+}
+
+
+class Eagle(name: String, aviaryNumber: Int) : Bird(name,aviaryNumber) {
+    constructor( name: String, aviaryNumber: Int,  age:Int) : this(name,aviaryNumber) {
+        this.age = age
+    }
+    override fun fly(time:Int) {
+        super.fly(time)
+        val distance = time * 200
+        println("Пролетел :$distance км")
+    }
+    override fun makeSound() {
+        println("$name издает орлиный клич!")
+    }
+}
+class Tiger(name: String, aviaryNumber: Int) : Mammal(name,aviaryNumber) {
+    constructor( name: String, aviaryNumber: Int,  age:Int) : this(name,aviaryNumber) {
+        this.age = age
+    }
+    override fun run(time:Int) {
+        super.run(time)
+        val distance = time * 40
+        println("Пробежал :$distance км")
+    }
+    override fun makeSound() {
+        println("$name устрашающе рычит")
+    }
+}
+class Penguin(name: String, aviaryNumber: Int) : Bird(name, aviaryNumber) {
+    constructor(name: String, aviaryNumber: Int,  age: Int) : this(name, aviaryNumber) {
+        this.age = age
+    }
+
+    override fun fly(time: Int) {
+        println("$name не умеет летать, но отлично плавает!")
+    }
+
+    override fun makeSound() {
+        println("$name издает звук: ГА-ГА-ГА!")
+    }
+}
+
+class Parrot(name: String, aviaryNumber: Int) : Bird(name, aviaryNumber) {
+    constructor(name: String, aviaryNumber: Int,  age: Int) : this(name, aviaryNumber) {
+        this.age = age
+    }
+    override fun fly(time:Int) {
+        super.fly(time)
+        val distance = time * 100
+        println("Пролетел :$distance км")
+    }
+    override fun makeSound() {
+        println("$name кричит: Попка дурак!")
+    }
+}
+
+class Monkey(name: String, aviaryNumber: Int) : Mammal(name, aviaryNumber) {
+    constructor(name: String, aviaryNumber: Int,  age: Int) : this(name, aviaryNumber) {
+        this.age = age
+    }
+
+    fun throwBanana() {
+        println("$name бросает банан!")
+    }
+
+    override fun makeSound() {
+        println("$name кричит: У-у-у-а-а-а!")
+    }
+    override fun run(time:Int) {
+        super.run(time)
+        val distance = time * 40
+        println("Пробежал :$distance км")
+    }
+}
+
+
+fun main() {
+    println("=== ДЕМОНСТРАЦИЯ РАБОТЫ ЗООПАРКА ===\n")
+    val eagle1 = Eagle("Атлант", 1,3)
+    val eagle2 = Eagle("Тор", 2,4)
+    val tiger1 = Tiger("Шерхан", 3,2)
+    val monkey1 = Monkey("Чита", 5, 4)
+    val penguin1 = Penguin("Ковальски", 6, 2)
+    val parrot1 = Parrot("Рио", 7, 1)
+
+
+    println("\n=== АКТИВНОСТИ ЖИВОТНЫХ ===")
+    eagle2.fly(3)
+    eagle1.fly(1)
+    tiger1.run(4)
+    penguin1.fly(1) // Пингвин не летает
+    parrot1.fly(1)
+    parrot1.makeSound()
+    monkey1.run(2)
+    monkey1.throwBanana()
+    monkey1.makeSound()
+    eagle1.makeSound()
+    penguin1.makeSound()
+
+    println("\n=== СИСТЕМА УБОРКИ ===")
+    eagle1.cleanEnclosure("стандартная уборка")
+    tiger1.cleanEnclosure("глубокая дезинфекция")
+    eagle2.cleanEnclosure("влажная уборка")
+
+    println("\n=== СИСТЕМА РАСЧЕТА ВОЗРАСТА И ГОДА РОЖДЕНИЯ ===")
+
+    // Демонстрация работы интерфейса BirthYearCalculatable
+    val animals = listOf(eagle1, eagle2, tiger1)
+
+    val shortProcessor = BirthYearProcessor { name, birthYear, age ->
+        println("$name: род. $birthYear ($age лет)")
+    }
+    animals.forEach { animal ->
+        val birthYear = animal.calculateBirthYear()
+        shortProcessor.processBirthYear(animal.name, birthYear, animal.age) 
+    }
+
+}
