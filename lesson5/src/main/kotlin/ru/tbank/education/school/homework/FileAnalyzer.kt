@@ -1,31 +1,114 @@
 package ru.tbank.education.school.homework
 
-/**
- * Интерфейс для подсчёта строк и слов в файле.
- */
+import java.io.*
+import java.nio.charset.Charset
+import java.nio.file.*
+
 interface FileAnalyzer {
 
-    /**
-     * Считает количество строк и слов в указанном входном файле и записывает результат в выходной файл.
-     *
-     * Словом считается последовательность символов, разделённая пробелами,
-     * табуляциями или знаками перевода строки. Пустые части после разделения не считаются словами.
-     *
-     * @param inputFilePath путь к входному текстовому файлу
-     * @param outputFilePath путь к выходному файлу, в который будет записан результат
-     * @return true если операция успешна, иначе false
-     */
     fun countLinesAndWordsInFile(inputFilePath: String, outputFilePath: String): Boolean
 }
 
 class IOFileAnalyzer : FileAnalyzer {
+
     override fun countLinesAndWordsInFile(inputFilePath: String, outputFilePath: String): Boolean {
-        TODO("Реализовать логику")
+        var lineCount = 0L
+        var wordCount = 0L
+
+        return try {
+            val input = File(inputFilePath)
+            val output = File(outputFilePath)
+
+            if (!input.exists() || input.isDirectory) {
+                println("Файл не найден или является директорией: $inputFilePath")
+                return false
+            }
+
+            if (output.exists() && output.isDirectory) {
+                println("Путь для вывода указывает на директорию: $outputFilePath")
+                return false
+            }
+
+            output.parentFile?.let { parent ->
+                if (!parent.exists() && !parent.mkdirs()) {
+                    println("Не удалось создать директорию для вывода: ${parent.absolutePath}")
+                    return false
+                }
+            }
+
+            BufferedReader(FileReader(input)).use { reader ->
+                var line: String?
+                while (true) {
+                    line = reader.readLine() ?: break
+                    lineCount++
+                    if (line!!.isNotEmpty()) {
+                        wordCount += line.trim().split("\\s+".toRegex()).count { it.isNotEmpty() }
+                    }
+                }
+            }
+
+            BufferedWriter(FileWriter(output, false)).use { writer ->
+                writer.write("Общее количество строк: $lineCount\n")
+                writer.write("Общее количество слов: $wordCount\n")
+            }
+
+            true
+        } catch (e: Exception) {
+            println("Ошибка: ${e.message}")
+            false
+        }
     }
 }
 
-class NIOFileAnalyzer : FileAnalyzer {
+class NIOFileAnalyzer(
+    private val charset: Charset = Charsets.UTF_8
+) : FileAnalyzer {
+
     override fun countLinesAndWordsInFile(inputFilePath: String, outputFilePath: String): Boolean {
-        TODO("Реализовать логику")
+        val inputPath = Path.of(inputFilePath)
+        val outputPath = Path.of(outputFilePath)
+        var lineCount = 0L
+        var wordCount = 0L
+
+        return try {
+            if (!Files.exists(inputPath) || Files.isDirectory(inputPath)) {
+                println("Файл не найден или является директорией: $inputFilePath")
+                return false
+            }
+
+            if (Files.exists(outputPath) && Files.isDirectory(outputPath)) {
+                println("Путь для вывода указывает на директорию: $outputFilePath")
+                return false
+            }
+
+            outputPath.parent?.let { parent ->
+                if (!Files.exists(parent)) Files.createDirectories(parent)
+            }
+
+            Files.newBufferedReader(inputPath, charset).use { reader ->
+                var line: String?
+                while (true) {
+                    line = reader.readLine() ?: break
+                    lineCount++
+                    if (!line.isNullOrEmpty()) {
+                        wordCount += line.trim().split("\\s+".toRegex()).count { it.isNotEmpty() }
+                    }
+                }
+            }
+
+            val resultText = "Общее количество строк: $lineCount\nОбщее количество слов: $wordCount\n"
+            Files.writeString(
+                outputPath,
+                resultText,
+                charset,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING
+            )
+
+            true
+        } catch (e: Exception) {
+            println("Ошибка: ${e.message}")
+            false
+        }
     }
 }
