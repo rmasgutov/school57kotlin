@@ -5,6 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
+import kotlin.math.PI
+
 class CalculatorKtTest {
 
     @ParameterizedTest(name = "{1} {0} {2} = {3}")
@@ -37,6 +39,9 @@ class CalculatorKtTest {
             Arguments.of(OperationType.DIVIDE, 10.0, 5.0, 2.0),
             Arguments.of(OperationType.DIVIDE, 10.0, 0.0, null),
             Arguments.of(OperationType.DIVIDE, 10.0, 2.0, 5.0),
+            Arguments.of(OperationType.SIN, PI / 2, 0.0, 1.0),
+            Arguments.of(OperationType.COS, PI, 0.0, -1.0),
+            Arguments.of(OperationType.SQRT, 49.0, 0.0, 7.0)
         )
 
         @JvmStatic
@@ -46,6 +51,9 @@ class CalculatorKtTest {
             Arguments.of("5 / 2", 2.5),
             Arguments.of("5 / 0", null),
             Arguments.of("10 + unknown", null),
+            Arguments.of("sin 0", 0.0),
+            Arguments.of("cos 0", 1.0),
+            Arguments.of("sqrt 49", 7.0)
         )
     }
 }
